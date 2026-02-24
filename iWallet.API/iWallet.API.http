@@ -1,0 +1,6 @@
+@iWallet.API_HostAddress = http://localhost:5010
+
+GET {{iWallet.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
