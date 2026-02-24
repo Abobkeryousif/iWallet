@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace iWallet.Infrastructure.Uesing
-{
-    internal class InfrastructureGlobalUesing
-    {
-    }
-}
+﻿global using Microsoft.EntityFrameworkCore;
+global using iWallet.Domain.Entities.Models;
+global using System.Reflection;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -22,6 +22,8 @@
         [Compare("Password")]
         public string confirmPassword { get; set; }
 
+        public string? Role { get; set; }
+
         public ICollection<Wallet> Wallets { get; set; }  
     }
 }
