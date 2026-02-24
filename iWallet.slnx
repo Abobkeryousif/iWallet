@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="iWallet.API/iWallet.API.csproj" />
+  <Project Path="iWallet.Application/iWallet.Application.csproj" />
+  <Project Path="iWallet.Domain/iWallet.Domain.csproj" />
+  <Project Path="iWallet.Infrastructure/iWallet.Infrastructure.csproj" />
 </Solution>
