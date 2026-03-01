@@ -2,3 +2,9 @@
 global using iWallet.Domain.Entities.Models;
 global using System.Reflection;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using iWallet.Application.Interface;
+global using iWallet.Application.DTOs;
+global using iWallet.Infrastructure.Data;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using iWallet.Infrastructure.Implemention;

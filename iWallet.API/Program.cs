@@ -1,6 +1,4 @@
-using iWallet.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-
+using iWallet.Infrastructure.Injection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,10 +8,13 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.InfrastructureReigster();
 
 builder.Services.AddDbContext<ApplicationDbContext>
     (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+
+builder.Services.AddControllers()
+    .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<UserRegisterValidator>());
 
 var app = builder.Build();
 
