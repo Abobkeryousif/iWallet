@@ -1,6 +1,6 @@
-﻿namespace iWallet.Domain.Entities.Models
+﻿namespace iWallet.Application.DTOs
 {
-    public class User : BaseEntity
+    public class UserDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -13,12 +13,6 @@
 
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
-        public string? ProfileImageUrl { get; set; }
-
-        public bool IsActive { get; set; } = false;
         public string Password { get; set; }
-        public string? Role { get; set; }
-
-        public ICollection<Wallet> Wallets { get; set; }  
     }
 }

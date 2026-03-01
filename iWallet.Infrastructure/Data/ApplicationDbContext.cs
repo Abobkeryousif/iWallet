@@ -10,6 +10,7 @@ namespace iWallet.Infrastructure.Data
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<LedgerEntry> LedgerEntries { get; set; }
+        public DbSet<Otp> OTPs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

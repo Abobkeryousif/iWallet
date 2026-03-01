@@ -1,10 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace iWallet.Application.Uesing
-{
-    internal class ApplicationGlobalUesing
-    {
-    }
-}
+﻿global using System.ComponentModel.DataAnnotations;
+global using iWallet.Application.DTOs;
+global using iWallet.Domain.Entities.Models;
