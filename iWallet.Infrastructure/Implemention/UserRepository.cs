@@ -1,19 +1,86 @@
-﻿using System.Linq.Expressions;
-
+﻿
 namespace iWallet.Infrastructure.Implemention
 {
     public class UserRepository : IUserRepository, IIsExistMethod<User>
     {
         private readonly ApplicationDbContext _context;
+        private readonly ISendEmailService _sendEmail;
+        private IOtpRepository _otpRepository;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(ApplicationDbContext context , ISendEmailService sendEmail , IOtpRepository otpRepository)
         {
             _context = context;
+            _sendEmail = sendEmail;
+            _otpRepository = otpRepository;
+        }
+
+        public string CompleteRegister(string Otp)
+        {
+            if (Otp == null || string.IsNullOrEmpty(Otp))
+                throw new ArgumentException("otp is requierd!");
+
+            var confiermOtp = _context.OTPs.FirstOrDefault(o=> o.otp == Otp );
+
+            if (confiermOtp == null)
+                throw new ArgumentException("invalid otp");
+
+            if (confiermOtp.IsExpier)
+                throw new ArgumentException("otp is expierd, ask new otp");
+
+            if (confiermOtp.IsUsed)
+                throw new ArgumentException("otp already used!");
+
+            var user = _context.Users.FirstOrDefault(u => u.Email == confiermOtp.UserEmail);
+
+            if (user == null)
+                throw new ArgumentException("user not found");
+
+            confiermOtp.IsUsed = true;
+            user.IsActive = true;
+
+            _otpRepository.UpdateOtp(confiermOtp);
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return "success";
+        }
+
+        public async Task<List<GetUsersDto>> GetAllUsers()
+        {
+            var users = await _context.Users.Where(u=> u.IsActive == true).AsNoTracking().ToListAsync();
+            var result = users.Select( u=> new GetUsersDto
+            {
+              FirstName = u.FirstName,
+              LastName = u.LastName,
+              Email = u.Email,
+              PhoneNumber = u.PhoneNumber,
+              City = u.City,
+              BirthDate = u.BirthDate,
+            }).ToList();
+
+            return result;
         }
 
         public bool IsExist(Expression<Func<User, bool>> filter = null)
         {
             return _context.Users.Any(filter);
+        }
+
+        public string ResetEmail(int id , UpdateUserEmailDto updateUserEmail)
+        {
+            var resetUserEmail = _context.Users.FirstOrDefault(i=> i.Id == id);
+            if (resetUserEmail == null)
+                throw new ArgumentException("user not found");
+
+            resetUserEmail.Email = updateUserEmail.email;
+            _context.Users.Update(resetUserEmail);
+            _context.SaveChanges();
+
+            // discard old otp from old email and send new otp to new updated email
+            _otpRepository.ResendOtp(resetUserEmail.Email);
+
+            return "success update user email";
+
         }
 
         public async Task<string> UserRegister(UserDto userDto)
@@ -37,11 +104,30 @@ namespace iWallet.Infrastructure.Implemention
                 Password = encriptedPassword
             };
 
-            
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return $"Register Completed Successfly";
+            Random random = new Random();
+            int otp = random.Next(0, 9999);
+
+
+            var userOtp = new Otp
+            {
+                otp = otp.ToString("0000"),
+                UserEmail = user.Email,
+                ExpirationOn = DateTime.Now.AddMinutes(5),
+                IsUsed = false,
+            };
+
+            _otpRepository.CreateOtp(userOtp);
+
+            _sendEmail.SendEmail(user.Email,"Confierm Register",$"Please Confierm this code to complete register {userOtp.otp}");
+
+
+
+            return $"Register Complete now confierm your account";
         }
+
+
     }
 }

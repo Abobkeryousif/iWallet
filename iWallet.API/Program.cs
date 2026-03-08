@@ -1,4 +1,4 @@
-using iWallet.Infrastructure.Injection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +12,9 @@ builder.Services.InfrastructureReigster();
 
 builder.Services.AddDbContext<ApplicationDbContext>
     (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+
+builder.Services.Configure<MailSetting>(builder.Configuration.GetSection("MailSetting"));
+
 
 builder.Services.AddControllers()
     .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<UserRegisterValidator>());

@@ -1,8 +1,4 @@
-﻿using iWallet.Application.DTOs;
-using iWallet.Application.Interface;
-
-using Microsoft.AspNetCore.Mvc;
-
+﻿using Microsoft.AspNetCore.Mvc;
 namespace iWallet.API.Controllers
 {
     [Route("api/[controller]")]
@@ -15,11 +11,43 @@ namespace iWallet.API.Controllers
             _unitofwork = unitofwork;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var result = await _unitofwork.UserRepository.GetAllUsers();
+            return Ok(result);
+        }    
+
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(UserDto userDto)
         {
             var user = await _unitofwork.UserRepository.UserRegister(userDto);
-            return Ok("user successfly added");
+            return Ok("sucess, now we send otp code in your email please confierm it");
         }
+
+        [HttpPost("complete-register")]
+        public IActionResult CompleteRegister(string otp)
+        {
+            var user = _unitofwork.UserRepository.CompleteRegister(otp);
+            return Ok("Successfly Complete Register");
+
+        }
+
+        [HttpPost("resend-otp")]
+        public IActionResult ResendOtp(string userEmail) 
+        {
+            var result = _unitofwork.OtpRepository.ResendOtp(userEmail);
+            return Ok("Resend Otp Complete, confierm your account by apply new otp code");
+        }
+
+        [HttpPatch("reset-email")]
+
+        public IActionResult ResetUserEmail([FromQuery]int id ,[FromBody]UpdateUserEmailDto updateUserEmail)
+        {
+            var updatedUser = _unitofwork.UserRepository.ResetEmail(id,updateUserEmail);
+            return Ok("successfly updated email and send otp to new email , please apply it to complete register");
+        }
+
+            
     }
 }

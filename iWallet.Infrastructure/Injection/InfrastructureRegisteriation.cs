@@ -1,5 +1,4 @@
-﻿
-namespace iWallet.Infrastructure.Injection
+﻿namespace iWallet.Infrastructure.Injection
 {
     public static class InfrastructureRegisteriation
     {
@@ -7,6 +6,8 @@ namespace iWallet.Infrastructure.Injection
         {
             services.AddScoped<IUnitofwork, Unitofwork>();
             services.AddTransient(typeof(IIsExistMethod<>),typeof(IsExistMethod<>));
+            services.AddTransient<ISendEmailService, SendEmailService>();
+            services.AddTransient<IOtpRepository, OtpRepository>();
 
 
             return services;
