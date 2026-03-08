@@ -2,10 +2,10 @@
 {
     public class Unitofwork : IUnitofwork
     {
-        public Unitofwork(ApplicationDbContext context)
+        public Unitofwork(ApplicationDbContext context , ISendEmailService sendEmail,IOtpRepository otpRepository)
         {
-            UserRepository = new UserRepository(context);
-            OtpRepository = new OtpRepository(context);
+            UserRepository = new UserRepository(context,sendEmail,otpRepository);
+            OtpRepository = new OtpRepository(context, sendEmail);
         }
 
         public IUserRepository UserRepository { get; }

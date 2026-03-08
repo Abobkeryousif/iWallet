@@ -38,7 +38,7 @@
 
             builder.Property(p => p.Password)
                 .IsRequired()
-                .HasMaxLength(35);
+                .HasMaxLength(100);
         }
     }
 }
