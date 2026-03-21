@@ -13,3 +13,5 @@ global using Microsoft.Extensions.Options;
 global using MimeKit;
 global using MailKit.Net.Smtp;
 global using System.Linq.Expressions;
+global using AutoMapper;
+global using iWallet.Domain.Entities.Enums;

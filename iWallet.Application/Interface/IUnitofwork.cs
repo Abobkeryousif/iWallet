@@ -5,5 +5,6 @@ namespace iWallet.Application.Interface
     {
         public IUserRepository UserRepository { get; }
         public IOtpRepository OtpRepository { get; }
+        public IWalletRepository WalletRepository { get; }
     }
 }

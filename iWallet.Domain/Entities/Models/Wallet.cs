@@ -4,8 +4,8 @@
     {
         public int UserId { get; set; }
         public User User { get; set; }
-       
-        public string WalletNumber { get; set; }
+
+        public string WalletNumber { get; set; } 
 
         [Column(TypeName = "nvarchar(40)")]
         public WalletType WalletType { get; set; }
@@ -17,5 +17,8 @@
         public byte[] PinSalt { get; set; }
 
         public ICollection<Transaction> Transactions { get; set; }
+
     }
+
+
 }
