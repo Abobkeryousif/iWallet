@@ -44,7 +44,6 @@ namespace iWallet.Infrastructure.Implemention
             
         }
 
-        
         // account number generation
         private static string GenerateWalletNumber()
         {
