@@ -1,0 +1,46 @@
+name: iWllet Pipeline
+
+on:
+    workflow_dispatch: 
+    push:
+        branches: 
+            - master    
+            - main 
+    pull_request:
+      branches: [ "master" , "main" ]
+
+
+jobs:
+    build-app:
+        runs-on: ubuntu-latest
+        steps:
+            - name: pull repo code inside runner
+              uses: actions/checkout@v5
+
+            - name: steup .NET
+              uses: actions/setup-dotnet@v5.2.0
+              with: 
+                dotnet-version: 10
+
+            - name: cache dependecies
+              uses: actions/cache@v3
+              with:
+                path: ~/.nuget/packages
+                key: ${{ runner.os }}-nuget-
+
+            - name: restore dependecies
+              run: dotnet restore
+
+            - name: build app
+              run: dotnet build --no-restore --configuration Release
+        
+            - name: run test
+              run: dotnet test --no-build --verbosity normal
+
+            - name: upload test result
+              continue-on-error: true
+              uses: actions/upload-artifact@v5
+              with:
+                name: test result
+                path: '**/TestResult/*.xml'
+    
