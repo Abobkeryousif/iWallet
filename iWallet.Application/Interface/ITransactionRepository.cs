@@ -3,6 +3,6 @@ namespace iWallet.Application.Interface
 {
     public interface ITransactionRepository
     {
-        Task MakeDepositAsync(int walletId , decimal ammount);
+        Task<string> MakeDepositAsync(int walletId , decimal ammount);
     }
 }

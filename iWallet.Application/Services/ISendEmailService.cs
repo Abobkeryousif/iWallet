@@ -2,6 +2,6 @@
 {
     public interface ISendEmailService
     {
-        void SendEmail(string MailTo, string subject, string message);
+        //void SendEmail(string MailTo, string subject, string message);
     }
 }

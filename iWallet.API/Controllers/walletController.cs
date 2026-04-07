@@ -32,9 +32,9 @@ namespace iWallet.API.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        public async Task<IActionResult> PatchWalletBalance(int id, UpdateWalletBalanceDto walletBalanceDto)
+        public async Task<IActionResult> PatchWalletBalance(int id, decimal balance)
         {
-            var updatedWalletBalance = await _unitofwork.WalletRepository.PatchWalletBalance(id, walletBalanceDto);
+            var updatedWalletBalance = await _unitofwork.WalletRepository.PatchWalletBalance(id, balance);
             return Ok(updatedWalletBalance);
         }
     }

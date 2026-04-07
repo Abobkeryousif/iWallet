@@ -28,6 +28,10 @@
                    .HasForeignKey(x => x.ToWalletId)
                    .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Property(s => s.Status)
+                .HasConversion<string>();
+
+
         }
     }
 }

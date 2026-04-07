@@ -44,7 +44,7 @@
 
             CreateOtp(userOtp);
 
-            _sendEmailService.SendEmail(user.Email, "Confierm Register", $"Please Confierm this code to complete register {userOtp.otp}");
+            //_sendEmailService.SendEmail(user.Email, "Confierm Register", $"Please Confierm this code to complete register {userOtp.otp}");
 
             return "Resend Otp Complete , confierm your account";
         }

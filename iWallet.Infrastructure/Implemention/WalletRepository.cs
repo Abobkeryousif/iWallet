@@ -80,16 +80,16 @@ namespace iWallet.Infrastructure.Implemention
             return getWalletDto;
         }
 
-        public async Task<string> PatchWalletBalance(int walletId, UpdateWalletBalanceDto walletBalanceDto)
+        public async Task<string> PatchWalletBalance(int walletId, decimal balance)
         {
             var wallet = await _context.Wallets.FindAsync(walletId);
             if (wallet == null)
                  throw new Exception($"not found wallet with id: {walletId}");
 
-            if (walletBalanceDto.Balance <= 0)
+            if (balance <= 0)
                 throw new Exception("invalid balance!");
 
-            wallet.Balance = walletBalanceDto.Balance;
+            wallet.Balance += balance;
             wallet.UpdatedAt = DateTime.UtcNow;
             _context.Wallets.Update(wallet);
             await _context.SaveChangesAsync();  
