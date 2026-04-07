@@ -8,6 +8,7 @@ namespace iWallet.Infrastructure.Implemention
             UserRepository = new UserRepository(context,sendEmail,otpRepository);
             OtpRepository = new OtpRepository(context, sendEmail);
             WalletRepository = new WalletRepository(context);
+            TransactionRepository = new TransactionRepository(context);
         }
 
         public IUserRepository UserRepository { get; }
@@ -15,5 +16,7 @@ namespace iWallet.Infrastructure.Implemention
         public IOtpRepository OtpRepository {  get; }
 
         public IWalletRepository WalletRepository {  get; }
+
+        public ITransactionRepository TransactionRepository {  get; }
     }
 }

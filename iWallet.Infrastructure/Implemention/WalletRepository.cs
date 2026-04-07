@@ -14,12 +14,16 @@ namespace iWallet.Infrastructure.Implemention
         public async Task<string> CreateAsync(CreateWalletDto walletDto)
         {
 
+            var userChack = await _context.Wallets.FirstOrDefaultAsync(u=> u.Id == walletDto.UserId);
+            if (userChack == null)
+                throw new Exception("Invalid user id");
+
             if (!Enum.IsDefined(typeof(WalletType), walletDto.WalletType))
                 throw new Exception("Invalid wallet type");
 
             //ensure any user just have 2 wallet
             var walletCount = await _context.Wallets
-                .CountAsync(w=> w.UserId == walletDto.UserId);
+                .CountAsync(w=> w.UserId == userChack.Id);
 
             if (walletCount >= 2)
                 throw new Exception("User can not have more then 2 wallet");
@@ -58,5 +62,57 @@ namespace iWallet.Infrastructure.Implemention
             pinSalt = hmac.Key;
             pinHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pin));
         }
+
+        public async Task<GetWalletDto> GetWalletById(int walletId)
+        {
+            var wallet = await _context.Wallets.FindAsync(walletId);
+            if (wallet == null)
+                throw new Exception($"not found wallet with id: {walletId}");
+
+            var getWalletDto = new GetWalletDto
+            {
+                WalletNumber = wallet.WalletNumber,
+                Balance = wallet.Balance,
+                Status = wallet.Status.ToString(),
+                WalletType = wallet.WalletType.ToString()
+            };
+
+            return getWalletDto;
+        }
+
+        public async Task<string> PatchWalletBalance(int walletId, UpdateWalletBalanceDto walletBalanceDto)
+        {
+            var wallet = await _context.Wallets.FindAsync(walletId);
+            if (wallet == null)
+                 throw new Exception($"not found wallet with id: {walletId}");
+
+            if (walletBalanceDto.Balance <= 0)
+                throw new Exception("invalid balance!");
+
+            wallet.Balance = walletBalanceDto.Balance;
+            wallet.UpdatedAt = DateTime.UtcNow;
+            _context.Wallets.Update(wallet);
+            await _context.SaveChangesAsync();  
+
+            return $"your updated balance is {wallet.Balance}";
+        }
+
+        public async Task<List<GetWalletDto>> GetWalletsAsync()
+        {
+            //fix performance to filter in database level and just get filterd data to local
+
+            var wallets = await _context.Wallets
+                .Select(w => new GetWalletDto
+                {
+                    WalletNumber = w.WalletNumber,
+                    Balance = w.Balance,
+                    WalletType = w.WalletType.ToString(),
+                    Status = w.Status.ToString()
+                })
+                .ToListAsync();
+
+            return wallets;
+        }
     }
-}
+    }
+
