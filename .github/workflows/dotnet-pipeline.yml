@@ -5,8 +5,10 @@ on:
     push:
         branches: 
             - master    
-    pull_request: 
-        types: opened
+            - main 
+    pull_request:
+      branches: [ "master" , "main" ]
+
 
 jobs:
     build-app:
