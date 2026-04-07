@@ -42,5 +42,5 @@ jobs:
               uses: actions/upload-artifact@v5
               with:
                 name: test result
-                path: '**/TestResult/*.xml'
+                path: '**/TestsResult/*.xml'
     
