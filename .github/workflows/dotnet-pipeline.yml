@@ -39,7 +39,7 @@ jobs:
 
             - name: upload test result
               continue-on-error: true
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v5
               with:
                 name: test result
                 path: '**/TestResult/*.xml'
