@@ -6,8 +6,9 @@ on:
         branches: 
             - master    
             - main 
+            - 'feature/*'
     pull_request:
-      branches: [ "master" , "main" ]
+      branches: [ "master" , "main" , "feature/*"]
 
 
 jobs:
@@ -26,7 +27,7 @@ jobs:
               uses: actions/cache@v3
               with:
                 path: ~/.nuget/packages
-                key: ${{ runner.os }}-nuget-
+                key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
 
             - name: restore dependecies
               run: dotnet restore
