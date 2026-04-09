@@ -17,7 +17,7 @@
 
         public bool IsActive { get; set; } = false;
         public string Password { get; set; }
-        public string? Role { get; set; }
+        public string Role { get; set; }
 
         public ICollection<Wallet> Wallets { get; set; }  
     }

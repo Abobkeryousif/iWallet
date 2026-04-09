@@ -33,6 +33,14 @@ namespace iWallet.API.Controllers
 
         }
 
+        [HttpPost("login")]
+
+        public async Task<IActionResult> UserLoginAsync(LoginDto loginDto)
+        {
+            return Ok(await _unitofwork.UserRepository.UserLoginAsync(loginDto));
+        }
+
+
         [HttpPost("resend-otp")]
         public IActionResult ResendOtp(string userEmail) 
         {

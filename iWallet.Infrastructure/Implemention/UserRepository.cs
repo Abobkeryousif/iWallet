@@ -6,12 +6,14 @@ namespace iWallet.Infrastructure.Implemention
         private readonly ApplicationDbContext _context;
         private readonly ISendEmailService _sendEmail;
         private IOtpRepository _otpRepository;
+        private readonly ITokenService _tokenService;
 
-        public UserRepository(ApplicationDbContext context , ISendEmailService sendEmail , IOtpRepository otpRepository)
+        public UserRepository(ApplicationDbContext context , ISendEmailService sendEmail , IOtpRepository otpRepository, ITokenService tokenService)
         {
             _context = context;
             _sendEmail = sendEmail;
             _otpRepository = otpRepository;
+            _tokenService = tokenService;
         }
 
         public string CompleteRegister(string Otp)
@@ -81,6 +83,22 @@ namespace iWallet.Infrastructure.Implemention
 
             return "success update user email";
 
+        }
+
+        public async Task<string> UserLoginAsync(LoginDto loginDto)
+        {
+            var loginUser = await _context.Users.FirstOrDefaultAsync(e=> e.Email == loginDto.email);
+            if (loginUser == null)
+                throw new Exception("invalid email or password");
+
+            var checkUserPassword = BCrypt.Net.BCrypt.Verify(loginDto.password,loginUser.Password);
+                if (!checkUserPassword)
+                    throw new Exception("invalid email or password");
+
+            var token = _tokenService.GenerateJwtToken(loginUser);
+            _tokenService.WriteTokenToCookie("ACCESS_TOKEN",token,DateTime.UtcNow.AddMinutes(12));
+
+            return $"Welcome back: {loginUser.UserName}";
         }
 
         public async Task<string> UserRegister(UserDto userDto)

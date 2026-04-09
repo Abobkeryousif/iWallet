@@ -32,4 +32,10 @@
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
     }
+
+    public record LoginDto
+    {
+        public string email { get; set; }
+        public string password { get; set; }
+    }
 }
