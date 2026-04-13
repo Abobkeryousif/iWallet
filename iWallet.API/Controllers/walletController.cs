@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace iWallet.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class walletController : ControllerBase
     {
         private readonly IUnitofwork _unitofwork;
@@ -14,6 +16,7 @@ namespace iWallet.API.Controllers
         }
 
         [HttpPost]
+        
         public async Task<IActionResult> CreateWalletAsync(CreateWalletDto createWalletDto)
         {
             var wallet = await _unitofwork.WalletRepository.CreateAsync(createWalletDto);
@@ -21,6 +24,7 @@ namespace iWallet.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "USER")]
         public async Task<IActionResult> GetWalletsAsync() =>
             Ok(await _unitofwork.WalletRepository.GetWalletsAsync());
 

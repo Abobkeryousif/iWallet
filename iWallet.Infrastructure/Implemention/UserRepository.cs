@@ -86,7 +86,7 @@ namespace iWallet.Infrastructure.Implemention
         }
 
         public async Task<string> UserLoginAsync(LoginDto loginDto)
-        {
+            {
             var loginUser = await _context.Users.FirstOrDefaultAsync(e=> e.Email == loginDto.email);
             if (loginUser == null)
                 throw new Exception("invalid email or password");
@@ -96,7 +96,7 @@ namespace iWallet.Infrastructure.Implemention
                     throw new Exception("invalid email or password");
 
             var token = _tokenService.GenerateJwtToken(loginUser);
-            _tokenService.WriteTokenToCookie("ACCESS_TOKEN",token,DateTime.UtcNow.AddMinutes(12));
+            _tokenService.WriteTokenToCookie("ACCESS_TOKEN", token ,DateTime.UtcNow.AddMinutes(15));
 
             return $"Welcome back: {loginUser.UserName}";
         }
