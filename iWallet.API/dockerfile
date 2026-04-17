@@ -1,0 +1,31 @@
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+
+COPY ["iWallet.API/iWallet.API.csproj", "iWallet.API/"]
+COPY ["iWallet.Application/iWallet.Application.csproj", "iWallet.Application/"]
+COPY ["iWallet.Domain/iWallet.Domain.csproj", "iWallet.Domain/"]
+COPY ["iWallet.Infrastructure/iWallet.Infrastructure.csproj", "iWallet.Infrastructure/"]
+
+RUN dotnet restore "iWallet.API/iWallet.API.csproj"
+
+
+COPY . .
+
+WORKDIR "/src/iWallet.API"
+RUN dotnet build "iWallet.API.csproj" -c Release -o /app/build
+
+
+RUN dotnet publish "iWallet.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 
+WORKDIR /app
+
+
+COPY --from=build /app/publish .
+
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080 
+
+ENTRYPOINT ["dotnet", "iWallet.API.dll"]

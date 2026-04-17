@@ -113,6 +113,26 @@ namespace iWallet.Infrastructure.Implemention
 
             return wallets;
         }
+
+        public async Task<GetWalletDto> GetByWalletNumber(string walletNumber)
+        {
+            var wallet = await _context.Wallets.FirstOrDefaultAsync(wn=> wn.WalletNumber == walletNumber);
+            if (wallet == null)
+                throw new Exception("invalid wallet number");
+
+            if (wallet.Status != WalletStatus.Active)
+                throw new Exception("inactive wallet");
+
+            var getWalletDto = new GetWalletDto
+            {
+                WalletNumber = walletNumber,
+                Balance= wallet.Balance,
+                WalletType= wallet.WalletType.ToString(),
+                Status = wallet.Status.ToString()
+            };
+
+            return getWalletDto;
+        }
     }
     }
 

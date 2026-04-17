@@ -1,3 +1,5 @@
+using iWallet.API.Middleware;
+using iWallet.API.UserContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -12,6 +14,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.InfrastructureReigster(builder.Configuration);
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IGetUserIdFromToken, GetUserIdFromToken>();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>
     (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
@@ -52,6 +58,8 @@ builder.Services.AddControllers()
 
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapOpenApi();
 app.UseSwagger();
