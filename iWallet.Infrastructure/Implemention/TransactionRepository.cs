@@ -1,4 +1,5 @@
-﻿namespace iWallet.Infrastructure.Implemention
+﻿
+namespace iWallet.Infrastructure.Implemention
 {
     public class TransactionRepository : ITransactionRepository
     {
@@ -127,8 +128,7 @@
                 await dbTransaction.CommitAsync();
 
                 return $"Transfer Completed Successfly with Transaction Reference {reference}";
-
-            }
+                }
 
             catch
             {
@@ -139,7 +139,7 @@
 
         public async Task<string> MakeWithdrawal(int walletId, decimal amount)
         {
-            if (amount < 0)
+            if (amount <= 0)
                 throw new Exception("Invalid amount");
 
             var wallet = await _context.Wallets.FindAsync(walletId);
@@ -184,6 +184,29 @@
             return $"withdrawal completed successfly with Transaction Reference {reference}";
         }
 
+        public async Task<List<TransactionDto>> TransactionHistory(int walletId)
+        {
+            var wallet = await _context.Wallets.AnyAsync(w=> w.Id == walletId);
+            if (!wallet)
+                throw new Exception("invalid wallet");
+
+            var history = await _context.Transactions
+                .Where(t => t.FromWalletId == walletId || t.ToWalletId == walletId)
+                .OrderByDescending(t => t.CreatedAt)
+                .Select(t=> new TransactionDto
+                {
+                    Reference = t.Reference,
+                    Amount = t.Amount,
+                    TransactionType = t.TransactionType.ToString(),
+                    TransactionStatus = t.Status.ToString()
+                })
+                .ToListAsync();
+
+            if (history.Count == 0)
+                throw new Exception("not make any transactions yet");
+
+            return history;
+        }
 
         private static string GenerateReference(TransactionType type)
         {
@@ -200,7 +223,5 @@
 
             return $"{prefix}-{data}-{random}";
         }
-
-
     }
 }

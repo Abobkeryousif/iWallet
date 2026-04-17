@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace iWallet.API.Controllers
+﻿namespace iWallet.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize(Roles = "USER")]
     public class walletController : ControllerBase
     {
         private readonly IUnitofwork _unitofwork;
@@ -15,8 +12,7 @@ namespace iWallet.API.Controllers
             _unitofwork = unitofwork;
         }
 
-        [HttpPost]
-        
+        [HttpPost] 
         public async Task<IActionResult> CreateWalletAsync(CreateWalletDto createWalletDto)
         {
             var wallet = await _unitofwork.WalletRepository.CreateAsync(createWalletDto);
@@ -24,7 +20,6 @@ namespace iWallet.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "USER")]
         public async Task<IActionResult> GetWalletsAsync() =>
             Ok(await _unitofwork.WalletRepository.GetWalletsAsync());
 
@@ -34,6 +29,10 @@ namespace iWallet.API.Controllers
             var getWallet = await _unitofwork.WalletRepository.GetWalletById(id);
             return Ok(getWallet);
         }
+
+        [HttpGet("get-by-wallet-number")]
+        public async Task<IActionResult> GetByWalletNumberAsync(string walletNumber) =>
+            Ok( await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber) );
 
         [HttpPatch("{id:int}")]
         public async Task<IActionResult> PatchWalletBalance(int id, decimal balance)

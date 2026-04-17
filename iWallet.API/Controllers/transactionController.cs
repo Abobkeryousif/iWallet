@@ -6,10 +6,12 @@
     public class transactionController : ControllerBase
     {
         private readonly IUnitofwork _unitofwork;
+        private readonly IGetUserIdFromToken _getUserIdFromToken;
 
-        public transactionController(IUnitofwork unitofwork)
+        public transactionController(IUnitofwork unitofwork,IGetUserIdFromToken getUserIdFromToken)
         {
             _unitofwork = unitofwork;
+            _getUserIdFromToken = getUserIdFromToken;
         }
 
         [HttpPost("deposit")]
@@ -24,7 +26,7 @@
 
         public async Task<IActionResult> TransferAsync(TransferTransactionDto transferDto)
         {
-            int userId = GetUserIdFromToken();
+            int userId = _getUserIdFromToken.UserIdFromToken();
             return Ok (await _unitofwork.TransactionRepository.TransferAsync(transferDto.toAccountNumber,transferDto.amount,userId));
 
         }
@@ -37,14 +39,10 @@
             return Ok(await _unitofwork.TransactionRepository.MakeWithdrawal(withdrawalDto.walletId , withdrawalDto.amount));
         }
 
+        [HttpGet("transaction-history")]
+        public async Task<IActionResult> GetTransactionHistoryAsync(int walletId) =>
+           Ok(await _unitofwork.TransactionRepository.TransactionHistory(walletId));
 
-        private int GetUserIdFromToken()
-        {
-            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == ClaimTypes.NameIdentifier);
-            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
-                throw new UnauthorizedAccessException("User Id not found or invalid token");
 
-            return userId;
-        }
     }
 }
