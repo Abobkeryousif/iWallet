@@ -13,4 +13,10 @@ namespace iWallet.Application.DTOs
         [MaxLength(20)]
         public string Name { get; set; }
     }  
+
+    public record BeneficieryTransaferDto
+    {
+        public string beneficieryName { get; set; }
+        public decimal amount { get; set; }
+    }
 }

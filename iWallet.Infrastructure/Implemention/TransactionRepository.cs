@@ -5,10 +5,12 @@ namespace iWallet.Infrastructure.Implemention
     {
         private readonly ApplicationDbContext _context;
         private readonly IWalletRepository _walletRepository;
-        public TransactionRepository(ApplicationDbContext context, IWalletRepository walletRepository)
+        private readonly ILimitService _limitService;
+        public TransactionRepository(ApplicationDbContext context, IWalletRepository walletRepository, ILimitService limitService)
         {
             _context = context;
             _walletRepository = walletRepository;
+            _limitService = limitService;
         }
         public async Task<string> MakeDepositAsync(int walletId, decimal ammount)
         {
@@ -30,12 +32,15 @@ namespace iWallet.Infrastructure.Implemention
                 Status = TransactionStatus.Success,
             };
 
-            await _walletRepository.PatchWalletBalance(walletId, transaction.Amount);
+            wallet.Balance += ammount;
+            _context.Wallets.Update(wallet);
             await _context.Transactions.AddAsync(transaction);
+            _context.SaveChanges();
             
 
             var ledger = new LedgerEntry
             {
+                
                 WalletId = walletId,
                 TransactionId = transaction.Id,
                 Debit = 0,
@@ -70,7 +75,18 @@ namespace iWallet.Infrastructure.Implemention
             if (senderWallet.Balance < amount)
                 throw new Exception("insufficient balance");
 
-           
+            // frud pervention and get value from cache
+
+            var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
+            if (amount > limit.PerTransactionLimit)
+                throw new Exception("Exceeded per transaction limit 5000");
+
+            var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
+            if (todyTotal + amount > limit.DailyLimit)
+                throw new Exception("You already Exceeded daily limit 200000");
+
+            await _context.SaveChangesAsync();
+
             var reference = GenerateReference(TransactionType.Transfer);
 
             using var dbTransaction = await _context.Database.BeginTransactionAsync();
@@ -208,6 +224,17 @@ namespace iWallet.Infrastructure.Implemention
             return history;
         }
 
+        public async Task<string> TransferToBeneficiery(string beneficieryName, decimal amount, int userId)
+        {
+            var checkBeneficiery = await _context.Beneficiaries.FirstOrDefaultAsync(n=> n.Name.ToLower() == beneficieryName.ToLower());
+            if (checkBeneficiery == null)
+                throw new Exception("invalid beneficiery name");
+
+            await TransferAsync(checkBeneficiery.WalletNumber, amount, userId);
+
+            return $"Transfer Completed Successfly with amount {amount}";
+        }
+
         private static string GenerateReference(TransactionType type)
         {
             var data = DateTime.UtcNow.ToString("yyMMdd");
@@ -222,6 +249,20 @@ namespace iWallet.Infrastructure.Implemention
             };
 
             return $"{prefix}-{data}-{random}";
+        }
+
+        public async Task<decimal> GetTransactionsTodayTotalAsync(int userId)
+        {
+            var today = DateTime.UtcNow.Date;
+            var tomorrow = today.AddDays(1);
+
+            return await _context.Transactions
+                .Where(t =>
+                    t.FromWallet.UserId == userId &&
+                    t.CreatedAt >= today &&
+                    t.CreatedAt < tomorrow &&
+                    t.Status == TransactionStatus.Success)
+                .SumAsync(t => (decimal?)t.Amount) ?? 0m;
         }
     }
 }

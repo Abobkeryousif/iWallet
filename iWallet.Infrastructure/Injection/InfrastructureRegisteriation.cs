@@ -11,10 +11,10 @@ namespace iWallet.Infrastructure.Injection
             services.AddTransient(typeof(IIsExistMethod<>),typeof(IsExistMethod<>));
             services.AddTransient<ISendEmailService, SendEmailService>();
             services.AddTransient<IOtpRepository, OtpRepository>();
+            services.AddScoped<ILimitService, LimitSerivce>();
+            services.AddMemoryCache();
 
-            
 
-           
 
 
             return services;
