@@ -7,7 +7,7 @@ on:
             - master    
             - main 
     pull_request:
-      branches: [ "master" , "main" , "feature/*"]
+      branches: [ "master" , "main"]
 
 
 jobs:
