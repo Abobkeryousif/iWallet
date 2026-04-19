@@ -32,8 +32,53 @@ namespace iWallet.Infrastructure.Implemention
             _context.SaveChanges();
 
             return $" Successfly Add beneficiery with name: {beneficiary.Name} and walletNumber {beneficiary.WalletNumber}";
-            
+        }
 
+        public void DeleteBeneficiery(int beneficierId)
+        {
+           var deletedBeneficiery = _context.Beneficiaries.Find(beneficierId);
+            if (deletedBeneficiery == null)
+                throw new Exception($"not found any beneficiery");
+
+            _context.Beneficiaries.Remove(deletedBeneficiery);
+            _context.SaveChanges();
+        }
+
+        public async Task<List<BeneficieryDto>> GetBeneficiers(int userId)
+        {
+            var user = await _context.Beneficiaries.AnyAsync(u=> u.UserId == userId);
+            if (!user)
+                throw new Exception($"not found user with this id: {userId}");
+
+            var userBeneficiery = await _context.Beneficiaries
+                .Where(u=> u.UserId == userId)
+                .OrderByDescending(u=>u.CreatedAt)
+                .Select(b=> new BeneficieryDto
+                {
+                    Name=b.Name,
+                    WalletNumber =b.WalletNumber,
+                }).ToListAsync();
+
+            if (userBeneficiery.Count == 0)
+                throw new Exception("not added beneficiers yet");
+
+            return userBeneficiery;
+        }
+
+        public string UpdateBeneficiaryName(int beneficierId, string updatedName)
+        {
+            var beneficiary =  _context.Beneficiaries.Find(beneficierId);
+            if (beneficiary == null)
+                throw new Exception("not found any beneficiery");
+
+            if (string.IsNullOrWhiteSpace(updatedName))
+                throw new Exception("invalid name");
+
+            beneficiary.Name = updatedName;
+            _context.Update(beneficiary);
+            _context.SaveChanges();
+
+            return $"updated beneficiery name to {beneficiary.Name}" ;
         }
     }
 }

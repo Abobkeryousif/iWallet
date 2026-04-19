@@ -20,5 +20,24 @@ namespace iWallet.API.Controllers
             var userId = _getUserIdFromToken.UserIdFromToken();
             return Ok(await _unitofwork.BeneficiaryRepository.AddBeneficiary(beneficieryDto.Name,beneficieryDto.WalletNumber,userId));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserBeneficiers()
+        {
+            var userId = _getUserIdFromToken.UserIdFromToken();
+            return Ok(await _unitofwork.BeneficiaryRepository.GetBeneficiers(userId));
+        }
+
+        [HttpPatch("update-name")]
+        public IActionResult UpdateBeneficieryName(UpdateBeneficieryName beneficieryName)=>
+            Ok (_unitofwork.BeneficiaryRepository.UpdateBeneficiaryName(beneficieryName.Id,beneficieryName.Name));
+
+        [HttpDelete("{beneficieryId:int}")]
+        public IActionResult DeleteBeneficiery(int beneficieryId)
+        {
+            _unitofwork.BeneficiaryRepository.DeleteBeneficiery(beneficieryId);
+            return Ok("successfly deleted beneficiery");
+        }
+
     }
 }
