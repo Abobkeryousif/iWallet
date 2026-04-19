@@ -39,6 +39,14 @@
             return Ok(await _unitofwork.TransactionRepository.MakeWithdrawal(withdrawalDto.walletId , withdrawalDto.amount));
         }
 
+
+        [HttpPost("beneficiery-transfer")]
+        public async Task<IActionResult> TransferToBeneficieryAsync(BeneficieryTransaferDto beneficieryTransafer)
+        {
+            var userId = _getUserIdFromToken.UserIdFromToken();
+            return Ok(await _unitofwork.TransactionRepository.TransferToBeneficiery(beneficieryTransafer.beneficieryName, beneficieryTransafer.amount, userId));    
+        }
+
         [HttpGet("transaction-history")]
         public async Task<IActionResult> GetTransactionHistoryAsync(int walletId) =>
            Ok(await _unitofwork.TransactionRepository.TransactionHistory(walletId));

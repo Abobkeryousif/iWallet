@@ -14,6 +14,8 @@ namespace iWallet.Infrastructure.Data
 
         public DbSet<Beneficiary> Beneficiaries { get; set; }
 
+        public DbSet<UserLimit> UserLimits { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -34,6 +36,16 @@ namespace iWallet.Infrastructure.Data
                   .HasConversion<string>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<UserLimit>()
+                .Property(l => l.PerTransactionLimit)
+                .HasMaxLength(5000);
+
+            modelBuilder.Entity<UserLimit>()
+                .Property(l => l.DailyLimit)
+                .HasMaxLength(20000);
+
+
 
         }
     }

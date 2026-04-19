@@ -3,12 +3,12 @@ namespace iWallet.Infrastructure.Implemention
 {
     public class Unitofwork : IUnitofwork
     {
-        public Unitofwork(ApplicationDbContext context , ISendEmailService sendEmail,IOtpRepository otpRepository,ITokenService tokenService)
+        public Unitofwork(ApplicationDbContext context , ISendEmailService sendEmail,IOtpRepository otpRepository,ITokenService tokenService,ILimitService limitService)
         {
             UserRepository = new UserRepository(context,sendEmail,otpRepository,tokenService);
             OtpRepository = new OtpRepository(context, sendEmail);
             WalletRepository = new WalletRepository(context);
-            TransactionRepository = new TransactionRepository(context,WalletRepository);
+            TransactionRepository = new TransactionRepository(context,WalletRepository,limitService);
             BeneficiaryRepository = new BeneficiaryRepository(context);
         }
 
