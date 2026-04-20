@@ -216,6 +216,7 @@ public async Task<decimal> GetTransactionsTodayTotalAsync(int userId)
 * 🌍 Multi-currency support
 * 🧾 Audit logging system
 * 🚀 Background Jobs
+* ☁️ Full cloud deployment on Azure using AKS(Azure Kubernetes service) with CI/CD and GitOps improvements
 
 ---
 
