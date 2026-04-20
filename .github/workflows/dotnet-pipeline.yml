@@ -54,9 +54,9 @@ jobs:
       runs-on: ubuntu-latest
       timeout-minutes: 5
       permissions:
-        contents: read
         packages: write
         
+
       steps:
         - name: pull repo code to runner
           uses: actions/checkout@v5
@@ -89,7 +89,6 @@ jobs:
             tags: |
                ghcr.io/${{ env.REPO }}:latest
                ghcr.io/${{ env.REPO }}:${{ github.sha }}
-               ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO }}:latest
                ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO }}:${{ github.sha }}
 
             
