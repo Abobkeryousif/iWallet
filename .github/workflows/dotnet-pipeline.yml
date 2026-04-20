@@ -6,12 +6,17 @@ on:
         branches: 
             - master    
             - main 
+            - 'feature/*'
     pull_request:
-      branches: [ "master" , "main"]
-
+      branches: [ "master" , "main" , "feature/*"]
+concurrency: 
+  group: iwallet-app
+  cancel-in-progress: false
+    
 
 jobs:
     build-app:
+        timeout-minutes: 5
         runs-on: ubuntu-latest
         steps:
             - name: pull repo code inside runner
@@ -43,4 +48,44 @@ jobs:
               with:
                 name: test result
                 path: '**/TestsResult/*.xml'
+
+    containerization:
+      needs: build-app
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      steps:
+        - name: pull repo code to runner
+          uses: actions/checkout@v5
+
+        - name: set repo name to lower case   # to easy push to ghcr
+          run: |
+            REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+            echo "REPO=$REPO" >> $GITHUB_ENV
+
+        - name: login to ghcr
+          uses: docker/login-action@v3
+          with:
+            registry: ghcr.io
+            username: ${{ github.repository_owner }}
+            password: ${{ secrets.CR_PAT }}
+
+        - name: login to docker hub
+          uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+
+        - name: build and push image to ghcr
+          continue-on-error: true
+          uses: docker/build-push-action@v7.1.0
+          with:
+            context: ./iWallet.API/
+            push: true
+            tags: |
+               ghcr.io/${{ env.REPO }}:latest
+               ghcr.io/${{ env.REPO }}:${{ github.sha }}
+               ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO }}:latest
+               ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO }}:${{ github.sha }}
+
+            
     
