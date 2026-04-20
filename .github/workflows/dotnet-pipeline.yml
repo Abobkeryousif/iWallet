@@ -6,9 +6,11 @@ on:
         branches: 
             - master    
             - main 
-            - 'feature/*'
+
+        paths-ignore: 
+           - '**/README.md'
     pull_request:
-      branches: [ "master" , "main" , "feature/*"]
+      branches: [ "master" , "main" ]
 concurrency: 
   group: iwallet-app
   cancel-in-progress: false
