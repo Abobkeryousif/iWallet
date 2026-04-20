@@ -79,7 +79,8 @@ jobs:
           continue-on-error: true
           uses: docker/build-push-action@v7.1.0
           with:
-            context: ./iWallet.API/
+            context: .
+            file: ./iWallet.API/Dockerfile
             push: true
             tags: |
                ghcr.io/${{ env.REPO }}:latest
