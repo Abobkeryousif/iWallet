@@ -8,14 +8,14 @@ A **production-ready digital wallet system** built with **.NET**, designed using
 
 **iWallet** is a scalable backend system that simulates a real-world **fintech wallet platform**, focusing on secure financial transactions, strict business rules, and high-performance processing.
 
-This project demonstrates **real-world engineering practices** beyond CRUD applications, including:
+This project demonstrates **real-world engineering practices** including:
 
 * 🔐 Secure authentication using JWT
 * 💸 Transaction processing with financial integrity
 * 🛡️ Limit enforcement (per transaction & daily)
 * ⚡ In-memory caching for performance optimization
 * 🐳 Containerization using Docker
-* 🔄 Automated CI/CD pipelines
+* 🔄 Advance Automated CI/CD pipelines
 * ☸️ Kubernetes deployment using GitOps (ArgoCD)
 
 ---
@@ -119,8 +119,12 @@ A fully automated CI/CD pipeline that:
 
 * Builds the application
 * Runs automated tests
+* Jobs Timeout || Jobs Cocurrency
+* Reusable Workflow || Custom actions
+* Caching
 * Builds Docker images
 * Deploy docker image to GHCR (Github Container Registery)
+* Auto override docker image tag in GitOps Repo
 
 
 Ensuring:
