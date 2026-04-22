@@ -36,10 +36,10 @@ The core of the system where all **business rules and domain models** are define
   * `Wallet`
   * `Transaction`
   * `LedgerEntry`
+  * `Beneficiery`
 
-* Rich domain modeling:
 
-  * Strongly-typed enums (`TransactionType`, `TransactionStatus`, `WalletStatus`)
+  * Strongly-typed enums (`TransactionType`, `TransactionStatus`, `WalletStatus`,`WalletType`)
 
 ---
 
@@ -88,6 +88,40 @@ Exposes the system through **secure RESTful APIs**:
 
 ## ⚡ Performance & Optimization
 
+🌐 Distributed Caching with Redis
+
+To support scalability and consistency across multiple instances, a Distributed Cache using Redis is implemented.
+
+Why Redis?
+
+🚀 High-performance in-memory data store
+🔗 Shared cache across multiple services/instances
+⏱️ Supports expiration (TTL) for dynamic data like limits
+
+Use Cases in iWallet:
+
+🔁 Idempotency Handling (Using Redis)
+
+To ensure safe and repeatable operations (especially in financial transactions), Idempotency is implemented.
+
+💡 Concept:
+
+If the same request is sent multiple times (e.g., due to retry or network issues), it should only be processed once.
+
+⚙️ How It Works:
+Client sends request with Idempotency Key
+Backend checks Redis:
+✅ If key exists → return cached response (no DB operation)
+❌ If not → process request normally
+Store result in Redis with a TTL (e.g.)
+🎯 Benefits:
+🛡️ Prevents duplicate transactions
+🔄 Safe retries for clients
+⚡ Faster responses for repeated requests
+🔗 Combined Impact
+
+
+
 * 🚀 **In-Memory Caching** for limit validation:
 
   * Reduces database load
@@ -97,9 +131,19 @@ Exposes the system through **secure RESTful APIs**:
     * Per Transaction Limits
     * Daily Limits
 
-* Optimized LINQ queries for aggregation
-
 * Async/Await across the system for high concurrency handling
+
+By combining:
+
+In-Memory Cache ⚡
+Distributed Cache (Redis) 🌐
+Idempotency 🔁
+
+The system achieves:
+
+High performance 🚀
+Strong consistency 🔒
+Fault-tolerant transaction handling 💪
 
 ---
 
@@ -183,22 +227,105 @@ Ensuring:
 
 ---
 
-## 📌 Example: Daily Limit Calculation
+## 📌 Example: Transfer between wallets
 
 ```csharp
-public async Task<decimal> GetTransactionsTodayTotalAsync(int userId)
-{
-    var today = DateTime.UtcNow.Date;
-    var tomorrow = today.AddDays(1);
+ public async Task<string> TransferAsync(string toAccountNumber, decimal amount, int userId)
+        {
+            if (amount <= 0)
+                throw new Exception("Invalid Amount");
 
-    return await _context.Transactions
-        .Where(t =>
-            t.FromWalletId == userId &&
-            t.CreatedAt >= today &&
-            t.CreatedAt < tomorrow &&
-            t.Status == TransactionStatus.Success)
-        .SumAsync(t => (decimal?)t.Amount) ?? 0;
-}
+            var senderWallet = await _context.Wallets.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
+                throw new Exception("invalid sender wallet");
+
+            var receiverWallet = await _context.Wallets.FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
+            if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
+                throw new Exception("Invalid receiver wallet");
+
+            if (senderWallet.Id == receiverWallet.Id)
+                throw new Exception("you can't transfer to yourself");
+
+            if (senderWallet.Balance < amount)
+                throw new Exception("insufficient balance");
+
+            // frud pervention and get value from cache
+
+            var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
+            if (amount > limit.PerTransactionLimit)
+                throw new Exception("Exceeded per transaction limit 5000");
+
+            var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
+            if (todyTotal + amount > limit.DailyLimit)
+                throw new Exception("You already Exceeded daily limit 200000");
+
+            await _context.SaveChangesAsync();
+
+            var reference = GenerateReference(TransactionType.Transfer);
+
+            using var dbTransaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                senderWallet.Balance -= amount;
+                receiverWallet.Balance += amount;
+
+                var transaction = new Transaction
+                {
+                    FromWalletId = senderWallet.Id,
+                    ToWalletId = receiverWallet.Id,
+                    Amount = amount,
+                    TransactionType = TransactionType.Transfer,
+                    Reference = reference,
+                    Status = TransactionStatus.Success
+                };
+
+                await _context.Transactions.AddAsync(transaction);
+                _context.SaveChanges();
+
+                var senderLedger = new LedgerEntry
+                {
+                    WalletId = senderWallet.Id,
+                    TransactionId = transaction.Id,
+                    Debit = amount,
+                    Credit = 0,
+                    Particulars = $"Transfer to {senderWallet.WalletNumber}"
+                };
+
+                await _context.LedgerEntries.AddAsync(senderLedger);
+                _context.SaveChanges();
+
+                var receiverLedger = new LedgerEntry
+                {
+                    WalletId = receiverWallet.Id,
+                    TransactionId = transaction.Id,
+                    Debit = 0,
+                    Credit = amount,
+                    Particulars = $"Successfly receive transaction from {receiverWallet.WalletNumber}"
+                };
+
+                await _context.LedgerEntries.AddAsync(receiverLedger);
+                _context.SaveChanges();
+
+                senderLedger.UpdatedAt = DateTime.UtcNow;
+                receiverWallet.UpdatedAt = DateTime.UtcNow;
+
+                _context.Wallets.Update(senderWallet);
+                _context.Wallets.Update(receiverWallet);
+
+                await _context.SaveChangesAsync();
+
+                await dbTransaction.CommitAsync();
+
+                return $"Transfer Completed Successfly with Transaction Reference {reference}";
+                }
+
+            catch
+            {
+                await dbTransaction.RollbackAsync();
+                throw;
+            }
+        }
 ```
 
 ---
@@ -246,12 +373,6 @@ Contributions are welcome! Feel free to fork the project and submit a pull reque
 ## 📄 License
 
 This project is developed as part of my continuous learning journey in **Software Engineering and DevOps**.
-
-It showcases practical implementation of:
-
-* Modern Backend system design
-* CI/CD pipelines and automation
-* Cloud-native deployment using Kubernetes and GitOps
 
 The project serves as both a **learning platform** and a **professional portfolio** to demonstrate real-world engineering practices.
 
