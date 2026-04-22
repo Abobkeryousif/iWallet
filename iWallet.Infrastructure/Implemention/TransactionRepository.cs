@@ -235,6 +235,21 @@ namespace iWallet.Infrastructure.Implemention
             return $"Transfer Completed Successfly with amount {amount}";
         }
 
+
+        public async Task<decimal> GetTransactionsTodayTotalAsync(int userId)
+        {
+            var today = DateTime.UtcNow.Date;
+            var tomorrow = today.AddDays(1);
+
+            return await _context.Transactions
+                .Where(t =>
+                    t.FromWallet.UserId == userId &&
+                    t.CreatedAt >= today &&
+                    t.CreatedAt < tomorrow &&
+                    t.Status == TransactionStatus.Success)
+                .SumAsync(t => (decimal?)t.Amount) ?? 0m;
+        }
+
         private static string GenerateReference(TransactionType type)
         {
             var data = DateTime.UtcNow.ToString("yyMMdd");
@@ -251,18 +266,6 @@ namespace iWallet.Infrastructure.Implemention
             return $"{prefix}-{data}-{random}";
         }
 
-        public async Task<decimal> GetTransactionsTodayTotalAsync(int userId)
-        {
-            var today = DateTime.UtcNow.Date;
-            var tomorrow = today.AddDays(1);
-
-            return await _context.Transactions
-                .Where(t =>
-                    t.FromWallet.UserId == userId &&
-                    t.CreatedAt >= today &&
-                    t.CreatedAt < tomorrow &&
-                    t.Status == TransactionStatus.Success)
-                .SumAsync(t => (decimal?)t.Amount) ?? 0m;
-        }
+   
     }
 }

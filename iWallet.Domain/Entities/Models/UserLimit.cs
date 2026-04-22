@@ -1,4 +1,4 @@
-﻿namespace iWallet.Domain.Entities.Common
+﻿namespace iWallet.Domain.Entities.Models
 {
     public class UserLimit
     {

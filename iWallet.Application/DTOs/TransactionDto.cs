@@ -15,6 +15,13 @@ namespace iWallet.Application.DTOs
         public decimal amount { get; set; }
     }
 
+    public record TransferRequest 
+    {
+        public int UserId { get; set; }
+        public TransactionType type { get; set; }
+        public decimal amount { get; set; }
+    }
+
     public record WithdrawalDto(int walletId,decimal amount);
 
     

@@ -2,6 +2,7 @@ using iWallet.API.Middleware;
 using iWallet.API.UserContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,6 +57,11 @@ builder.Services.AddControllers()
     .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<UserRegisterValidator>());
 
 
+builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
+{
+    var config = builder.Configuration.GetConnectionString("redis");
+    return ConnectionMultiplexer.Connect(config!);
+});
 
 var app = builder.Build();
 
