@@ -1,4 +1,6 @@
-﻿namespace iWallet.API.Controllers
+﻿using iWallet.API.Attributes;
+
+namespace iWallet.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,15 +17,16 @@
         }
 
         [HttpPost("deposit")]
-    
+        [Idempotency(1)]
+
         public async Task<IActionResult> MakeDepositAsync(int walletId, decimal ammount)
         {
             return Ok(await _unitofwork.TransactionRepository.MakeDepositAsync(walletId, ammount));
         }
 
         [HttpPost("transfer")]
+        [Idempotency(20)]
         
-
         public async Task<IActionResult> TransferAsync(TransferTransactionDto transferDto)
         {
             int userId = _getUserIdFromToken.UserIdFromToken();
@@ -33,6 +36,7 @@
 
 
         [HttpPost("withdrawal")]
+        [Idempotency(1)]
 
         public async Task<IActionResult> WithdrawalAsync(WithdrawalDto withdrawalDto)
         {
@@ -41,6 +45,7 @@
 
 
         [HttpPost("beneficiery-transfer")]
+        [Idempotency(20)]
         public async Task<IActionResult> TransferToBeneficieryAsync(BeneficieryTransaferDto beneficieryTransafer)
         {
             var userId = _getUserIdFromToken.UserIdFromToken();

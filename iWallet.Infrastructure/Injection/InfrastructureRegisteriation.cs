@@ -13,8 +13,8 @@ namespace iWallet.Infrastructure.Injection
             services.AddTransient<IOtpRepository, OtpRepository>();
             services.AddScoped<ILimitService, LimitSerivce>();
             services.AddMemoryCache();
-
-
+            services.AddScoped<IIDempotencyService, IDempotencyService>();
+            
 
 
             return services;

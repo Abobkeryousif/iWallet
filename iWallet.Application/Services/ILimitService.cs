@@ -1,6 +1,4 @@
-﻿using iWallet.Domain.Entities.Common;
-
-namespace iWallet.Application.Services
+﻿namespace iWallet.Application.Services
 {
     public interface ILimitService
     {

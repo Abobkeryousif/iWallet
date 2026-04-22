@@ -10,4 +10,6 @@ global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Security.Claims;
 global using iWallet.API.UserContext;
-
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using System.Security.Cryptography;
+global using System.Text;
