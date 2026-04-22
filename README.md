@@ -112,7 +112,9 @@ If the same request is sent multiple times (e.g., due to retry or network issues
 Client sends request with Idempotency Key
 Backend checks Redis:
 ✅ If key exists → return cached response (no DB operation)
+
 ❌ If not → process request normally
+
 Store result in Redis with a TTL (e.g.)
 🎯 Benefits:
 🛡️ Prevents duplicate transactions
