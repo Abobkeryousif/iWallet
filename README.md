@@ -61,6 +61,7 @@ Responsible for **use case orchestration and business workflows**:
 * Coordinates between domain and infrastructure
 
 * Fully asynchronous for better scalability
+* Fluent Validations and DTOs
 
 ---
 
