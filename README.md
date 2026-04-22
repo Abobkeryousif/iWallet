@@ -209,7 +209,7 @@ Ensuring:
 * Repository Pattern
 * Separation of Concerns
 * Async/Await scalability
-* Performance optimization using caching
+* Performance optimization using caching (InMemory , Distributed)
 * container and container orchestration
 * DevOps automation (CI/CD)
 * GitOps workflow
