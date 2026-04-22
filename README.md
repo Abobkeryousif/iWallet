@@ -334,6 +334,7 @@ Ensuring:
 
 ## ⚖️ Design Decisions & Trade-offs
 
+* Implemented Idempotency using Distributed Caching (Redis) to prevent duplicate financial transactions, with a trade-off of temporary storage overhead and key management complexity.
 * Used **in-memory caching** for limits to reduce database pressure, with a trade-off of potential cache staleness (acceptable within short windows).
 * Daily limits are calculated using **transaction aggregation** instead of storing counters to ensure accuracy and consistency.
 * Chose **stateless APIs with JWT** to support horizontal scaling.
