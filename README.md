@@ -193,6 +193,7 @@ Ensuring:
 
 * Deployed on a Kubernetes cluster
 * Designed for scalability and resilience
+* build advance deployment and services
 
 ---
 
