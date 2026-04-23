@@ -12,8 +12,9 @@ This project demonstrates **real-world engineering practices** including:
 
 * 🔐 Secure authentication using JWT
 * 💸 Transaction processing with financial integrity
+* 💡 Handling Duplicate Transactions With Idempotency
 * 🛡️ Limit enforcement (per transaction & daily)
-* ⚡ In-memory caching for performance optimization
+* ⚡ Distributed & In-memory caching for performance optimization
 * 🐳 Containerization using Docker
 * 🔄 Advance Automated CI/CD pipelines
 * ☸️ Kubernetes deployment using GitOps (ArgoCD)
