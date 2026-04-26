@@ -106,13 +106,12 @@ jobs:
       steps:
         - name: checkout repo code 
           run: |
-            git clone https://${{ secrets.GITOPS_PAT }}@github.com/Abobkeryousif/iwallet-gitops.git $GITHUB_WORKSPACE/manifests
-
+            git clone https://${{ secrets.GITOPS_PAT }}@github.com/Abobkeryousif/iwallet-gitops.git gitops
         - name: apply blue-green update
           env:
             IMAGE: ${{ needs.containerization.outputs.image }}
           run: |
-            cd manifests
+            cd gitops/manifests
 
             git config user.name "github-actions"
             git config user.email "actions@github.com"
