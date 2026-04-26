@@ -140,3 +140,4 @@ jobs:
             git commit -m "Blue-Green deploy $IMAGE (backup $CURRENT_IMAGE)" || echo "no changes"
             git push
     
+# 
