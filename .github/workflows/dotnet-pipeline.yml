@@ -56,10 +56,11 @@ jobs:
       needs: build-app
       runs-on: ubuntu-latest
       timeout-minutes: 8
+      permissions:
+        packages: write
       
       outputs:
         image: ${{ steps.set-image.outputs.image }}
-
 
       steps:
         - name: pull repo code to runner
