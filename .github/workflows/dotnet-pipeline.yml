@@ -20,6 +20,7 @@ jobs:
     build-app:
         timeout-minutes: 5
         runs-on: ubuntu-latest
+        
         steps:
             - name: pull repo code inside runner
               uses: actions/checkout@v5
@@ -54,9 +55,10 @@ jobs:
     containerization:
       needs: build-app
       runs-on: ubuntu-latest
-      timeout-minutes: 5
-      permissions:
-        packages: write
+      timeout-minutes: 8
+      
+      outputs:
+        image: ${{ steps.set-image.outputs.image }}
 
 
       steps:
@@ -86,6 +88,54 @@ jobs:
             tags: |
                ghcr.io/${{ env.REPO }}:latest
                ghcr.io/${{ env.REPO }}:${{ github.sha }}
-             
+
+        - name: set image output
+          id: set-image
+          run: |
+            IMAGE="ghcr.io/${{ env.REPO }}:${{ github.sha }}"
+            echo "IMAGE=$IMAGE"
+            echo "image=$IMAGE" >> $GITHUB_OUTPUT
+
+          
+    deploy-gitops:
+      needs: containerization
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      steps:
+        - name: checkout repo code 
+          run: |
+            git clone https://${{ secrets.GITOPS_PAT }}@github.com/Abobkeryousif/iwallet-gitops.git manifests
+
+        - name: apply blue-green update
+          env:
+            IMAGE: ${{ needs.containerization.outputs.image }}
+          run: |
+            cd manifests
+
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+
+            CURRENT=$(grep 'version:' service.yaml | awk '{print $2}')
+            echo "Current live: $CURRENT"
+
+            if [ "$CURRENT" = "green" ]; then
+              LIVE_FILE="green-deployment.yaml"
+              BACKUP_FILE="blue-deployment.yaml"
+              NEXT="green"
+            else
+              LIVE_FILE="blue-deployment.yaml"
+              BACKUP_FILE="green-deployment.yaml"
+              NEXT="blue"
+            fi
             
+            CURRENT_IMAGE=$(grep 'image:' $LIVE_FILE | awk '{print $2}')
+            sed -i "s|image: .*|image: $CURRENT_IMAGE|g" $BACKUP_FILE
+
+            sed -i "s|image: .*|image: $IMAGE|g" $LIVE_FILE
+
+            sed -i "s|version: .*|version: $NEXT|g" service.yaml
+
+            git add .
+            git commit -m "Blue-Green deploy $IMAGE (backup $CURRENT_IMAGE)" || echo "no changes"
+            git push
     
