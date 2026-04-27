@@ -20,20 +20,19 @@ jobs:
     build-app:
         timeout-minutes: 5
         runs-on: ubuntu-latest
+
+        container:
+          image: mcr.microsoft.com/dotnet/sdk:10.0
+          options: --user root
         
         steps:
             - name: pull repo code inside runner
-              uses: actions/checkout@v5
-
-            - name: steup .NET
-              uses: actions/setup-dotnet@v5.2.0
-              with: 
-                dotnet-version: 10
+              uses: actions/checkout@v6
 
             - name: cache dependecies
               uses: actions/cache@v3
               with:
-                path: ~/.nuget/packages
+                path: /root/.nuget/packages
                 key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
 
             - name: restore dependecies
@@ -42,23 +41,24 @@ jobs:
             - name: build app
               run: dotnet build --no-restore --configuration Release
         
-            - name: run test
-              run: dotnet test --no-build --verbosity normal
+            - name: test
+              run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
 
-            - name: upload test result
-              continue-on-error: true
+            - name: upload test results
+              if: always()
               uses: actions/upload-artifact@v5
               with:
-                name: test result
-                path: '**/TestsResult/*.xml'
+                name: test-results
+                path: '**/*.trx'
+                
 
     containerization:
       needs: build-app
       runs-on: ubuntu-latest
       timeout-minutes: 8
-      permissions:
-       contents: read
-       packages: write
+      # permissions:
+      #  contents: read
+      #  packages: write
       
       outputs:
         image: ${{ steps.set-image.outputs.image }}
@@ -103,6 +103,7 @@ jobs:
       needs: containerization
       runs-on: ubuntu-latest
       timeout-minutes: 5
+      continue-on-error: true
       steps:
         - name: checkout repo code 
           run: |
