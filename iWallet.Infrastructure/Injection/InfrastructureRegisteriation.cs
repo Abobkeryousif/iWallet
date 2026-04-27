@@ -15,6 +15,7 @@ namespace iWallet.Infrastructure.Injection
             services.AddMemoryCache();
             services.AddScoped<IIDempotencyService, IDempotencyService>();
             
+            QuestPDF.Settings.License = LicenseType.Community;
 
 
             return services;

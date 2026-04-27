@@ -1,4 +1,6 @@
 ﻿
+using iWallet.Infrastructure.Implementation;
+
 namespace iWallet.Infrastructure.Implemention
 {
     public class TransactionRepository : ITransactionRepository
@@ -13,7 +15,7 @@ namespace iWallet.Infrastructure.Implemention
             _limitService = limitService;
         }
         public async Task<string> MakeDepositAsync(int walletId, decimal ammount)
-        {
+            {
             if (ammount <= 0)
                 throw new Exception("invalid amount");
 
@@ -61,11 +63,11 @@ namespace iWallet.Infrastructure.Implemention
             if (amount <= 0)
                 throw new Exception("Invalid Amount");
 
-            var senderWallet = await _context.Wallets.FirstOrDefaultAsync(u => u.UserId == userId);
+            var senderWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(u => u.UserId == userId);
             if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
                 throw new Exception("invalid sender wallet");
 
-            var receiverWallet = await _context.Wallets.FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
+            var receiverWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
             if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
                 throw new Exception("Invalid receiver wallet");
 
@@ -142,6 +144,32 @@ namespace iWallet.Infrastructure.Implemention
                 await _context.SaveChangesAsync();
 
                 await dbTransaction.CommitAsync();
+
+                var recepit = new TransferReceiptDto
+                {
+                    TransactionReference = reference,
+                    SenderName = senderWallet.User.UserName,
+                    SenderWalletNumber = senderWallet.WalletNumber,
+                    ReceiverName = receiverWallet.User.UserName,
+                    ReceiveWalletNumber = receiverWallet.WalletNumber,
+                    Amount = amount,
+                    Fees = 0,
+                    Currency = "SAR",
+                    Date = DateTime.UtcNow,
+                    Status = transaction.Status.ToString(),
+                };
+
+                var path = Path.Combine("receipts/");
+
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                var logoPath = Path.Combine("wwwroot/assets", "iWallet-logo.png");
+
+                var document = new TransferReceiptDocument(recepit, logoPath);
+
+                document.GeneratePdf($"receipts/receipt-{recepit.TransactionReference}.pdf");
+
 
                 return $"Transfer Completed Successfly with Transaction Reference {reference}";
                 }

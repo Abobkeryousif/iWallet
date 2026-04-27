@@ -2,6 +2,7 @@ using iWallet.API.Middleware;
 using iWallet.API.UserContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using QuestPDF.Infrastructure;
 using StackExchange.Redis;
 using System.Text;
 
@@ -52,6 +53,8 @@ builder.Services.AddAuthentication(option =>
                     }
                 };
             });
+
+
 
 builder.Services.AddControllers()
     .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<UserRegisterValidator>());
