@@ -34,6 +34,8 @@ jobs:
               with:
                 path: /root/.nuget/packages
                 key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+                restore-keys: |
+                   ${{ runner.os }}-nuget-
 
             - name: restore dependecies
               run: dotnet restore
@@ -42,15 +44,17 @@ jobs:
               run: dotnet build --no-restore --configuration Release
         
             - name: test
-              run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+              run: dotnet test --no-build --verbosity normal \
+                  --logger "trx;LogFileName=test-results.trx" \
+                  --results-directory ./TestResults
 
             - name: upload test results
               if: always()
               uses: actions/upload-artifact@v5
               with:
                 name: test-results
-                path: '**/*.trx'
-                
+                path: ./TestResults/*.trx
+
 
     containerization:
       needs: build-app
