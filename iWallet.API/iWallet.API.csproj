@@ -23,4 +23,8 @@
     <ProjectReference Include="..\iWallet.Infrastructure\iWallet.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
+
 </Project>
