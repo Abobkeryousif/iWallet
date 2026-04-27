@@ -29,13 +29,16 @@ jobs:
             - name: pull repo code inside runner
               uses: actions/checkout@v6
 
+            - name: ensure nuget cache dir exists
+              run: mkdir -p /root/.nuget/packages
+
             - name: cache dependecies
               uses: actions/cache@v3
               with:
                 path: /root/.nuget/packages
                 key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
                 restore-keys: |
-                   ${{ runner.os }}-nuget-
+                  ${{ runner.os }}-nuget-
 
             - name: restore dependecies
               run: dotnet restore
@@ -44,17 +47,15 @@ jobs:
               run: dotnet build --no-restore --configuration Release
         
             - name: test
-              run: dotnet test --no-build --verbosity normal \
-                  --logger "trx;LogFileName=test-results.trx" \
-                  --results-directory ./TestResults
+              run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
 
             - name: upload test results
               if: always()
               uses: actions/upload-artifact@v5
               with:
                 name: test-results
-                path: ./TestResults/*.trx
-
+                path: '**/*.trx'
+                
 
     containerization:
       needs: build-app
