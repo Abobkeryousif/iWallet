@@ -1,4 +1,4 @@
-name: iWllet Pipeline
+name: iWallet Pipeline
 
 on:
     workflow_dispatch: 
@@ -11,6 +11,7 @@ on:
            - '**/README.md'
     pull_request:
       branches: [ "master" , "main" ]
+      types: [ opened , synchronize ] 
 concurrency: 
   group: iwallet-app
   cancel-in-progress: false
