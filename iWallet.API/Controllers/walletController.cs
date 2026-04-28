@@ -2,7 +2,7 @@
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "USER")]
+
     public class walletController : ControllerBase
     {
         private readonly IUnitofwork _unitofwork;
@@ -12,7 +12,8 @@
             _unitofwork = unitofwork;
         }
 
-        [HttpPost] 
+        [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateWalletAsync(CreateWalletDto createWalletDto)
         {
             var wallet = await _unitofwork.WalletRepository.CreateAsync(createWalletDto);
@@ -20,10 +21,13 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "USER")]
+
         public async Task<IActionResult> GetWalletsAsync() =>
             Ok(await _unitofwork.WalletRepository.GetWalletsAsync());
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "USER")]
         public async Task<IActionResult> GetWalletByIdAsync(int id)
         {
             var getWallet = await _unitofwork.WalletRepository.GetWalletById(id);
@@ -35,6 +39,7 @@
             Ok( await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber) );
 
         [HttpPatch("{id:int}")]
+        [Authorize(Roles = "USER")]
         public async Task<IActionResult> PatchWalletBalance(int id, decimal balance)
         {
             var updatedWalletBalance = await _unitofwork.WalletRepository.PatchWalletBalance(id, balance);
