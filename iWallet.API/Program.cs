@@ -1,10 +1,5 @@
-using iWallet.API.Middleware;
-using iWallet.API.UserContext;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using QuestPDF.Infrastructure;
-using StackExchange.Redis;
-using System.Text;
+
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +15,20 @@ builder.Services.InfrastructureReigster(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IGetUserIdFromToken, GetUserIdFromToken>();
 
+//apply rate limiting per user ip address to provide more advance security layer for our APIs
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 10,
+                Window = TimeSpan.FromSeconds(10)
+            }));
+});
 builder.Services.AddDbContext<ApplicationDbContext>
     (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
 
@@ -76,6 +84,7 @@ app.UseSwaggerUI();
 
 
 app.UseHttpsRedirection();
+app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();

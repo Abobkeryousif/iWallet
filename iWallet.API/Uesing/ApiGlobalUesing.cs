@@ -13,3 +13,7 @@ global using iWallet.API.UserContext;
 global using Microsoft.AspNetCore.Mvc.Filters;
 global using System.Security.Cryptography;
 global using System.Text;
+global using iWallet.API.Middleware;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using StackExchange.Redis;
