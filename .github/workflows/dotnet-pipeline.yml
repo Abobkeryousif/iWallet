@@ -33,13 +33,14 @@ jobs:
             - name: ensure nuget cache dir exists
               run: mkdir -p /root/.nuget/packages
 
-            - name: cache dependecies
+            - name: cache dependencies
               uses: actions/cache@v3
               with:
                 path: /root/.nuget/packages
                 key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
                 restore-keys: |
-                  ${{ runner.os }}-nuget-
+                    ${{ runner.os }}-nuget-
+                    ${{ runner.os }}-
 
             - name: restore dependecies
               run: dotnet restore
