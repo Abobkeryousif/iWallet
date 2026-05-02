@@ -237,6 +237,7 @@ namespace iWallet.Infrastructure.Implemention
             var history = await _context.Transactions
                 .Where(t => t.FromWalletId == walletId || t.ToWalletId == walletId)
                 .OrderByDescending(t => t.CreatedAt)
+                .AsNoTracking()
                 .Select(t=> new TransactionDto
                 {
                     Reference = t.Reference,

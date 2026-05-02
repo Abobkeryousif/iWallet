@@ -53,6 +53,7 @@ namespace iWallet.Infrastructure.Implemention
             var userBeneficiery = await _context.Beneficiaries
                 .Where(u=> u.UserId == userId)
                 .OrderByDescending(u=>u.CreatedAt)
+                .AsNoTracking()
                 .Select(b=> new BeneficieryDto
                 {
                     Name=b.Name,

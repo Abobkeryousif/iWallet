@@ -102,6 +102,7 @@ namespace iWallet.Infrastructure.Implemention
             //fix performance to filter in database level and just get filterd data to local
 
             var wallets = await _context.Wallets
+                .AsNoTracking()
                 .Select(w => new GetWalletDto
                 {
                     WalletNumber = w.WalletNumber,

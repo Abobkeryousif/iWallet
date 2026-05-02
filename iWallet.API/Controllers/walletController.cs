@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = "USER")]
+        [Authorize(Roles = "ADMIN")]
 
         public async Task<IActionResult> GetWalletsAsync() =>
             Ok(await _unitofwork.WalletRepository.GetWalletsAsync());
