@@ -44,6 +44,9 @@ jobs:
 
             - name: build app
               run: dotnet build --no-restore --configuration Release
+
+            - name: valdaite ef core migration
+              run: dotnet ef migration script
         
             - name: test
               run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
@@ -101,6 +104,15 @@ jobs:
             IMAGE="ghcr.io/${{ env.REPO }}:${{ github.sha }}"
             echo "IMAGE=$IMAGE"
             echo "image=$IMAGE" >> $GITHUB_OUTPUT
+
+        - name: scan docker image for security 
+          uses: aquasecurity/trivy-action@master
+          with:
+            image-ref: ghcr.io/${{ env.REPO }}:${{ github.sha }}
+            format: table
+            exit-code: 1
+            severity: CRITICAL,HIGH
+
 
           
     deploy-gitops:
