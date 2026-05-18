@@ -45,6 +45,12 @@ jobs:
             - name: build app
               run: dotnet build --no-restore --configuration Release
 
+            - name: install ef tool
+              run: dotnet tool install --global dotnet-ef
+
+            - name: add dotnet tools to path
+              run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
             - name: valdaite ef core migration
               run: dotnet ef migrations script
         
