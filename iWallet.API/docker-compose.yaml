@@ -1,0 +1,11 @@
+services:
+  app-seq:
+    image: datalust/seq:latest
+    container_name: app-seq
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=
+    ports:
+      - "8089:80"    # to interacte with interface
+      - "5341:5341"  # for reciver logs from iWallet App
+    restart: unless-stopped

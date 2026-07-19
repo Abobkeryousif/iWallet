@@ -14,9 +14,14 @@ namespace iWallet.Infrastructure.Implemention
         public async Task<string> CreateAsync(CreateWalletDto walletDto)
         {
 
+            Log.Information("Start create wallet process for UserId: {UserId}",walletDto.UserId);
+
             var userChack = await _context.Wallets.FirstOrDefaultAsync(u=> u.Id == walletDto.UserId);
             if (userChack == null)
+            {
+                Log.Warning("Invalid UserId: {UserId}",walletDto.UserId);
                 throw new Exception("Invalid user id");
+            }
 
             if (!Enum.IsDefined(typeof(WalletType), walletDto.WalletType))
                 throw new Exception("Invalid wallet type");

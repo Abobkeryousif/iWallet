@@ -1,6 +1,4 @@
 
-using System.Threading.RateLimiting;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +9,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.InfrastructureReigster(builder.Configuration);
+
+//registered and signing serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IGetUserIdFromToken, GetUserIdFromToken>();

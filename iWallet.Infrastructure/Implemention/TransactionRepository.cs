@@ -1,5 +1,4 @@
-﻿
-using iWallet.Infrastructure.Implementation;
+﻿using iWallet.Infrastructure.Implementation;
 
 namespace iWallet.Infrastructure.Implemention
 {
@@ -60,16 +59,32 @@ namespace iWallet.Infrastructure.Implemention
 
         public async Task<string> TransferAsync(string toAccountNumber, decimal amount, int userId)
         {
+
+            Log.Information("Starring Transfer Process. UserId: {UserId}, ToAccount: {toAccount}, Amount: {Amount}",
+                userId,
+                toAccountNumber,
+                amount);
+
             if (amount <= 0)
+            {
+                Log.Warning("Transfer Rejected, Invalid Amount: {Amount}, UserId: {UserId}",
+                    amount,
+                    userId);
+
                 throw new Exception("Invalid Amount");
+            }
 
             var senderWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(u => u.UserId == userId);
             if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
+            {
+                Log.Warning("Sender wallet not found. UserId: {UserId}",userId);
                 throw new Exception("invalid sender wallet");
+            }
 
             var receiverWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
             if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
                 throw new Exception("Invalid receiver wallet");
+            
 
             if (senderWallet.Id == receiverWallet.Id)
                 throw new Exception("you can't transfer to yourself");
@@ -81,7 +96,14 @@ namespace iWallet.Infrastructure.Implemention
 
             var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
             if (amount > limit.PerTransactionLimit)
+            {
+                Log.Warning("Transfer Blocked duo to Transaction Limit. UserId {UserId}, Amount: {Amount}, Limit: {Limit}",
+                    userId,
+                    amount,
+                    limit.PerTransactionLimit);
+
                 throw new Exception("Exceeded per transaction limit 5000");
+            }
 
             var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
             if (todyTotal + amount > limit.DailyLimit)
@@ -90,6 +112,12 @@ namespace iWallet.Infrastructure.Implemention
             await _context.SaveChangesAsync();
 
             var reference = GenerateReference(TransactionType.Transfer);
+
+
+            Log.Information(
+            "Database transaction start for transfer. FromWallet: {FromWallet}, ToWallet: {ToWallet}",
+            senderWallet.WalletNumber,
+            receiverWallet.WalletNumber);
 
             using var dbTransaction = await _context.Database.BeginTransactionAsync();
 
@@ -145,6 +173,15 @@ namespace iWallet.Infrastructure.Implemention
 
                 await dbTransaction.CommitAsync();
 
+
+                Log.Information(
+                "Transfer completed successfully. Reference: {Reference}, Amount: {Amount}, Sender: {Sender}, Receiver: {Receiver}",
+                reference,
+                amount,
+                senderWallet.WalletNumber,
+                receiverWallet.WalletNumber);
+
+
                 var recepit = new TransferReceiptDto
                 {
                     TransactionReference = reference,
@@ -174,9 +211,17 @@ namespace iWallet.Infrastructure.Implemention
                 return $"Transfer Completed Successfly with Transaction Reference {reference}";
                 }
 
-            catch
+            catch(Exception ex)
             {
                 await dbTransaction.RollbackAsync();
+
+                Log.Error(
+                ex.Message,
+                "Transfer failed. UserId: {UserId}, Amount: {Amount}, Reference: {Reference}",
+                userId,
+                amount,
+                reference);
+
                 throw;
             }
         }

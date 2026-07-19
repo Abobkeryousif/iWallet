@@ -24,3 +24,4 @@ global using System.Text;
 global using QuestPDF.Fluent;
 global using QuestPDF.Helpers;
 global using QuestPDF.Infrastructure;
+global using Serilog;

@@ -1,0 +1,5 @@
+2026-07-18 15:55:27.049 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 0
+2026-07-18 15:55:27.107 +03:00 [WRN] Transfer Rejected, Invalid Amount: 0, UserId: 8
+2026-07-18 15:55:42.945 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 45
+2026-07-18 15:55:48.015 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-07-18 15:55:48.499 +03:00 [INF] Transfer completed successfully. Reference: TRN-260718-7C7AC7, Amount: 45, Sender: W720980850, Receiver: W437089894
