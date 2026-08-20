@@ -66,7 +66,6 @@ builder.Services.AddAuthentication(option =>
             });
 
 
-
 builder.Services.AddControllers()
     .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<UserRegisterValidator>());
 
@@ -85,9 +84,11 @@ app.MapOpenApi();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.MapMetrics();
 
 app.UseHttpsRedirection();
 app.UseRateLimiter();
+app.UseHttpMetrics();
 
 app.UseAuthentication();
 app.UseAuthorization();

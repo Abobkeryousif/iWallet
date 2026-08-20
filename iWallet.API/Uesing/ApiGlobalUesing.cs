@@ -19,3 +19,4 @@ global using Microsoft.IdentityModel.Tokens;
 global using StackExchange.Redis;
 global using System.Threading.RateLimiting;
 global using Serilog;
+global using Prometheus;

@@ -1,0 +1,9 @@
+2026-08-20 12:26:06.150 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 45
+2026-08-20 12:26:07.098 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-08-20 12:26:07.957 +03:00 [INF] Transfer completed successfully. Reference: TRN-260820-296195, Amount: 45, Sender: W720980850, Receiver: W437089894
+2026-08-20 12:26:41.200 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 45
+2026-08-20 12:26:41.497 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-08-20 12:26:41.567 +03:00 [INF] Transfer completed successfully. Reference: TRN-260820-CB85E2, Amount: 45, Sender: W720980850, Receiver: W437089894
+2026-08-20 12:29:53.503 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 100
+2026-08-20 12:29:54.183 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-08-20 12:29:54.393 +03:00 [INF] Transfer completed successfully. Reference: TRN-260820-D96FB4, Amount: 100, Sender: W720980850, Receiver: W437089894

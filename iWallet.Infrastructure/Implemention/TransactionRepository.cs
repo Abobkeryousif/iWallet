@@ -1,5 +1,4 @@
-﻿using iWallet.Infrastructure.Implementation;
-
+﻿
 namespace iWallet.Infrastructure.Implemention
 {
     public class TransactionRepository : ITransactionRepository
@@ -15,12 +14,21 @@ namespace iWallet.Infrastructure.Implemention
         }
         public async Task<string> MakeDepositAsync(int walletId, decimal ammount)
             {
+
             if (ammount <= 0)
+            {
+                DepositMetrics.DepositsFailuresTotal.Inc();
                 throw new Exception("invalid amount");
+                
+            }
 
             var wallet = await _context.Wallets.FirstOrDefaultAsync(x => x.Id == walletId);
-                if (wallet == null || wallet.Status != WalletStatus.Active)
-                    throw new Exception("invalid wallet");
+            if (wallet == null || wallet.Status != WalletStatus.Active)
+            {
+                DepositMetrics.DepositsFailuresTotal.Inc();
+                throw new Exception("invalid wallet");
+                
+            }
 
             var reference = GenerateReference(TransactionType.Deposit);
 
@@ -37,7 +45,8 @@ namespace iWallet.Infrastructure.Implemention
             _context.Wallets.Update(wallet);
             await _context.Transactions.AddAsync(transaction);
             _context.SaveChanges();
-            
+
+            DepositMetrics.DepositsTotal.Inc();
 
             var ledger = new LedgerEntry
             {
@@ -71,6 +80,7 @@ namespace iWallet.Infrastructure.Implemention
                     amount,
                     userId);
 
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("Invalid Amount");
             }
 
@@ -78,19 +88,28 @@ namespace iWallet.Infrastructure.Implemention
             if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
             {
                 Log.Warning("Sender wallet not found. UserId: {UserId}",userId);
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("invalid sender wallet");
             }
 
             var receiverWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
             if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
+            {
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("Invalid receiver wallet");
-            
+            }
 
             if (senderWallet.Id == receiverWallet.Id)
+            {
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("you can't transfer to yourself");
+            }
 
             if (senderWallet.Balance < amount)
+            {
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("insufficient balance");
+            }
 
             // frud pervention and get value from cache
 
@@ -102,12 +121,16 @@ namespace iWallet.Infrastructure.Implemention
                     amount,
                     limit.PerTransactionLimit);
 
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("Exceeded per transaction limit 5000");
             }
 
             var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
             if (todyTotal + amount > limit.DailyLimit)
+            {
+                TransferMetrics.TransferFailureTotal.Inc();
                 throw new Exception("You already Exceeded daily limit 200000");
+            }
 
             await _context.SaveChangesAsync();
 
@@ -138,6 +161,8 @@ namespace iWallet.Infrastructure.Implemention
 
                 await _context.Transactions.AddAsync(transaction);
                 _context.SaveChanges();
+
+                TransferMetrics.TransferTotal.Inc();
 
                 var senderLedger = new LedgerEntry
                 {
@@ -229,11 +254,17 @@ namespace iWallet.Infrastructure.Implemention
         public async Task<string> MakeWithdrawal(int walletId, decimal amount)
         {
             if (amount <= 0)
+            {
+                WithdrawalMetrics.WithdrawalFailuresTotal.Inc();
                 throw new Exception("Invalid amount");
+            }
 
             var wallet = await _context.Wallets.FindAsync(walletId);
             if (wallet == null || wallet.Status != WalletStatus.Active)
+            {
+                WithdrawalMetrics.WithdrawalFailuresTotal.Inc();
                 throw new Exception("Invalid wallet");
+            }
 
             if (wallet.Balance < amount)
                 throw new Exception("Insufficient balance");
@@ -257,6 +288,7 @@ namespace iWallet.Infrastructure.Implemention
 
              await _context.Transactions.AddAsync(transaction);
             _context.SaveChanges();
+            WithdrawalMetrics.WithdrawalTotal.Inc();
 
             var ledger = new LedgerEntry
             {
