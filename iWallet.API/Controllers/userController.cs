@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 namespace iWallet.API.Controllers
 {
     [Route("api/[controller]")]
@@ -22,7 +22,7 @@ namespace iWallet.API.Controllers
         public async Task<IActionResult> RegisterAsync(UserDto userDto)
         {
             var user = await _unitofwork.UserRepository.UserRegister(userDto);
-            return Ok("sucess, now we send otp code in your email please confierm it");
+            return Created("sucess, now we send otp code in your email please confierm it",userDto.UserName);
         }
 
         [HttpPost("complete-register")]

@@ -17,7 +17,7 @@
         public async Task<IActionResult> CreateWalletAsync(CreateWalletDto createWalletDto)
         {
             var wallet = await _unitofwork.WalletRepository.CreateAsync(createWalletDto);
-            return Ok(wallet);
+            return Created("wallet created successfly",wallet);
         }
 
         [HttpGet]

@@ -36,7 +36,7 @@ namespace iWallet.API.Controllers
         public IActionResult DeleteBeneficiery(int beneficieryId)
         {
             _unitofwork.BeneficiaryRepository.DeleteBeneficiery(beneficieryId);
-            return Ok("successfly deleted beneficiery");
+            return NoContent();
         }
 
     }

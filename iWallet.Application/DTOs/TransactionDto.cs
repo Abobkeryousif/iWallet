@@ -9,7 +9,7 @@ namespace iWallet.Application.DTOs
         public string TransactionStatus { get; set; }
     }
 
-    public record TransferTransactionDto
+    public record TransferTransactionDto 
     {
         public string toAccountNumber { get; set; }
         public decimal amount { get; set; }
@@ -24,5 +24,6 @@ namespace iWallet.Application.DTOs
 
     public record WithdrawalDto(int walletId,decimal amount);
 
+    public record DepositDto (int walletId,decimal amount);
     
 }

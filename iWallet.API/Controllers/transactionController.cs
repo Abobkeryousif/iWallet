@@ -19,9 +19,9 @@ namespace iWallet.API.Controllers
         [HttpPost("deposit")]
         [Idempotency(1)]
 
-        public async Task<IActionResult> MakeDepositAsync(int walletId, decimal ammount)
+        public async Task<IActionResult> MakeDepositAsync(DepositDto depositDto)
         {
-            return Ok(await _unitofwork.TransactionRepository.MakeDepositAsync(walletId, ammount));
+            return Ok(await _unitofwork.TransactionRepository.MakeDepositAsync(depositDto));
         }
 
         [HttpPost("transfer")]

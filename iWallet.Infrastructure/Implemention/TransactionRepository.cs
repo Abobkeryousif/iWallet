@@ -4,25 +4,16 @@ namespace iWallet.Infrastructure.Implemention
     public class TransactionRepository : ITransactionRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWalletRepository _walletRepository;
         private readonly ILimitService _limitService;
-        public TransactionRepository(ApplicationDbContext context, IWalletRepository walletRepository, ILimitService limitService)
+        public TransactionRepository(ApplicationDbContext context, ILimitService limitService)
         {
             _context = context;
-            _walletRepository = walletRepository;
             _limitService = limitService;
         }
-        public async Task<string> MakeDepositAsync(int walletId, decimal ammount)
+        public async Task<string> MakeDepositAsync(DepositDto depositDto)
             {
 
-            if (ammount <= 0)
-            {
-                DepositMetrics.DepositsFailuresTotal.Inc();
-                throw new Exception("invalid amount");
-                
-            }
-
-            var wallet = await _context.Wallets.FirstOrDefaultAsync(x => x.Id == walletId);
+            var wallet = await _context.Wallets.FirstOrDefaultAsync(x => x.Id == depositDto.walletId);
             if (wallet == null || wallet.Status != WalletStatus.Active)
             {
                 DepositMetrics.DepositsFailuresTotal.Inc();
@@ -34,14 +25,14 @@ namespace iWallet.Infrastructure.Implemention
 
             var transaction = new Transaction
             {
-                FromWalletId = walletId,
+                FromWalletId = depositDto.walletId,
                 Reference = reference,
-                Amount = ammount,
+                Amount = depositDto.amount,
                 TransactionType = TransactionType.Deposit,
                 Status = TransactionStatus.Success,
             };
 
-            wallet.Balance += ammount;
+            wallet.Balance += depositDto.amount;
             _context.Wallets.Update(wallet);
             await _context.Transactions.AddAsync(transaction);
             _context.SaveChanges();
@@ -51,11 +42,11 @@ namespace iWallet.Infrastructure.Implemention
             var ledger = new LedgerEntry
             {
                 
-                WalletId = walletId,
+                WalletId = depositDto.walletId,
                 TransactionId = transaction.Id,
                 Debit = 0,
-                Credit = ammount,
-                Particulars = $"Deposit ammount = {ammount} to wallet {wallet.WalletNumber}"
+                Credit = depositDto.amount,
+                Particulars = $"Deposit ammount = {depositDto.amount} to wallet {wallet.WalletNumber}"
                 
             };
 
@@ -74,15 +65,6 @@ namespace iWallet.Infrastructure.Implemention
                 toAccountNumber,
                 amount);
 
-            if (amount <= 0)
-            {
-                Log.Warning("Transfer Rejected, Invalid Amount: {Amount}, UserId: {UserId}",
-                    amount,
-                    userId);
-
-                TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("Invalid Amount");
-            }
 
             var senderWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(u => u.UserId == userId);
             if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
@@ -114,16 +96,6 @@ namespace iWallet.Infrastructure.Implemention
             // frud pervention and get value from cache
 
             var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
-            if (amount > limit.PerTransactionLimit)
-            {
-                Log.Warning("Transfer Blocked duo to Transaction Limit. UserId {UserId}, Amount: {Amount}, Limit: {Limit}",
-                    userId,
-                    amount,
-                    limit.PerTransactionLimit);
-
-                TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("Exceeded per transaction limit 5000");
-            }
 
             var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
             if (todyTotal + amount > limit.DailyLimit)
@@ -253,11 +225,6 @@ namespace iWallet.Infrastructure.Implemention
 
         public async Task<string> MakeWithdrawal(int walletId, decimal amount)
         {
-            if (amount <= 0)
-            {
-                WithdrawalMetrics.WithdrawalFailuresTotal.Inc();
-                throw new Exception("Invalid amount");
-            }
 
             var wallet = await _context.Wallets.FindAsync(walletId);
             if (wallet == null || wallet.Status != WalletStatus.Active)
@@ -267,7 +234,10 @@ namespace iWallet.Infrastructure.Implemention
             }
 
             if (wallet.Balance < amount)
+            {
+                WithdrawalMetrics.WithdrawalFailuresTotal.Inc();
                 throw new Exception("Insufficient balance");
+            }
 
             wallet.Balance -= amount;
             wallet.UpdatedAt = DateTime.UtcNow;

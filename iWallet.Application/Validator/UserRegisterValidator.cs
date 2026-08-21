@@ -1,7 +1,4 @@
-﻿
-using FluentValidation;
-
-namespace iWallet.Application.Validator
+﻿namespace iWallet.Application.Validator
 {
     public class UserRegisterValidator : AbstractValidator<UserDto>
     {
