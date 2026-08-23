@@ -10,15 +10,14 @@ namespace iWallet.Infrastructure.Implemention
             _context = context;
             _limitService = limitService;
         }
-        public async Task<string> MakeDepositAsync(DepositDto depositDto)
+        public async Task<Result<string>> MakeDepositAsync(DepositDto depositDto)
             {
 
             var wallet = await _context.Wallets.FirstOrDefaultAsync(x => x.Id == depositDto.walletId);
             if (wallet == null || wallet.Status != WalletStatus.Active)
             {
                 DepositMetrics.DepositsFailuresTotal.Inc();
-                throw new Exception("invalid wallet");
-                
+                return Result<string>.Failure(TransactionSharedErrors.InValidUserWallet());
             }
 
             var reference = GenerateReference(TransactionType.Deposit);
@@ -53,11 +52,11 @@ namespace iWallet.Infrastructure.Implemention
             _context.LedgerEntries.Add(ledger);
             await _context.SaveChangesAsync();
 
-            return $"Successfly Deposit with Ammount {transaction.Amount} and total wallet balance = {wallet.Balance}";
+            return Result<string>.Success($"Successfly Deposit with Ammount {transaction.Amount} and total wallet balance = {wallet.Balance}");
 
         }
 
-        public async Task<string> TransferAsync(string toAccountNumber, decimal amount, int userId)
+        public async Task<Result<string>> TransferAsync(string toAccountNumber, decimal amount, int userId)
         {
 
             Log.Information("Starring Transfer Process. UserId: {UserId}, ToAccount: {toAccount}, Amount: {Amount}",
@@ -71,26 +70,27 @@ namespace iWallet.Infrastructure.Implemention
             {
                 Log.Warning("Sender wallet not found. UserId: {UserId}",userId);
                 TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("invalid sender wallet");
+
+                return Result<string>.Failure(TransactionSharedErrors.InValidUserWallet());
             }
 
             var receiverWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
             if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
             {
                 TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("Invalid receiver wallet");
+                return Result<string>.Failure(TransferErrors.InValidReceiverWallet());
             }
 
             if (senderWallet.Id == receiverWallet.Id)
             {
                 TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("you can't transfer to yourself");
+                return Result<string>.Failure(TransferErrors.Conflict());
             }
 
             if (senderWallet.Balance < amount)
             {
                 TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("insufficient balance");
+                return Result<string>.Failure(TransactionSharedErrors.InsufficientBalance());
             }
 
             // frud pervention and get value from cache
@@ -101,7 +101,7 @@ namespace iWallet.Infrastructure.Implemention
             if (todyTotal + amount > limit.DailyLimit)
             {
                 TransferMetrics.TransferFailureTotal.Inc();
-                throw new Exception("You already Exceeded daily limit 200000");
+                return Result<string>.Failure(TransferErrors.ExceededDailylimit());
             }
 
             await _context.SaveChangesAsync();
@@ -205,7 +205,8 @@ namespace iWallet.Infrastructure.Implemention
                 document.GeneratePdf($"receipts/receipt-{recepit.TransactionReference}.pdf");
 
 
-                return $"Transfer Completed Successfly with Transaction Reference {reference}";
+                return Result<string>.Success($"Transfer Completed Successfly with Transaction Reference {reference}");
+
                 }
 
             catch(Exception ex)
@@ -223,20 +224,20 @@ namespace iWallet.Infrastructure.Implemention
             }
         }
 
-        public async Task<string> MakeWithdrawal(int walletId, decimal amount)
+        public async Task<Result<string>> MakeWithdrawal(int walletId, decimal amount)
         {
 
             var wallet = await _context.Wallets.FindAsync(walletId);
             if (wallet == null || wallet.Status != WalletStatus.Active)
             {
                 WithdrawalMetrics.WithdrawalFailuresTotal.Inc();
-                throw new Exception("Invalid wallet");
+                return Result<string>.Failure(TransactionSharedErrors.InValidUserWallet());
             }
 
             if (wallet.Balance < amount)
             {
                 WithdrawalMetrics.WithdrawalFailuresTotal.Inc();
-                throw new Exception("Insufficient balance");
+                return Result<string>.Failure(TransactionSharedErrors.InsufficientBalance());
             }
 
             wallet.Balance -= amount;
@@ -272,7 +273,7 @@ namespace iWallet.Infrastructure.Implemention
             _context.LedgerEntries.Add(ledger);
             _context.SaveChanges();
 
-            return $"withdrawal completed successfly with Transaction Reference {reference}";
+            return Result<string>.Success($"withdrawal completed successfly with Transaction Reference {reference}");
         }
 
         public async Task<List<TransactionDto>> TransactionHistory(int walletId)

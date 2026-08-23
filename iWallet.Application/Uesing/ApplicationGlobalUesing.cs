@@ -4,3 +4,4 @@ global using iWallet.Domain.Entities.Models;
 global using iWallet.Domain.Entities.Enums;
 global using Prometheus;
 global using FluentValidation;
+global using iWallet.Application.Common;

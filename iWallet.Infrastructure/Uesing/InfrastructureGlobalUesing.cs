@@ -28,4 +28,5 @@ global using Serilog;
 global using iWallet.Application.iWalletCustomMetrics;
 global using iWallet.Application.iWalletMetrics;
 global using iWallet.Infrastructure.Implementation;
-
+global using iWallet.Application.Common;
+global using iWallet.Application.Errors;
