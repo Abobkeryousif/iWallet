@@ -78,6 +78,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
 
 var app = builder.Build();
 
+await app.Services.ApplyMigrationAsync<ApplicationDbContext>();
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapOpenApi();

@@ -139,9 +139,7 @@ namespace iWallet.Infrastructure.Implemention
 
             _otpRepository.CreateOtp(userOtp);
 
-            //_sendEmail.SendEmail(user.Email,"Confierm Register",$"Please Confierm this code to complete register {userOtp.otp}");
-
-
+            _sendEmail.SendEmail(user.Email, "Confierm Register", $"Please Confierm this code to complete register {userOtp.otp}");
 
             return $"Register Complete now confierm your account";
         }

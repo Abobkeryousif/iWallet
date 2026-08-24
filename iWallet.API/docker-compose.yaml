@@ -1,4 +1,65 @@
 services:
+  web:
+    image: ghcr.io/abobkeryousif/iwallet:ec5f342b924992620a24446337efaa745ba7b5cf
+    ports:
+      - 8082:8080
+    
+    environment:
+       JWT__Key: ${JWT_KEY}
+       JWT__Issuer: ${JWT_ISSUER}
+       JWT__Audience: ${JWT_AUDIENCE}
+    networks:
+      - iwallet-application-network
+
+      
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: iwallet-sqlserver
+
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD}
+
+    ports:
+      - 1433:1433
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    
+    networks:
+      - iwallet-application-network
+
+    depends_on:
+      - web
+
+
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    ports:
+      - 9090:9090
+    
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - iwallet-application-network
+    depends_on:
+      - web
+
+
+  grafana:
+    image: grafana/grafana
+    restart: always
+    environment:
+    - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - 3001:3000
+    networks:
+      - iwallet-application-network
+    depends_on:
+      - prometheus
+
+
+
   app-seq:
     image: datalust/seq:latest
     container_name: app-seq
@@ -9,3 +70,12 @@ services:
       - "8089:80"    # to interacte with interface
       - "5341:5341"  # for reciver logs from iWallet App
     restart: unless-stopped
+    networks:
+      - iwallet-application-network
+
+
+volumes:
+   sqlserver-data:
+
+networks:
+  iwallet-application-network:
