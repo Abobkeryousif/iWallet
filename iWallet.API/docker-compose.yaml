@@ -1,16 +1,4 @@
 services:
-  web:
-    image: ghcr.io/abobkeryousif/iwallet:ec5f342b924992620a24446337efaa745ba7b5cf
-    ports:
-      - 8082:8080
-    
-    environment:
-       JWT__Key: ${JWT_KEY}
-       JWT__Issuer: ${JWT_ISSUER}
-       JWT__Audience: ${JWT_AUDIENCE}
-    networks:
-      - iwallet-application-network
-
       
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -19,6 +7,7 @@ services:
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD}
+      ConnectionStrings__default: "Server=sqlserver,1433;Database=iWalletDb;User Id=sa;Password=admin123$;TrustServerCertificate=True;"
 
     ports:
       - 1433:1433
@@ -28,10 +17,22 @@ services:
     networks:
       - iwallet-application-network
 
+  web:
+    image: ghcr.io/abobkeryousif/iwallet:f65a9b50eef04d634c8f38489811152d64b88642
+    ports:
+      - 8082:8080
+    
+    environment:
+       JWT__Key: ${JWT_KEY}
+       JWT__Issuer: ${JWT_ISSUER}
+       JWT__Audience: ${JWT_AUDIENCE}
     depends_on:
-      - web
+      - sqlserver
+    networks:
+      - iwallet-application-network
 
 
+    
   prometheus:
     image: prom/prometheus
     restart: always
