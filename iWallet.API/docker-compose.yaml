@@ -7,7 +7,7 @@ services:
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD}
-      ConnectionStrings__default: "Server=sqlserver,1433;Database=iWalletDb;User Id=sa;Password=admin123$;TrustServerCertificate=True;"
+      
 
     ports:
       - 1433:1433
@@ -18,11 +18,12 @@ services:
       - iwallet-application-network
 
   web:
-    image: ghcr.io/abobkeryousif/iwallet:f65a9b50eef04d634c8f38489811152d64b88642
+    image: ghcr.io/abobkeryousif/iwallet:dc829203d5c926105466069415b88806d9b42a5c
     ports:
       - 8082:8080
     
     environment:
+       ConnectionStrings__default: "Server=sqlserver,1433;Database=iWalletDb;User Id=sa;Password=admin123$;TrustServerCertificate=True;"
        JWT__Key: ${JWT_KEY}
        JWT__Issuer: ${JWT_ISSUER}
        JWT__Audience: ${JWT_AUDIENCE}

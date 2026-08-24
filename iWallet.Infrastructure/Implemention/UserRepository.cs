@@ -16,36 +16,36 @@ namespace iWallet.Infrastructure.Implemention
             _tokenService = tokenService;
         }
 
-        public string CompleteRegister(string Otp)
-        {
-            if (Otp == null || string.IsNullOrEmpty(Otp))
-                throw new ArgumentException("otp is requierd!");
+        //public string CompleteRegister(string Otp)
+        //{
+        //    if (Otp == null || string.IsNullOrEmpty(Otp))
+        //        throw new ArgumentException("otp is requierd!");
 
-            var confiermOtp = _context.OTPs.FirstOrDefault(o=> o.otp == Otp );
+        //    var confiermOtp = _context.OTPs.FirstOrDefault(o=> o.otp == Otp );
 
-            if (confiermOtp == null)
-                throw new ArgumentException("invalid otp");
+        //    if (confiermOtp == null)
+        //        throw new ArgumentException("invalid otp");
 
-            if (confiermOtp.IsExpier)
-                throw new ArgumentException("otp is expierd, ask new otp");
+        //    if (confiermOtp.IsExpier)
+        //        throw new ArgumentException("otp is expierd, ask new otp");
 
-            if (confiermOtp.IsUsed)
-                throw new ArgumentException("otp already used!");
+        //    if (confiermOtp.IsUsed)
+        //        throw new ArgumentException("otp already used!");
 
-            var user = _context.Users.FirstOrDefault(u => u.Email == confiermOtp.UserEmail);
+        //    var user = _context.Users.FirstOrDefault(u => u.Email == confiermOtp.UserEmail);
 
-            if (user == null)
-                throw new ArgumentException("user not found");
+        //    if (user == null)
+        //        throw new ArgumentException("user not found");
 
-            confiermOtp.IsUsed = true;
-            user.IsActive = true;
+        //    confiermOtp.IsUsed = true;
+        //    user.IsActive = true;
 
-            _otpRepository.UpdateOtp(confiermOtp);
-            _context.Users.Update(user);
-            _context.SaveChanges();
+        //    _otpRepository.UpdateOtp(confiermOtp);
+        //    _context.Users.Update(user);
+        //    _context.SaveChanges();
 
-            return "success";
-        }
+        //    return "success";
+        //}
 
         public async Task<List<GetUsersDto>> GetAllUsers()
         {
@@ -68,22 +68,22 @@ namespace iWallet.Infrastructure.Implemention
             return _context.Users.Any(filter);
         }
 
-        public string ResetEmail(int id , UpdateUserEmailDto updateUserEmail)
-        {
-            var resetUserEmail = _context.Users.FirstOrDefault(i=> i.Id == id);
-            if (resetUserEmail == null)
-                throw new ArgumentException("user not found");
+        //public string ResetEmail(int id , UpdateUserEmailDto updateUserEmail)
+        //{
+        //    var resetUserEmail = _context.Users.FirstOrDefault(i=> i.Id == id);
+        //    if (resetUserEmail == null)
+        //        throw new ArgumentException("user not found");
 
-            resetUserEmail.Email = updateUserEmail.email;
-            _context.Users.Update(resetUserEmail);
-            _context.SaveChanges();
+        //    resetUserEmail.Email = updateUserEmail.email;
+        //    _context.Users.Update(resetUserEmail);
+        //    _context.SaveChanges();
 
-            // discard old otp from old email and send new otp to new updated email
-            _otpRepository.ResendOtp(resetUserEmail.Email);
+        //    // discard old otp from old email and send new otp to new updated email
+        //    _otpRepository.ResendOtp(resetUserEmail.Email);
 
-            return "success update user email";
+        //    return "success update user email";
 
-        }
+        //}
 
         public async Task<string> UserLoginAsync(LoginDto loginDto)
             {
@@ -117,31 +117,32 @@ namespace iWallet.Infrastructure.Implemention
                 PhoneNumber = userDto.PhoneNumber,
                 City = userDto.City,
                 BirthDate = userDto.BirthDate,
-                IsActive = false,
+                IsActive = true,
                 Role = "USER",
                 Password = encriptedPassword
             };
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+          
 
-            Random random = new Random();
-            int otp = random.Next(0, 9999);
+            //Random random = new Random();
+            //int otp = random.Next(0, 9999);
 
 
-            var userOtp = new Otp
-            {
-                otp = otp.ToString("0000"),
-                UserEmail = user.Email,
-                ExpirationOn = DateTime.Now.AddMinutes(5),
-                IsUsed = false,
-            };
+            //var userOtp = new Otp
+            //{
+            //    otp = otp.ToString("0000"),
+            //    UserEmail = user.Email,
+            //    ExpirationOn = DateTime.Now.AddMinutes(5),
+            //    IsUsed = false,
+            //};
 
-            _otpRepository.CreateOtp(userOtp);
+            //_otpRepository.CreateOtp(userOtp);
 
-            _sendEmail.SendEmail(user.Email, "Confierm Register", $"Please Confierm this code to complete register {userOtp.otp}");
+            //_sendEmail.SendEmail(user.Email, "Confierm Register", $"Please Confierm this code to complete register {userOtp.otp}");
 
-            return $"Register Complete now confierm your account";
+            return $"Register Complete Successfly";
         }
 
 

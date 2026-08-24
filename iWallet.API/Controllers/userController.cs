@@ -25,13 +25,13 @@ namespace iWallet.API.Controllers
             return Created("sucess, now we send otp code in your email please confierm it",userDto.UserName);
         }
 
-        [HttpPost("complete-register")]
-        public IActionResult CompleteRegister(string otp)
-        {
-            var user = _unitofwork.UserRepository.CompleteRegister(otp);
-            return Ok("Successfly Complete Register");
+        //[HttpPost("complete-register")]
+        //public IActionResult CompleteRegister(string otp)
+        //{
+        //    var user = _unitofwork.UserRepository.CompleteRegister(otp);
+        //    return Ok("Successfly Complete Register");
 
-        }
+        //}
 
         [HttpPost("login")]
 
@@ -48,13 +48,13 @@ namespace iWallet.API.Controllers
             return Ok("Resend Otp Complete, confierm your account by apply new otp code");
         }
 
-        [HttpPatch("reset-email")]
+        //[HttpPatch("reset-email")]
 
-        public IActionResult ResetUserEmail([FromQuery]int id ,[FromBody]UpdateUserEmailDto updateUserEmail)
-        {
-            var updatedUser = _unitofwork.UserRepository.ResetEmail(id,updateUserEmail);
-            return Ok("successfly updated email and send otp to new email , please apply it to complete register");
-        }
+        //public IActionResult ResetUserEmail([FromQuery]int id ,[FromBody]UpdateUserEmailDto updateUserEmail)
+        //{
+        //    var updatedUser = _unitofwork.UserRepository.ResetEmail(id,updateUserEmail);
+        //    return Ok("successfly updated email and send otp to new email , please apply it to complete register");
+        //}
 
             
     }
