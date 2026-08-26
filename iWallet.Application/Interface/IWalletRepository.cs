@@ -2,7 +2,9 @@
 {
     public interface IWalletRepository
     {
-        Task<string> CreateAsync(CreateWalletDto walletDto);
+        Task<string> CreateAsync(int userId, WalletType walletType, string pin);
+
+        Task<List<GetWalletDto>> GetUserWalletsAsync(int userId);
         Task<List<GetWalletDto>> GetWalletsAsync();
         Task<GetWalletDto> GetWalletById(int walletId);
         Task<GetWalletDto> GetByWalletNumber(string walletNumber);

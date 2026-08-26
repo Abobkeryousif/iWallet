@@ -1,0 +1,5 @@
+2026-08-25 10:07:54.049 +03:00 [INF] Start create wallet process for UserId: 18
+2026-08-25 10:07:54.148 +03:00 [WRN] Invalid UserId: 18
+2026-08-25 10:08:26.689 +03:00 [INF] Start create wallet process for UserId: 18
+2026-08-25 10:09:09.325 +03:00 [WRN] Invalid UserId: 18
+2026-08-25 10:10:22.138 +03:00 [INF] Start create wallet process for UserId: 18

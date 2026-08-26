@@ -11,36 +11,36 @@ namespace iWallet.Infrastructure.Implemention
             _context = context;
         }
 
-        public async Task<string> CreateAsync(CreateWalletDto walletDto)
+        public async Task<string> CreateAsync(int userId,WalletType walletType,string pin)
         {
 
-            Log.Information("Start create wallet process for UserId: {UserId}",walletDto.UserId);
+            Log.Information("Start create wallet process for UserId: {UserId}",userId);
 
-            var userChack = await _context.Wallets.FirstOrDefaultAsync(u=> u.Id == walletDto.UserId);
-            if (userChack == null)
-            {
-                Log.Warning("Invalid UserId: {UserId}",walletDto.UserId);
-                throw new Exception("Invalid user id");
-            }
+            //var userChack = await _context.Wallets.FirstOrDefaultAsync(u=> u.Id == userId);
+            //if (userChack == null)
+            //{
+            //    Log.Warning("Invalid UserId: {UserId}",userId);
+            //    throw new Exception("Invalid user id");
+            //}
 
-            if (!Enum.IsDefined(typeof(WalletType), walletDto.WalletType))
+            if (!Enum.IsDefined(typeof(WalletType), walletType))
                 throw new Exception("Invalid wallet type");
 
             //ensure any user just have 2 wallet
             var walletCount = await _context.Wallets
-                .CountAsync(w=> w.UserId == userChack.Id);
+                .CountAsync(w=> w.UserId == userId);
 
             if (walletCount >= 2)
                 throw new Exception("User can not have more then 2 wallet");
 
 
-            CreatePinHash(walletDto.pin, out byte[] pinHash, out byte[] pinSalt);
+            CreatePinHash(pin, out byte[] pinHash, out byte[] pinSalt);
             
             var wallet = new Wallet
             {
-                UserId = walletDto.UserId,
+                UserId = userId,
                 WalletNumber = GenerateWalletNumber(),
-                WalletType = walletDto.WalletType,
+                WalletType = walletType,
                 Balance = 0,
                 PinHash = pinHash,
                 PinSalt = pinSalt
@@ -138,6 +138,25 @@ namespace iWallet.Infrastructure.Implemention
             };
 
             return getWalletDto;
+        }
+
+        public async Task<List<GetWalletDto>> GetUserWalletsAsync(int userId)
+        {
+            var result = await _context.Wallets
+                .AsNoTracking()
+                .Where(w => w.UserId == userId)
+                .Select(w => new GetWalletDto
+                {
+                    WalletNumber = w.WalletNumber,
+                    Balance = w.Balance,
+                    WalletType = w.WalletType.ToString(),
+                    Status = w.Status.ToString()
+                }).ToListAsync();
+
+            if (result.Count == 0)
+                throw new ArgumentNullException("user does't have any wallet!");
+
+            return result;
         }
     }
     }
