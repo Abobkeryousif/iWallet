@@ -37,6 +37,7 @@
         }
 
         [HttpGet("get-by-wallet-number")]
+        [Authorize(Roles = "USER")]
         public async Task<IActionResult> GetByWalletNumber(string walletNumber) =>
             Ok( await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber) );
 

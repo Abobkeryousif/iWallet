@@ -33,7 +33,10 @@ builder.Services.AddRateLimiter(options =>
             }));
 });
 builder.Services.AddDbContext<ApplicationDbContext>
-    (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+    (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default"),sqlOption=>
+    {
+        sqlOption.EnableRetryOnFailure();
+    }));
 
 builder.Services.Configure<MailSetting>(builder.Configuration.GetSection("MailSetting"));
 
