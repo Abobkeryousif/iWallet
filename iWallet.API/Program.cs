@@ -33,10 +33,7 @@ builder.Services.AddRateLimiter(options =>
             }));
 });
 builder.Services.AddDbContext<ApplicationDbContext>
-    (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default"),sqlOption=>
-    {
-        sqlOption.EnableRetryOnFailure();
-    }));
+    (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
 
 builder.Services.Configure<MailSetting>(builder.Configuration.GetSection("MailSetting"));
 
@@ -81,7 +78,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
 
 var app = builder.Build();
 
-//await app.Services.ApplyMigrationAsync<ApplicationDbContext>();
+await app.Services.ApplyMigrationAsync<ApplicationDbContext>();
+
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
