@@ -65,24 +65,28 @@ namespace iWallet.Infrastructure.Implemention
         {
             using var hmac = new System.Security.Cryptography.HMACSHA512();
             pinSalt = hmac.Key;
-            pinHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pin));
+            pinHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(pin));
         }
 
         public async Task<GetWalletDto> GetWalletById(int walletId)
         {
-            var wallet = await _context.Wallets.FindAsync(walletId);
+            var wallet = await _context.Wallets
+                .AsNoTracking()
+                .Where(wi=> wi.Id == walletId)
+                .Select(w=> new GetWalletDto
+                {
+                    WalletNumber = w.WalletNumber,
+                    Balance = w.Balance,
+                    Status = w.Status,
+                    WalletType = w.WalletType
+                })
+                .FirstOrDefaultAsync();
+                
+   
             if (wallet == null)
                 throw new Exception($"not found wallet with id: {walletId}");
 
-            var getWalletDto = new GetWalletDto
-            {
-                WalletNumber = wallet.WalletNumber,
-                Balance = wallet.Balance,
-                Status = wallet.Status.ToString(),
-                WalletType = wallet.WalletType.ToString()
-            };
-
-            return getWalletDto;
+            return wallet;
         }
 
         public async Task<string> PatchWalletBalance(int walletId, decimal balance)
@@ -112,8 +116,8 @@ namespace iWallet.Infrastructure.Implemention
                 {
                     WalletNumber = w.WalletNumber,
                     Balance = w.Balance,
-                    WalletType = w.WalletType.ToString(),
-                    Status = w.Status.ToString()
+                    WalletType = w.WalletType,
+                    Status = w.Status
                 })
                 .ToListAsync();
 
@@ -122,22 +126,21 @@ namespace iWallet.Infrastructure.Implemention
 
         public async Task<GetWalletDto> GetByWalletNumber(string walletNumber)
         {
-            var wallet = await _context.Wallets.FirstOrDefaultAsync(wn=> wn.WalletNumber == walletNumber);
+            var wallet = await _context.Wallets
+                .AsNoTracking()
+                .Where(wn => wn.WalletNumber == walletNumber && wn.Status == WalletStatus.Active)
+                .Select(w => new GetWalletDto
+                {
+                    WalletNumber = w.WalletNumber,
+                    Balance = w.Balance,
+                    Status = w.Status,
+                    WalletType = w.WalletType
+                }).FirstOrDefaultAsync();
+
             if (wallet == null)
-                throw new Exception("invalid wallet number");
+                throw new Exception("invalid wallet number or InActive Wallet");
 
-            if (wallet.Status != WalletStatus.Active)
-                throw new Exception("inactive wallet");
-
-            var getWalletDto = new GetWalletDto
-            {
-                WalletNumber = walletNumber,
-                Balance= wallet.Balance,
-                WalletType= wallet.WalletType.ToString(),
-                Status = wallet.Status.ToString()
-            };
-
-            return getWalletDto;
+            return wallet;
         }
 
         public async Task<List<GetWalletDto>> GetUserWalletsAsync(int userId)
@@ -149,8 +152,8 @@ namespace iWallet.Infrastructure.Implemention
                 {
                     WalletNumber = w.WalletNumber,
                     Balance = w.Balance,
-                    WalletType = w.WalletType.ToString(),
-                    Status = w.Status.ToString()
+                    WalletType = w.WalletType,
+                    Status = w.Status
                 }).ToListAsync();
 
             if (result.Count == 0)

@@ -2,7 +2,7 @@
 {
     public interface ITokenService
     {
-        string GenerateJwtToken(User user);
+        string GenerateJwtToken(int userId, string email, string role);
         void WriteTokenToCookie(string cookieName , string token, DateTime expiretion);
     }
 }

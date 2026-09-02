@@ -22,8 +22,8 @@
     {
         public string WalletNumber { get; set; }
         public decimal Balance { get; set; }
-        public string WalletType { get; set; }
-        public string Status { get; set; }
+        public WalletType WalletType { get; set; }
+        public WalletStatus Status { get; set; }
 
         // i make enum string to get accutal value 
     }

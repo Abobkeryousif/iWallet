@@ -49,18 +49,17 @@ namespace iWallet.Infrastructure.Implemention
 
         public async Task<List<GetUsersDto>> GetAllUsers()
         {
-            var users = await _context.Users.Where(u=> u.IsActive == true).AsNoTracking().ToListAsync();
-            var result = users.Select( u=> new GetUsersDto
+            var users = await _context.Users.AsNoTracking().Where(u=> u.IsActive == true).Select(u => new GetUsersDto
             {
-              FirstName = u.FirstName,
-              LastName = u.LastName,
-              Email = u.Email,
-              PhoneNumber = u.PhoneNumber,
-              City = u.City,
-              BirthDate = u.BirthDate,
-            }).ToList();
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber,
+                City = u.City,
+                BirthDate = u.BirthDate
+            }).ToListAsync();
 
-            return result;
+            return users;
         }
 
         public bool IsExist(Expression<Func<User, bool>> filter = null)
@@ -86,17 +85,29 @@ namespace iWallet.Infrastructure.Implemention
         //}
 
         public async Task<string> UserLoginAsync(LoginDto loginDto)
-            {
-            var loginUser = await _context.Users.FirstOrDefaultAsync(e=> e.Email == loginDto.email);
+        {
+            
+            var loginUser = await _context.Users
+                .Where(u => u.Email == loginDto.email)
+                .Select(u => new
+                {
+                    u.Id,
+                    u.UserName,
+                    u.Email,
+                    u.Role,
+                    u.Password
+                })
+                .FirstOrDefaultAsync();
+
             if (loginUser == null)
                 throw new Exception("invalid email or password");
 
-            var checkUserPassword = BCrypt.Net.BCrypt.Verify(loginDto.password,loginUser.Password);
-                if (!checkUserPassword)
-                    throw new Exception("invalid email or password");
+            var checkUserPassword = BCrypt.Net.BCrypt.Verify(loginDto.password, loginUser.Password);
+            if (!checkUserPassword)
+                throw new Exception("invalid email or password");
 
-            var token = _tokenService.GenerateJwtToken(loginUser);
-            _tokenService.WriteTokenToCookie("ACCESS_TOKEN", token ,DateTime.UtcNow.AddMinutes(15));
+            var token = _tokenService.GenerateJwtToken(loginUser.Id, loginUser.Email, loginUser.Role);
+            _tokenService.WriteTokenToCookie("ACCESS_TOKEN", token, DateTime.UtcNow.AddMinutes(15));
 
             return $"Welcome back: {loginUser.UserName}";
         }

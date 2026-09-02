@@ -11,7 +11,7 @@ namespace iWallet.Infrastructure.Implemention
             _limitService = limitService;
         }
         public async Task<Result<string>> MakeDepositAsync(DepositDto depositDto)
-            {
+        {
 
             var wallet = await _context.Wallets.FirstOrDefaultAsync(x => x.Id == depositDto.walletId);
             if (wallet == null || wallet.Status != WalletStatus.Active)
@@ -40,13 +40,13 @@ namespace iWallet.Infrastructure.Implemention
 
             var ledger = new LedgerEntry
             {
-                
+
                 WalletId = depositDto.walletId,
                 TransactionId = transaction.Id,
                 Debit = 0,
                 Credit = depositDto.amount,
                 Particulars = $"Deposit ammount = {depositDto.amount} to wallet {wallet.WalletNumber}"
-                
+
             };
 
             _context.LedgerEntries.Add(ledger);
@@ -68,7 +68,7 @@ namespace iWallet.Infrastructure.Implemention
             var senderWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(u => u.UserId == userId);
             if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
             {
-                Log.Warning("Sender wallet not found. UserId: {UserId}",userId);
+                Log.Warning("Sender wallet not found. UserId: {UserId}", userId);
                 TransferMetrics.TransferFailureTotal.Inc();
 
                 return Result<string>.Failure(TransactionSharedErrors.InValidUserWallet());
@@ -207,9 +207,9 @@ namespace iWallet.Infrastructure.Implemention
 
                 return Result<string>.Success($"Transfer Completed Successfly with Transaction Reference {reference}");
 
-                }
+            }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await dbTransaction.RollbackAsync();
 
@@ -254,10 +254,10 @@ namespace iWallet.Infrastructure.Implemention
                 Amount = amount,
                 Status = TransactionStatus.Success,
                 TransactionType = TransactionType.Withdrawal,
-                
+
             };
 
-             await _context.Transactions.AddAsync(transaction);
+            await _context.Transactions.AddAsync(transaction);
             _context.SaveChanges();
             WithdrawalMetrics.WithdrawalTotal.Inc();
 
@@ -278,15 +278,26 @@ namespace iWallet.Infrastructure.Implemention
 
         public async Task<List<TransactionDto>> TransactionHistory(int walletId)
         {
-            var wallet = await _context.Wallets.AnyAsync(w=> w.Id == walletId);
-            if (!wallet)
-                throw new Exception("invalid wallet");
+            var walletExists = await _context.Wallets
+                 .AnyAsync(w => w.Id == walletId);
 
-            var history = await _context.Transactions
-                .Where(t => t.FromWalletId == walletId || t.ToWalletId == walletId)
-                .OrderByDescending(t => t.CreatedAt)
+            if (!walletExists)
+                throw new Exception("Invalid wallet");
+
+            var fromTransactions = _context.Transactions
+                 .AsNoTracking()
+                 .Where(t => t.FromWalletId == walletId);
+
+            
+            var toTransactions = _context.Transactions
                 .AsNoTracking()
-                .Select(t=> new TransactionDto
+                .Where(t => t.ToWalletId == walletId);
+
+            
+            var history = await fromTransactions
+                .Concat(toTransactions)
+                .OrderByDescending(t => t.CreatedAt)
+                .Select(t => new TransactionDto
                 {
                     Reference = t.Reference,
                     Amount = t.Amount,
@@ -295,15 +306,17 @@ namespace iWallet.Infrastructure.Implemention
                 })
                 .ToListAsync();
 
+            Console.WriteLine(history.ToString());
+
             if (history.Count == 0)
-                throw new Exception("not make any transactions yet");
+                throw new Exception("No transactions found");
 
             return history;
         }
 
         public async Task<string> TransferToBeneficiery(string beneficieryName, decimal amount, int userId)
         {
-            var checkBeneficiery = await _context.Beneficiaries.FirstOrDefaultAsync(n=> n.Name.ToLower() == beneficieryName.ToLower());
+            var checkBeneficiery = await _context.Beneficiaries.FirstOrDefaultAsync(n => n.Name.ToLower() == beneficieryName.ToLower());
             if (checkBeneficiery == null)
                 throw new Exception("invalid beneficiery name");
 
@@ -343,6 +356,6 @@ namespace iWallet.Infrastructure.Implemention
             return $"{prefix}-{data}-{random}";
         }
 
-   
+
     }
 }

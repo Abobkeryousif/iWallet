@@ -1,4 +1,6 @@
 
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -70,6 +72,14 @@ builder.Services.AddControllers()
     .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<UserRegisterValidator>());
 
 
+// to convert from enum to string, instead of make it inside db query, i make it globally form program.cs to save performance
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter());
+    });
+
 builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
 {
     var config = builder.Configuration.GetConnectionString("redis");
@@ -78,7 +88,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
 
 var app = builder.Build();
 
-await app.Services.ApplyMigrationAsync<ApplicationDbContext>();
+//await app.Services.ApplyMigrationAsync<ApplicationDbContext>();
 
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

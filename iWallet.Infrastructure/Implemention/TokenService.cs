@@ -11,13 +11,13 @@ namespace iWallet.Infrastructure.Implemention
             _configuration = configuration;
             _httpContextAccessor = httpContext;
         }
-        public string GenerateJwtToken(User user)
+        public string GenerateJwtToken(int userId, string email, string role)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role,user.Role)
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Email, email),
+                new Claim(ClaimTypes.Role,role)
             };
 
 
