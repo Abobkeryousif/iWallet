@@ -88,6 +88,7 @@ namespace iWallet.Infrastructure.Implemention
         {
             
             var loginUser = await _context.Users
+                .AsNoTracking()
                 .Where(u => u.Email == loginDto.email)
                 .Select(u => new
                 {
