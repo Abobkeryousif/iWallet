@@ -92,7 +92,7 @@ namespace iWallet.Infrastructure.Implemention
                 .Select(u => new
                 {
                     u.Id,
-                    u.UserName,
+                    u.FirstName,
                     u.Email,
                     u.Role,
                     u.Password
@@ -109,7 +109,7 @@ namespace iWallet.Infrastructure.Implemention
             var token = _tokenService.GenerateJwtToken(loginUser.Id, loginUser.Email, loginUser.Role);
             _tokenService.WriteTokenToCookie("ACCESS_TOKEN", token, DateTime.UtcNow.AddMinutes(15));
 
-            return $"Welcome back: {loginUser.UserName}";
+            return $"Welcome back: {loginUser.FirstName}";
         }
 
         public async Task<string> UserRegister(UserDto userDto)
