@@ -20,3 +20,7 @@ global using StackExchange.Redis;
 global using System.Threading.RateLimiting;
 global using Serilog;
 global using Prometheus;
+global using System.Text.Json.Serialization;
+global using OpenTelemetry.Resources;
+global using OpenTelemetry.Trace;
+global using OpenTelemetry.Metrics;
