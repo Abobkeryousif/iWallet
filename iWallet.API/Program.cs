@@ -1,6 +1,4 @@
 
-using System.Text.Json.Serialization;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +14,8 @@ builder.Services.InfrastructureReigster(builder.Configuration);
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
+
+builder.Host.UseSerilog();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IGetUserIdFromToken, GetUserIdFromToken>();
@@ -85,6 +85,31 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
     var config = builder.Configuration.GetConnectionString("redis");
     return ConnectionMultiplexer.Connect(config!);
 });
+
+
+//opentelemetry configuration
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resourceBuilder=> resourceBuilder.AddService("iWallet", "2.0"))
+    .WithTracing(tracerProvider=>
+    {
+        tracerProvider
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddSqlClientInstrumentation()
+        .AddConsoleExporter();
+    })
+    .WithMetrics(meterProvider=>
+    {
+        meterProvider
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddRuntimeInstrumentation()
+            .AddSqlClientInstrumentation()
+            .AddConsoleExporter();
+    });
+
+
+
 
 var app = builder.Build();
 

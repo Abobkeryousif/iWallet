@@ -12,6 +12,7 @@ namespace iWallet.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetUsers()
         {
             var result = await _unitofwork.UserRepository.GetAllUsers();
@@ -41,12 +42,12 @@ namespace iWallet.API.Controllers
         }
 
 
-        [HttpPost("resend-otp")]
-        public IActionResult ResendOtp(string userEmail) 
-        {
-            var result = _unitofwork.OtpRepository.ResendOtp(userEmail);
-            return Ok("Resend Otp Complete, confierm your account by apply new otp code");
-        }
+        //[HttpPost("resend-otp")]
+        //public IActionResult ResendOtp(string userEmail) 
+        //{
+        //    var result = _unitofwork.OtpRepository.ResendOtp(userEmail);
+        //    return Ok("Resend Otp Complete, confierm your account by apply new otp code");
+        //}
 
         //[HttpPatch("reset-email")]
 

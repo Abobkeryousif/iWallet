@@ -3,10 +3,10 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 
-COPY ["iWallet.API/iWallet.API.csproj", "iWallet.API/"]
-COPY ["iWallet.Application/iWallet.Application.csproj", "iWallet.Application/"]
-COPY ["iWallet.Domain/iWallet.Domain.csproj", "iWallet.Domain/"]
-COPY ["iWallet.Infrastructure/iWallet.Infrastructure.csproj", "iWallet.Infrastructure/"]
+COPY ["./iWallet.API/iWallet.API.csproj", "iWallet.API/"]
+COPY ["./iWallet.Application/iWallet.Application.csproj", "iWallet.Application/"]
+COPY ["./iWallet.Domain/iWallet.Domain.csproj", "iWallet.Domain/"]
+COPY ["./iWallet.Infrastructure/iWallet.Infrastructure.csproj", "iWallet.Infrastructure/"]
 
 RUN dotnet restore "iWallet.API/iWallet.API.csproj"
 
