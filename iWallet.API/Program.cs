@@ -113,7 +113,13 @@ builder.Services.AddOpenTelemetry()
 
 var app = builder.Build();
 
-await app.Services.ApplyMigrationAsync<ApplicationDbContext>();
+if (app.Configuration.GetValue<bool>("Database:Enabled"))
+{
+    await app.Services
+        .ApplyMigrationAsync<ApplicationDbContext>();
+}
+
+await app.RunAsync();
 
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
