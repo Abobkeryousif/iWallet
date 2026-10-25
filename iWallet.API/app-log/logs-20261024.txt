@@ -1,0 +1,1236 @@
+2026-10-24 12:24:51.969 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 12:24:52.064 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 12:24:53.018 +03:00 [INF] Executed DbCommand (64ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 12:24:53.048 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 12:24:53.137 +03:00 [INF] Executed DbCommand (81ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 12:24:53.261 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 12:24:53.298 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 12:24:53.306 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 12:24:53.372 +03:00 [INF] Executed DbCommand (58ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 12:24:53.395 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 12:24:53.410 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 12:24:53.464 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 12:24:54.141 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 12:24:54.146 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 12:24:54.335 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 12:24:54.346 +03:00 [INF] Hosting environment: Development
+2026-10-24 12:24:54.350 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 12:24:55.461 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 12:24:55.857 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 404 null null 440.5137ms
+2026-10-24 12:24:55.874 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7111/swagger/index.html, Response status code: 404
+2026-10-24 12:26:06.972 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 12:26:07.005 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 12:26:07.417 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 12:26:07.430 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 12:26:07.473 +03:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 12:26:07.538 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 12:26:07.555 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 12:26:07.561 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 12:26:07.574 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 12:26:07.586 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 12:26:07.597 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 12:26:07.720 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 12:26:08.039 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 12:26:08.045 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 12:26:08.207 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 12:26:08.211 +03:00 [INF] Hosting environment: Development
+2026-10-24 12:26:08.213 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 12:26:08.895 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 12:26:09.128 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 200 null text/html;charset=utf-8 252.7149ms
+2026-10-24 12:26:09.143 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 12:26:09.143 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 12:26:09.143 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 12:26:09.143 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 12:26:09.259 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 116.6312ms
+2026-10-24 12:26:09.258 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 116.0455ms
+2026-10-24 12:26:09.143 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 12:26:09.199 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 12:26:09.274 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 131.7578ms
+2026-10-24 12:26:09.293 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 149.9198ms
+2026-10-24 12:26:09.314 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 12:26:09.318 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 175.4508ms
+2026-10-24 12:26:09.326 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 181.3681ms
+2026-10-24 12:26:09.468 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 154.4874ms
+2026-10-24 12:26:09.528 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 12:26:09.754 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 226.2308ms
+2026-10-24 12:26:35.218 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 40
+2026-10-24 12:26:35.426 +03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (USER)
+2026-10-24 12:26:35.447 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-10-24 12:26:35.469 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 401 0 null 251.3822ms
+2026-10-24 12:26:45.845 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 76
+2026-10-24 12:26:45.865 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 12:26:45.945 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 12:26:45.971 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 8.5994ms
+2026-10-24 12:26:45.976 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 12:26:46.088 +03:00 [ERR] Error at path: /api/user/login
+System.InvalidOperationException: Unable to resolve service for type 'iWallet.Application.Interface.IUnitofwork' while attempting to activate 'iWallet.API.Controllers.userController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method25(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpRequestDurationMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpRequestCountMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpInProgressMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at iWallet.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\D files\Projects\iWallet\iWallet.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-10-24 12:26:46.134 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 500 null application/json 289.2679ms
+2026-10-24 14:06:26.882 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:06:26.914 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:06:27.354 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:06:27.368 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:06:27.401 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:06:27.462 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:06:27.480 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:06:27.483 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:06:27.494 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:06:27.505 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:06:27.517 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:06:27.675 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:06:28.171 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:06:28.175 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:06:28.221 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:06:28.223 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:06:28.244 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:06:29.043 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:06:29.316 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 307.5868ms
+2026-10-24 14:06:29.345 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:06:29.345 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:06:29.345 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:06:29.345 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:06:29.346 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:06:29.374 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:06:29.399 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 56.1788ms
+2026-10-24 14:06:29.399 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 55.4688ms
+2026-10-24 14:06:29.399 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 55.9451ms
+2026-10-24 14:06:29.409 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 63.9338ms
+2026-10-24 14:06:29.444 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:06:29.446 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 102.6213ms
+2026-10-24 14:06:29.458 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 110.6707ms
+2026-10-24 14:06:29.546 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 135.6431ms
+2026-10-24 14:06:29.584 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:06:29.735 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 151.2091ms
+2026-10-24 14:07:20.540 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/api/user - null null
+2026-10-24 14:07:20.785 +03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2026-10-24 14:07:20.795 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-10-24 14:07:20.806 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/api/user - 401 0 null 266.2059ms
+2026-10-24 14:10:49.222 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 47
+2026-10-24 14:10:49.251 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:10:49.331 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:10:49.348 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 4.4973ms
+2026-10-24 14:10:49.352 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:10:49.410 +03:00 [ERR] Error at path: /api/user/login
+System.InvalidOperationException: Unable to resolve service for type 'iWallet.Application.Interface.IUnitofwork' while attempting to activate 'iWallet.API.Controllers.userController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method25(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpRequestDurationMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpRequestCountMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpInProgressMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at iWallet.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\D files\Projects\iWallet\iWallet.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-10-24 14:10:49.458 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 500 null application/json 236.4275ms
+2026-10-24 14:11:30.936 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:11:30.967 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:11:31.355 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:11:31.368 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:11:31.400 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:11:31.457 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:11:31.472 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:11:31.474 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:11:31.482 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:11:31.492 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:11:31.499 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:11:31.590 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:11:31.878 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:11:31.880 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:11:32.032 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:11:32.033 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:11:32.034 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:11:32.401 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:11:32.580 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 198.1638ms
+2026-10-24 14:11:32.602 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:11:32.602 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:11:32.602 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:11:32.602 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:11:32.602 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:11:32.602 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:11:32.614 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 12.2748ms
+2026-10-24 14:11:32.628 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 26.4421ms
+2026-10-24 14:11:32.631 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 29.6698ms
+2026-10-24 14:11:32.628 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 27.1926ms
+2026-10-24 14:11:32.632 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 31.2799ms
+2026-10-24 14:11:32.644 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 43.256ms
+2026-10-24 14:11:32.650 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:11:32.722 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 72.6942ms
+2026-10-24 14:11:32.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:11:32.835 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 89.9771ms
+2026-10-24 14:11:45.691 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 47
+2026-10-24 14:11:45.881 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:11:45.914 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:11:45.978 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:11:46.415 +03:00 [INF] Executed DbCommand (115ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:11:46.421 +03:00 [WRN] invalid email or password
+2026-10-24 14:11:46.427 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 442.665ms.
+2026-10-24 14:11:46.435 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:11:46.456 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 532.6122ms
+2026-10-24 14:11:46.470 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:11:46.487 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 797.0636ms
+2026-10-24 14:14:19.557 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:14:19.587 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:14:19.949 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:14:19.962 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:14:20.002 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:14:20.063 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:14:20.079 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:14:20.082 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:14:20.090 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:14:20.099 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:14:20.106 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:14:20.196 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:14:20.506 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:14:20.507 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:14:20.542 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:14:20.543 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:14:20.544 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:14:21.089 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:14:21.289 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 226.1554ms
+2026-10-24 14:14:21.307 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:14:21.307 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:14:21.307 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:14:21.307 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:14:21.307 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:14:21.330 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 23.4816ms
+2026-10-24 14:14:21.330 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 23.4771ms
+2026-10-24 14:14:21.310 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:14:21.337 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 30.9416ms
+2026-10-24 14:14:21.337 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 30.9202ms
+2026-10-24 14:14:21.338 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 30.8351ms
+2026-10-24 14:14:21.355 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 45.4931ms
+2026-10-24 14:14:21.358 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:14:21.433 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 74.5662ms
+2026-10-24 14:14:21.457 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:14:21.540 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 83.586ms
+2026-10-24 14:14:27.868 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 47
+2026-10-24 14:14:28.022 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:14:28.107 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:14:28.176 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:14:28.799 +03:00 [INF] Executed DbCommand (120ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:14:28.815 +03:00 [WRN] invalid email or password
+2026-10-24 14:14:28.829 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 643.6528ms.
+2026-10-24 14:14:28.845 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:14:28.869 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 751.5232ms
+2026-10-24 14:14:28.871 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:14:28.905 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 1037.2662ms
+2026-10-24 14:15:33.541 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 47
+2026-10-24 14:15:33.561 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:15:33.566 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:15:33.581 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:15:33.770 +03:00 [INF] Executed DbCommand (39ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:15:33.787 +03:00 [WRN] invalid email or password
+2026-10-24 14:15:33.789 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 203.6879ms.
+2026-10-24 14:15:33.810 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:15:33.815 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 244.5171ms
+2026-10-24 14:15:33.819 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:15:33.821 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 280.1411ms
+2026-10-24 14:22:28.432 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:22:28.462 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:22:28.892 +03:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:22:28.912 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:22:28.977 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:22:29.079 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:22:29.107 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:22:29.118 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:22:29.135 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:22:29.159 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:22:29.174 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:22:29.387 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:22:29.784 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:22:29.787 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:22:30.033 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:22:30.038 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:22:30.040 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:22:30.537 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:22:30.921 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 428.5261ms
+2026-10-24 14:22:30.967 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:22:30.967 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:22:30.967 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:22:30.969 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:22:30.967 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:22:31.060 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 90.8191ms
+2026-10-24 14:22:30.967 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:22:31.106 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:22:31.107 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 139.432ms
+2026-10-24 14:22:31.107 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 139.8083ms
+2026-10-24 14:22:31.107 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 140.0054ms
+2026-10-24 14:22:31.112 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 145.3603ms
+2026-10-24 14:22:31.145 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 177.969ms
+2026-10-24 14:22:31.218 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 113.1712ms
+2026-10-24 14:22:31.257 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:22:31.445 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 188.3576ms
+2026-10-24 14:22:39.207 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 47
+2026-10-24 14:22:39.370 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:22:39.428 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:22:39.535 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:22:40.273 +03:00 [INF] Executed DbCommand (90ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:22:40.283 +03:00 [WRN] invalid email or password
+2026-10-24 14:22:40.341 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 797.4564ms.
+2026-10-24 14:22:40.355 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:22:40.380 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 940.5332ms
+2026-10-24 14:22:40.384 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:22:40.404 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 1196.413ms
+2026-10-24 14:23:49.284 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 66
+2026-10-24 14:23:49.302 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:23:49.306 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:23:49.322 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:23:49.537 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:23:50.129 +03:00 [WRN] invalid email or password
+2026-10-24 14:23:50.133 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 805.9478ms.
+2026-10-24 14:23:50.136 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:23:50.139 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 827.9072ms
+2026-10-24 14:23:50.143 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:23:50.146 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 863.008ms
+2026-10-24 14:28:08.280 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:28:08.313 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:28:08.715 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:28:08.730 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:28:08.783 +03:00 [INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:28:08.852 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:28:08.873 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:28:08.876 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:28:08.896 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:28:08.912 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:28:08.945 +03:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:28:09.056 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:28:09.377 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:28:09.381 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:28:09.421 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:28:09.425 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:28:09.431 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:28:10.234 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:28:10.655 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 469.0994ms
+2026-10-24 14:28:10.695 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:28:10.696 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:28:10.695 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:28:10.695 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:28:10.695 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:28:10.729 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:28:10.768 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 71.4072ms
+2026-10-24 14:28:10.820 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 125.4429ms
+2026-10-24 14:28:10.768 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 73.2387ms
+2026-10-24 14:28:10.820 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 125.758ms
+2026-10-24 14:28:10.825 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:28:10.826 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 131.4952ms
+2026-10-24 14:28:10.829 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 129.0764ms
+2026-10-24 14:28:10.973 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 147.983ms
+2026-10-24 14:28:11.020 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:28:11.224 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 203.6016ms
+2026-10-24 14:28:37.745 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 67
+2026-10-24 14:28:37.907 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:28:37.965 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:28:38.070 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:28:38.972 +03:00 [INF] Executed DbCommand (151ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:28:39.605 +03:00 [WRN] invalid email or password
+2026-10-24 14:28:39.692 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1608.9549ms.
+2026-10-24 14:28:39.712 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:28:39.771 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 1790.3234ms
+2026-10-24 14:28:39.776 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:28:39.803 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 2058.0528ms
+2026-10-24 14:28:49.388 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 66
+2026-10-24 14:28:49.415 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:28:49.423 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:28:49.457 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:28:49.657 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:28:50.269 +03:00 [WRN] invalid email or password
+2026-10-24 14:28:50.272 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 811.3976ms.
+2026-10-24 14:28:50.276 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:28:50.280 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 839.7818ms
+2026-10-24 14:28:50.283 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:28:50.287 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 898.7258ms
+2026-10-24 14:29:20.111 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 67
+2026-10-24 14:29:20.136 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:29:20.140 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:29:20.156 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:29:20.198 +03:00 [INF] Executed DbCommand (34ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:29:20.526 +03:00 [WRN] invalid email or password
+2026-10-24 14:29:20.529 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 369.2326ms.
+2026-10-24 14:29:20.533 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:29:20.538 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 393.3457ms
+2026-10-24 14:29:20.541 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:29:20.544 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 432.9309ms
+2026-10-24 14:30:34.422 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/register - application/json 181
+2026-10-24 14:30:34.431 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:30:34.451 +03:00 [INF] Route matched with {action = "Register", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterAsync(iWallet.Application.DTOs.UserDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:30:34.598 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:30:34.636 +03:00 [INF] Executed action iWallet.API.Controllers.userController.RegisterAsync (iWallet.API) in 181.6912ms
+2026-10-24 14:30:34.643 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:30:34.645 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/register - 400 null application/problem+json; charset=utf-8 222.8853ms
+2026-10-24 14:30:45.991 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/register - application/json 182
+2026-10-24 14:30:46.009 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:30:46.022 +03:00 [INF] Route matched with {action = "Register", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterAsync(iWallet.Application.DTOs.UserDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:30:46.033 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:30:46.036 +03:00 [INF] Executed action iWallet.API.Controllers.userController.RegisterAsync (iWallet.API) in 9.0464ms
+2026-10-24 14:30:46.039 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:30:46.042 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/register - 400 null application/problem+json; charset=utf-8 50.7995ms
+2026-10-24 14:30:52.882 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/register - application/json 182
+2026-10-24 14:30:52.892 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:30:52.895 +03:00 [INF] Route matched with {action = "Register", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterAsync(iWallet.Application.DTOs.UserDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:30:52.904 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:30:52.908 +03:00 [INF] Executed action iWallet.API.Controllers.userController.RegisterAsync (iWallet.API) in 8.9448ms
+2026-10-24 14:30:52.911 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:30:52.914 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/register - 400 null application/problem+json; charset=utf-8 31.8093ms
+2026-10-24 14:31:15.452 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/register - application/json 182
+2026-10-24 14:31:15.460 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:31:15.463 +03:00 [INF] Route matched with {action = "Register", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterAsync(iWallet.Application.DTOs.UserDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:31:15.470 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.RegisterAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:31:15.600 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[@userDto_Email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Email] = @userDto_Email) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-10-24 14:31:16.545 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 15), @p2='?' (DbType = DateTime2), @p3='?' (Size = 30), @p4='?' (Size = 15), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (Size = 15), @p8='?' (Size = 100), @p9='?' (Size = 15), @p10='?' (Size = 4000), @p11='?' (Size = 15), @p12='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([BirthDate], [City], [CreatedAt], [Email], [FirstName], [IsActive], [IsDeleted], [LastName], [Password], [PhoneNumber], [ProfileImageUrl], [Role], [UpdatedAt])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2026-10-24 14:31:16.622 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.RegisterAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.CreatedResult in 1149.9464ms.
+2026-10-24 14:31:16.626 +03:00 [INF] Executing CreatedResult, writing value of type 'System.String'.
+2026-10-24 14:31:16.634 +03:00 [INF] Executed action iWallet.API.Controllers.userController.RegisterAsync (iWallet.API) in 1167.886ms
+2026-10-24 14:31:16.639 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.RegisterAsync (iWallet.API)'
+2026-10-24 14:31:16.642 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/register - 201 null text/plain; charset=utf-8 1189.3588ms
+2026-10-24 14:31:28.885 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 55
+2026-10-24 14:31:28.896 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:31:28.904 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:31:28.912 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:31:28.959 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:31:29.248 +03:00 [WRN] invalid email or password
+2026-10-24 14:31:29.250 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 331.237ms.
+2026-10-24 14:31:29.254 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:31:29.257 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 346.4216ms
+2026-10-24 14:31:29.261 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:31:29.263 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 378.2317ms
+2026-10-24 14:31:37.000 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 56
+2026-10-24 14:31:37.003 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:31:37.011 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:31:37.017 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:31:37.030 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:31:37.323 +03:00 [WRN] invalid email or password
+2026-10-24 14:31:37.325 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 305.2384ms.
+2026-10-24 14:31:37.329 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:31:37.331 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 315.8255ms
+2026-10-24 14:31:37.334 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:31:37.337 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 337.5482ms
+2026-10-24 14:31:54.428 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 55
+2026-10-24 14:31:54.445 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:31:54.450 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:31:54.455 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:31:54.463 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:31:54.885 +03:00 [INF] user Mosab registerd Successfly
+2026-10-24 14:31:54.900 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 441.7863ms.
+2026-10-24 14:31:54.903 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:31:54.907 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 453.6005ms
+2026-10-24 14:31:54.910 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:31:54.912 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 484.2792ms
+2026-10-24 14:32:12.588 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/wallet - application/json 62
+2026-10-24 14:32:12.750 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.walletController.CreateWalletAsync (iWallet.API)'
+2026-10-24 14:32:12.773 +03:00 [INF] Route matched with {action = "CreateWallet", controller = "wallet"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateWalletAsync(iWallet.Application.DTOs.CreateWalletDto) on controller iWallet.API.Controllers.walletController (iWallet.API).
+2026-10-24 14:32:12.794 +03:00 [INF] Executing action method iWallet.API.Controllers.walletController.CreateWalletAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:32:12.812 +03:00 [INF] Start create wallet process for UserId: 19
+2026-10-24 14:32:12.949 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Wallets] AS [w]
+WHERE [w].[UserId] = @userId
+2026-10-24 14:32:13.156 +03:00 [INF] Executed DbCommand (27ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 8000) (DbType = Binary), @p4='?' (Size = 8000) (DbType = Binary), @p5='?' (Size = 40), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32), @p8='?' (Size = 12), @p9='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Wallets] ([Balance], [CreatedAt], [IsDeleted], [PinHash], [PinSalt], [Status], [UpdatedAt], [UserId], [WalletNumber], [WalletType])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-10-24 14:32:13.167 +03:00 [INF] Executed action method iWallet.API.Controllers.walletController.CreateWalletAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.CreatedResult in 369.4499ms.
+2026-10-24 14:32:13.174 +03:00 [INF] Executing CreatedResult, writing value of type 'System.String'.
+2026-10-24 14:32:13.176 +03:00 [INF] Executed action iWallet.API.Controllers.walletController.CreateWalletAsync (iWallet.API) in 398.0043ms
+2026-10-24 14:32:13.180 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.walletController.CreateWalletAsync (iWallet.API)'
+2026-10-24 14:32:13.184 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/wallet - 201 null text/plain; charset=utf-8 596.1044ms
+2026-10-24 14:32:24.223 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/api/wallet/5 - null null
+2026-10-24 14:32:24.243 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.walletController.GetWalletByIdA (iWallet.API)'
+2026-10-24 14:32:24.267 +03:00 [INF] Route matched with {action = "GetWalletByIdA", controller = "wallet"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetWalletByIdA(Int32) on controller iWallet.API.Controllers.walletController (iWallet.API).
+2026-10-24 14:32:24.275 +03:00 [INF] Executing action method iWallet.API.Controllers.walletController.GetWalletByIdA (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:32:24.313 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[WalletNumber], [w].[Balance], [w].[Status], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @walletId
+2026-10-24 14:32:31.209 +03:00 [INF] Executed action iWallet.API.Controllers.walletController.GetWalletByIdA (iWallet.API) in 6937.5399ms
+2026-10-24 14:32:31.218 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.walletController.GetWalletByIdA (iWallet.API)'
+2026-10-24 14:32:31.298 +03:00 [ERR] Error at path: /api/wallet/5
+System.Exception: not found wallet with id: 5
+   at iWallet.Infrastructure.Implemention.WalletRepository.GetWalletById(Int32 walletId) in C:\D files\Projects\iWallet\iWallet.Infrastructure\Implemention\WalletRepository.cs:line 87
+   at iWallet.API.Controllers.walletController.GetWalletByIdA(Int32 id) in C:\D files\Projects\iWallet\iWallet.API\Controllers\walletController.cs:line 35
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpRequestDurationMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpRequestCountMiddleware.Invoke(HttpContext context)
+   at Prometheus.HttpMetrics.HttpInProgressMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at iWallet.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\D files\Projects\iWallet\iWallet.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-10-24 14:32:31.368 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/api/wallet/5 - 500 null application/json 7145.1171ms
+2026-10-24 14:32:38.217 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/api/wallet/get-user-wallets - null null
+2026-10-24 14:32:38.236 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.walletController.GetUserWallets (iWallet.API)'
+2026-10-24 14:32:38.259 +03:00 [INF] Route matched with {action = "GetUserWallets", controller = "wallet"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUserWallets() on controller iWallet.API.Controllers.walletController (iWallet.API).
+2026-10-24 14:32:38.266 +03:00 [INF] Executing action method iWallet.API.Controllers.walletController.GetUserWallets (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:32:38.321 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [w].[WalletNumber], [w].[Balance], [w].[WalletType], [w].[Status]
+FROM [Wallets] AS [w]
+WHERE [w].[UserId] = @userId
+2026-10-24 14:32:38.336 +03:00 [INF] Executed action method iWallet.API.Controllers.walletController.GetUserWallets (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 65.9545ms.
+2026-10-24 14:32:38.340 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[iWallet.Application.DTOs.GetWalletDto, iWallet.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-10-24 14:32:38.373 +03:00 [INF] Executed action iWallet.API.Controllers.walletController.GetUserWallets (iWallet.API) in 109.7917ms
+2026-10-24 14:32:38.378 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.walletController.GetUserWallets (iWallet.API)'
+2026-10-24 14:32:38.380 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/api/wallet/get-user-wallets - 200 null application/json; charset=utf-8 163.3793ms
+2026-10-24 14:33:17.646 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 43
+2026-10-24 14:33:17.663 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:33:17.681 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:33:17.702 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:33:17.711 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 25.7438ms
+2026-10-24 14:33:17.743 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:33:17.745 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 400 null application/problem+json; charset=utf-8 100.1938ms
+2026-10-24 14:33:49.659 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 46
+2026-10-24 14:33:49.681 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:33:49.683 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:33:49.694 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:33:49.697 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 8.1498ms
+2026-10-24 14:33:49.700 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:33:49.702 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 400 null application/problem+json; charset=utf-8 43.4313ms
+2026-10-24 14:34:00.000 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 44
+2026-10-24 14:34:00.015 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:34:00.020 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:34:00.038 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:34:00.048 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 16.1418ms
+2026-10-24 14:34:00.057 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:34:00.060 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 400 null application/problem+json; charset=utf-8 60.5214ms
+2026-10-24 14:34:09.403 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 35
+2026-10-24 14:34:09.413 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:34:09.417 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:34:09.458 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:34:09.610 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[@depositDto_walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @depositDto_walletId
+2026-10-24 14:34:09.617 +03:00 [WRN] Withdrawal rejected because wallet was not found or is inactive. WalletId: 5
+2026-10-24 14:34:09.619 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 155.2953ms.
+2026-10-24 14:34:09.623 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:34:09.627 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 206.012ms
+2026-10-24 14:34:09.632 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:34:09.635 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 200 null application/json; charset=utf-8 232.0825ms
+2026-10-24 14:34:23.819 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 35
+2026-10-24 14:34:23.833 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:34:23.834 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:34:23.840 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:34:23.849 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@depositDto_walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @depositDto_walletId
+2026-10-24 14:34:23.853 +03:00 [WRN] Withdrawal rejected because wallet was not found or is inactive. WalletId: 7
+2026-10-24 14:34:23.855 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 12.0058ms.
+2026-10-24 14:34:23.857 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:34:23.859 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 20.8847ms
+2026-10-24 14:34:23.862 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:34:23.865 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 200 null application/json; charset=utf-8 45.578ms
+2026-10-24 14:37:57.844 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:37:57.875 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:37:58.260 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:37:58.275 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:37:58.322 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:37:58.388 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:37:58.408 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:37:58.411 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:37:58.423 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:37:58.433 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:37:58.453 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:37:58.552 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:37:58.787 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:37:58.794 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:37:59.018 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:37:59.020 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:37:59.021 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:37:59.220 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:37:59.456 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 263.7321ms
+2026-10-24 14:37:59.481 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:37:59.483 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:37:59.481 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:37:59.496 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 14.9803ms
+2026-10-24 14:37:59.481 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:37:59.481 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:37:59.483 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:37:59.502 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 22.0871ms
+2026-10-24 14:37:59.502 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 21.9884ms
+2026-10-24 14:37:59.511 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 31.0445ms
+2026-10-24 14:37:59.520 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 39.6295ms
+2026-10-24 14:37:59.535 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:37:59.535 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 51.8357ms
+2026-10-24 14:37:59.607 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 72.4154ms
+2026-10-24 14:37:59.653 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:37:59.742 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 90.5451ms
+2026-10-24 14:38:25.897 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 38
+2026-10-24 14:38:26.190 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:38:26.263 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:38:26.426 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:38:27.444 +03:00 [INF] Executed DbCommand (157ms) [Parameters=[@depositDto_walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @depositDto_walletId
+2026-10-24 14:38:27.460 +03:00 [WRN] Withdrawal rejected because wallet was not found or is inactive. WalletId: 19
+2026-10-24 14:38:27.577 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1137.8824ms.
+2026-10-24 14:38:27.597 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:38:27.637 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 1359.4281ms
+2026-10-24 14:38:27.644 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:38:27.682 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 200 null application/json; charset=utf-8 1785.0914ms
+2026-10-24 14:39:56.340 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:39:56.374 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:39:56.752 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:39:56.766 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:39:56.810 +03:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:39:56.867 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:39:56.896 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:39:56.914 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:39:56.936 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:39:56.962 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:39:56.976 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:39:57.081 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:39:57.379 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:39:57.384 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:39:57.524 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:39:57.526 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:39:57.527 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:39:58.116 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:39:58.552 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 481.7836ms
+2026-10-24 14:39:58.597 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:39:58.597 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:39:58.599 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:39:58.598 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:39:58.610 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:39:58.640 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:39:58.668 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 70.4717ms
+2026-10-24 14:39:58.674 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 75.328ms
+2026-10-24 14:39:58.668 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 70.8859ms
+2026-10-24 14:39:58.728 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 119.6629ms
+2026-10-24 14:39:58.729 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:39:58.765 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 150.0226ms
+2026-10-24 14:39:58.767 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 169.3472ms
+2026-10-24 14:39:58.911 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 182.2162ms
+2026-10-24 14:39:58.960 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:39:59.168 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 208.6231ms
+2026-10-24 14:40:13.816 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 35
+2026-10-24 14:40:14.123 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:40:14.181 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:40:14.358 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 14:40:14.409 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 215.2421ms
+2026-10-24 14:40:14.413 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:40:14.435 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 400 null application/problem+json; charset=utf-8 618.6867ms
+2026-10-24 14:40:22.298 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 38
+2026-10-24 14:40:22.335 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:40:22.344 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:40:22.382 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:40:34.053 +03:00 [INF] Executed DbCommand (152ms) [Parameters=[@depositDto_walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @depositDto_walletId
+2026-10-24 14:40:52.034 +03:00 [WRN] Withdrawal rejected because wallet was not found or is inactive. WalletId: 19
+2026-10-24 14:40:56.971 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 34568.8949ms.
+2026-10-24 14:40:56.978 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:40:57.015 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 34659.0187ms
+2026-10-24 14:40:57.020 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:40:57.036 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 200 null application/json; charset=utf-8 34738.0065ms
+2026-10-24 14:41:16.220 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 38
+2026-10-24 14:41:16.244 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:41:16.248 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:41:16.271 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:41:19.907 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[@depositDto_walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @depositDto_walletId
+2026-10-24 14:41:24.090 +03:00 [WRN] Withdrawal rejected because wallet was not found or is inactive. WalletId: 18
+2026-10-24 14:41:27.364 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 11087.6795ms.
+2026-10-24 14:41:27.370 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:41:27.373 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 11117.7353ms
+2026-10-24 14:41:27.376 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:41:27.380 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 200 null application/json; charset=utf-8 11159.8046ms
+2026-10-24 14:41:55.226 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/deposit - application/json 40
+2026-10-24 14:41:55.234 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:41:55.237 +03:00 [INF] Route matched with {action = "MakeDeposit", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MakeDepositAsync(iWallet.Application.DTOs.DepositDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:41:55.244 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:41:58.896 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[@depositDto_walletId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType]
+FROM [Wallets] AS [w]
+WHERE [w].[Id] = @depositDto_walletId
+2026-10-24 14:42:08.174 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p21='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p12='?' (DbType = DateTime2), @p13='?' (DbType = Boolean), @p14='?' (Size = 8000) (DbType = Binary), @p15='?' (Size = 8000) (DbType = Binary), @p16='?' (Size = 40), @p17='?' (DbType = DateTime2), @p18='?' (DbType = Int32), @p19='?' (Size = 12), @p20='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11, [CreatedAt] = @p12, [IsDeleted] = @p13, [PinHash] = @p14, [PinSalt] = @p15, [Status] = @p16, [UpdatedAt] = @p17, [UserId] = @p18, [WalletNumber] = @p19, [WalletType] = @p20
+OUTPUT 1
+WHERE [Id] = @p21;
+2026-10-24 14:42:10.995 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-24 14:42:11.794 +03:00 [INF] deposit amount: 6000 to wallet: 2007
+2026-10-24 14:42:17.799 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 22552.4222ms.
+2026-10-24 14:42:17.814 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:42:17.817 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API) in 22574.7932ms
+2026-10-24 14:42:17.823 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.MakeDepositAsync (iWallet.API)'
+2026-10-24 14:42:17.826 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/deposit - 200 null application/json; charset=utf-8 22600.7192ms
+2026-10-24 14:50:59.071 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:50:59.110 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 14:50:59.540 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:50:59.561 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 14:50:59.612 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 14:50:59.685 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 14:50:59.706 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 14:50:59.719 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 14:50:59.745 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 14:50:59.765 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 14:50:59.794 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 14:50:59.899 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 14:51:00.217 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 14:51:00.224 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 14:51:00.265 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 14:51:00.273 +03:00 [INF] Hosting environment: Development
+2026-10-24 14:51:00.281 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 14:51:00.757 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 14:51:01.115 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 381.5544ms
+2026-10-24 14:51:01.153 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 14:51:01.154 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 14:51:01.153 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 14:51:01.154 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 14:51:01.152 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 14:51:01.195 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 44.2935ms
+2026-10-24 14:51:01.195 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 44.1908ms
+2026-10-24 14:51:01.155 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 14:51:01.245 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 94.5453ms
+2026-10-24 14:51:01.247 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 14:51:01.248 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 97.2626ms
+2026-10-24 14:51:01.248 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 98.2616ms
+2026-10-24 14:51:01.276 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 120.9895ms
+2026-10-24 14:51:01.377 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 130.9959ms
+2026-10-24 14:51:01.420 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 14:51:01.606 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 186.0825ms
+2026-10-24 14:51:29.139 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 55
+2026-10-24 14:51:29.333 +03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (USER)
+2026-10-24 14:51:29.348 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-10-24 14:51:29.369 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 401 0 null 230.7204ms
+2026-10-24 14:52:00.834 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 55
+2026-10-24 14:52:00.860 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:52:00.944 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 14:52:01.052 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:52:01.908 +03:00 [INF] Executed DbCommand (151ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 14:52:02.562 +03:00 [INF] user Mosab registerd Successfly
+2026-10-24 14:52:02.671 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1605.0831ms.
+2026-10-24 14:52:02.690 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:52:02.738 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 1769.8281ms
+2026-10-24 14:52:02.744 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 14:52:02.763 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 1928.1488ms
+2026-10-24 14:56:17.123 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 55
+2026-10-24 14:56:17.243 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 14:56:17.262 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 14:56:17.352 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 14:56:17.365 +03:00 [INF] Starring Transfer Process. UserId: 19, ToAccount: W910505433, Amount: 4000
+2026-10-24 14:56:17.833 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[UserId] = @userId
+2026-10-24 14:56:18.207 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[@toAccountNumber='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[WalletNumber] = @toAccountNumber
+2026-10-24 14:56:18.275 +03:00 [INF] Executed DbCommand (26ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DailyLimit], [u].[PerTransactionLimit], [u].[UserId]
+FROM [UserLimits] AS [u]
+WHERE [u].[UserId] = @userId
+2026-10-24 14:56:18.679 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@p0='?' (Size = 20000) (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (Size = 5000) (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [UserLimits] ([DailyLimit], [PerTransactionLimit], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2);
+2026-10-24 14:56:18.882 +03:00 [INF] Executed DbCommand (33ms) [Parameters=[@userId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @tomorrow='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([t].[Amount]), 0.0)
+FROM [Transactions] AS [t]
+LEFT JOIN [Wallets] AS [w] ON [t].[FromWalletId] = [w].[Id]
+WHERE [w].[UserId] = @userId AND [t].[CreatedAt] >= @today AND [t].[CreatedAt] < @tomorrow AND [t].[Status] = N'Success'
+2026-10-24 14:56:18.896 +03:00 [INF] Database transaction start for transfer. FromWallet: W936056685, ToWallet: W910505433
+2026-10-24 14:56:19.111 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 14:56:19.159 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p12='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13
+OUTPUT 1
+WHERE [Id] = @p14;
+2026-10-24 14:56:19.244 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 14:56:19.264 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-24 14:56:19.284 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 14:56:19.307 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-24 14:56:19.338 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 14:56:19.375 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p12='?' (DbType = Int32), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 8000) (DbType = Binary), @p6='?' (Size = 8000) (DbType = Binary), @p7='?' (Size = 40), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?' (Size = 40), @p23='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Boolean), @p16='?' (Size = 8000) (DbType = Binary), @p17='?' (Size = 8000) (DbType = Binary), @p18='?' (Size = 40), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int32), @p21='?' (Size = 12), @p22='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [LedgerEntries] SET [UpdatedAt] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Wallets] SET [Balance] = @p2, [CreatedAt] = @p3, [IsDeleted] = @p4, [PinHash] = @p5, [PinSalt] = @p6, [Status] = @p7, [UpdatedAt] = @p8, [UserId] = @p9, [WalletNumber] = @p10, [WalletType] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13, [CreatedAt] = @p14, [IsDeleted] = @p15, [PinHash] = @p16, [PinSalt] = @p17, [Status] = @p18, [UpdatedAt] = @p19, [UserId] = @p20, [WalletNumber] = @p21, [WalletType] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+2026-10-24 14:56:19.388 +03:00 [INF] Transfer completed successfully. Reference: TRN-261024-27FF2B, Amount: 4000, Sender: W936056685, Receiver: W910505433
+2026-10-24 14:56:21.634 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 4278.6509ms.
+2026-10-24 14:56:21.641 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 14:56:21.645 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 4378.1351ms
+2026-10-24 14:56:21.647 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 14:56:21.650 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 200 null application/json; charset=utf-8 4526.8542ms
+2026-10-24 15:38:39.060 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 15:38:39.094 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-24 15:38:39.559 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 15:38:39.574 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-24 15:38:39.607 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-24 15:38:39.671 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-24 15:38:39.688 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-24 15:38:39.692 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-24 15:38:39.706 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-24 15:38:39.720 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-24 15:38:39.727 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-24 15:38:39.882 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-24 15:38:40.158 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-24 15:38:40.160 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-24 15:38:40.348 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-24 15:38:40.350 +03:00 [INF] Hosting environment: Development
+2026-10-24 15:38:40.351 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-24 15:38:40.619 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-24 15:38:40.901 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 314.0102ms
+2026-10-24 15:38:40.937 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-24 15:38:40.937 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-24 15:38:40.937 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-24 15:38:40.937 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-24 15:38:40.937 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-24 15:38:40.939 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-24 15:38:40.946 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 10.0698ms
+2026-10-24 15:38:40.959 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 22.8817ms
+2026-10-24 15:38:40.959 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 21.9877ms
+2026-10-24 15:38:40.959 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 23.0473ms
+2026-10-24 15:38:41.024 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-24 15:38:40.999 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 59.8952ms
+2026-10-24 15:38:40.997 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 60.3158ms
+2026-10-24 15:38:41.084 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 83.7138ms
+2026-10-24 15:38:41.116 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-24 15:38:41.257 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 141.0239ms
+2026-10-24 15:39:01.264 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 55
+2026-10-24 15:39:01.434 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 15:39:01.484 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-24 15:39:01.533 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 15:39:02.008 +03:00 [INF] Executed DbCommand (105ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-24 15:39:02.419 +03:00 [INF] user Mosab registerd Successfly
+2026-10-24 15:39:02.516 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 976.5773ms.
+2026-10-24 15:39:02.527 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 15:39:02.548 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 1057.035ms
+2026-10-24 15:39:02.551 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-24 15:39:02.582 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 1318.743ms
+2026-10-24 15:39:27.407 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 57
+2026-10-24 15:39:27.500 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 15:39:27.525 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 15:39:27.614 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 15:39:27.654 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 124.5147ms
+2026-10-24 15:39:27.659 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 15:39:27.662 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 400 null application/problem+json; charset=utf-8 255.6029ms
+2026-10-24 15:39:41.420 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 56
+2026-10-24 15:39:41.450 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 15:39:41.455 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 15:39:41.477 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-10-24 15:39:41.482 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 21.5028ms
+2026-10-24 15:39:41.486 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 15:39:41.491 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 400 null application/problem+json; charset=utf-8 71.6446ms
+2026-10-24 15:39:54.664 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 55
+2026-10-24 15:39:54.684 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 15:39:54.687 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-24 15:39:54.699 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) - Validation state: "Valid"
+2026-10-24 15:39:54.724 +03:00 [INF] Starring Transfer Process. UserId: 19, ToAccount: W910505433, Amount: 1000
+2026-10-24 15:39:55.041 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[UserId] = @userId
+2026-10-24 15:39:55.247 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@toAccountNumber='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[WalletNumber] = @toAccountNumber
+2026-10-24 15:39:55.270 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DailyLimit], [u].[PerTransactionLimit], [u].[UserId]
+FROM [UserLimits] AS [u]
+WHERE [u].[UserId] = @userId
+2026-10-24 15:39:55.444 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@userId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @tomorrow='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([t].[Amount]), 0.0)
+FROM [Transactions] AS [t]
+LEFT JOIN [Wallets] AS [w] ON [t].[FromWalletId] = [w].[Id]
+WHERE [w].[UserId] = @userId AND [t].[CreatedAt] >= @today AND [t].[CreatedAt] < @tomorrow AND [t].[Status] = N'Success'
+2026-10-24 15:39:55.578 +03:00 [INF] Database transaction start for transfer. FromWallet: W936056685, ToWallet: W910505433
+2026-10-24 15:39:55.897 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 15:39:55.954 +03:00 [INF] Executed DbCommand (39ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p12='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13
+OUTPUT 1
+WHERE [Id] = @p14;
+2026-10-24 15:39:56.074 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 15:39:56.089 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-24 15:39:56.104 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 15:39:56.108 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-24 15:39:56.125 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-24 15:39:56.163 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p12='?' (DbType = Int32), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 8000) (DbType = Binary), @p6='?' (Size = 8000) (DbType = Binary), @p7='?' (Size = 40), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?' (Size = 40), @p23='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Boolean), @p16='?' (Size = 8000) (DbType = Binary), @p17='?' (Size = 8000) (DbType = Binary), @p18='?' (Size = 40), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int32), @p21='?' (Size = 12), @p22='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [LedgerEntries] SET [UpdatedAt] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Wallets] SET [Balance] = @p2, [CreatedAt] = @p3, [IsDeleted] = @p4, [PinHash] = @p5, [PinSalt] = @p6, [Status] = @p7, [UpdatedAt] = @p8, [UserId] = @p9, [WalletNumber] = @p10, [WalletType] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13, [CreatedAt] = @p14, [IsDeleted] = @p15, [PinHash] = @p16, [PinSalt] = @p17, [Status] = @p18, [UpdatedAt] = @p19, [UserId] = @p20, [WalletNumber] = @p21, [WalletType] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+2026-10-24 15:39:56.191 +03:00 [INF] Transfer completed successfully. Reference: TRN-261024-54C90B, Amount: 1000, Sender: W936056685, Receiver: W910505433
+2026-10-24 15:39:57.258 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2555.0138ms.
+2026-10-24 15:39:57.268 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-24 15:39:57.270 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 2577.9911ms
+2026-10-24 15:39:57.272 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-24 15:39:57.281 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 200 null application/json; charset=utf-8 2616.5103ms

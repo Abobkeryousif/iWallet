@@ -5,7 +5,7 @@
         public static ServiceError InValidUserWallet() =>
           new(
               "Transaction.InValidUserWallet",
-              "Invalid Sender Wallet",
+              "Invalid User Wallet",
               ErrorType.Validation
               );
 
@@ -14,6 +14,13 @@
                 "Transaction.InsufficientBalance",
                 "Insufficient Balance from user wallet",
                 ErrorType.Conflict
+                );
+
+        public static ServiceError InvalidBeneficieryName() =>
+            new(
+                "Transaction.InvalidBeneficieryName",
+                "invalid beneficiery name",
+                ErrorType.NotFound
                 );
     }
 }

@@ -1,4 +1,5 @@
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -93,6 +94,7 @@ builder.Services.AddOpenTelemetry()
     .WithTracing(tracerProvider=>
     {
         tracerProvider
+        .AddSource(TransactionActivitySource.SourceName)
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
         .AddSqlClientInstrumentation()
@@ -101,11 +103,12 @@ builder.Services.AddOpenTelemetry()
     .WithMetrics(meterProvider=>
     {
         meterProvider
+            .AddMeter(iWalletBusinessMetrics.meterName)
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddRuntimeInstrumentation()
-            .AddSqlClientInstrumentation()
-            .AddConsoleExporter();
+            .AddSqlClientInstrumentation();
+            //.AddConsoleExporter();
     });
 
 
@@ -118,8 +121,6 @@ if (app.Configuration.GetValue<bool>("Database:Enabled"))
     await app.Services
         .ApplyMigrationAsync<ApplicationDbContext>();
 }
-
-await app.RunAsync();
 
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

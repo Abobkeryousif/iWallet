@@ -1,0 +1,531 @@
+2026-10-25 10:11:33.133 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 10:11:33.269 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 10:11:34.999 +03:00 [INF] Executed DbCommand (94ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 10:11:35.091 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-25 10:11:35.216 +03:00 [INF] Executed DbCommand (106ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-25 10:11:35.449 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-25 10:11:35.518 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 10:11:35.535 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-25 10:11:35.567 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-25 10:11:35.606 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-25 10:11:35.624 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-25 10:11:36.137 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-25 10:11:37.379 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-25 10:11:37.382 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-25 10:11:37.531 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-25 10:11:37.534 +03:00 [INF] Hosting environment: Development
+2026-10-25 10:11:37.536 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-25 10:11:38.852 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-25 10:11:39.424 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 622.2375ms
+2026-10-25 10:11:39.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-25 10:11:39.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-25 10:11:39.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-25 10:11:39.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-25 10:11:39.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-25 10:11:39.477 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 18.718ms
+2026-10-25 10:11:39.501 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 42.5756ms
+2026-10-25 10:11:39.504 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 45.8551ms
+2026-10-25 10:11:39.511 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 52.7654ms
+2026-10-25 10:11:39.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-25 10:11:39.519 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 60.922ms
+2026-10-25 10:11:39.556 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-25 10:11:39.590 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 131.7983ms
+2026-10-25 10:11:39.710 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 153.7694ms
+2026-10-25 10:11:39.791 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-25 10:11:40.033 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 242.1141ms
+2026-10-25 10:11:56.850 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 76
+2026-10-25 10:11:57.052 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-25 10:11:57.127 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-25 10:11:57.284 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-25 10:11:58.363 +03:00 [INF] Executed DbCommand (149ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-25 10:11:59.079 +03:00 [INF] user abdallah registerd Successfly
+2026-10-25 10:11:59.209 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1910.5851ms.
+2026-10-25 10:11:59.233 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-25 10:11:59.274 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 2109.5078ms
+2026-10-25 10:11:59.280 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-25 10:11:59.316 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 2467.2042ms
+2026-10-25 10:12:24.469 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 65
+2026-10-25 10:12:24.671 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 10:12:24.701 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-25 10:12:24.808 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) - Validation state: "Valid"
+2026-10-25 10:12:24.828 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 90
+2026-10-25 10:12:25.337 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[UserId] = @userId
+2026-10-25 10:12:25.729 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@toAccountNumber='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[WalletNumber] = @toAccountNumber
+2026-10-25 10:12:25.781 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DailyLimit], [u].[PerTransactionLimit], [u].[UserId]
+FROM [UserLimits] AS [u]
+WHERE [u].[UserId] = @userId
+2026-10-25 10:12:25.938 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@userId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @tomorrow='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([t].[Amount]), 0.0)
+FROM [Transactions] AS [t]
+LEFT JOIN [Wallets] AS [w] ON [t].[FromWalletId] = [w].[Id]
+WHERE [w].[UserId] = @userId AND [t].[CreatedAt] >= @today AND [t].[CreatedAt] < @tomorrow AND [t].[Status] = N'Success'
+2026-10-25 10:12:26.117 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-10-25 10:12:26.536 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 10:12:26.581 +03:00 [INF] Executed DbCommand (31ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p12='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13
+OUTPUT 1
+WHERE [Id] = @p14;
+2026-10-25 10:12:26.709 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 10:12:26.735 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 10:12:26.753 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 10:12:26.762 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 10:12:26.796 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 10:12:26.832 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p12='?' (DbType = Int32), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 8000) (DbType = Binary), @p6='?' (Size = 8000) (DbType = Binary), @p7='?' (Size = 40), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?' (Size = 40), @p23='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Boolean), @p16='?' (Size = 8000) (DbType = Binary), @p17='?' (Size = 8000) (DbType = Binary), @p18='?' (Size = 40), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int32), @p21='?' (Size = 12), @p22='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [LedgerEntries] SET [UpdatedAt] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Wallets] SET [Balance] = @p2, [CreatedAt] = @p3, [IsDeleted] = @p4, [PinHash] = @p5, [PinSalt] = @p6, [Status] = @p7, [UpdatedAt] = @p8, [UserId] = @p9, [WalletNumber] = @p10, [WalletType] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13, [CreatedAt] = @p14, [IsDeleted] = @p15, [PinHash] = @p16, [PinSalt] = @p17, [Status] = @p18, [UpdatedAt] = @p19, [UserId] = @p20, [WalletNumber] = @p21, [WalletType] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+2026-10-25 10:12:26.860 +03:00 [INF] Transfer completed successfully. Reference: TRN-261025-FFDF91, Amount: 90, Sender: W720980850, Receiver: W437089894
+2026-10-25 10:12:28.197 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 3385.3477ms.
+2026-10-25 10:12:28.201 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-25 10:12:28.204 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 3498.8962ms
+2026-10-25 10:12:28.209 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 10:12:28.213 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 200 null application/json; charset=utf-8 3744.5027ms
+2026-10-25 11:19:54.586 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 11:19:54.628 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 11:19:55.217 +03:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 11:19:55.239 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-25 11:19:55.290 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-25 11:19:55.382 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-25 11:19:55.411 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 11:19:55.426 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-25 11:19:55.474 +03:00 [INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-25 11:19:55.498 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-25 11:19:55.512 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-25 11:19:55.663 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-25 11:19:56.335 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-25 11:19:56.337 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-25 11:19:56.629 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-25 11:19:56.632 +03:00 [INF] Hosting environment: Development
+2026-10-25 11:19:56.635 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-25 11:19:57.159 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-25 11:19:57.628 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 520.5555ms
+2026-10-25 11:19:57.659 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-25 11:19:57.694 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-25 11:19:57.663 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-25 11:19:57.663 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-25 11:19:57.659 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-25 11:19:57.738 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-25 11:19:57.788 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 93.2653ms
+2026-10-25 11:19:57.788 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 124.8176ms
+2026-10-25 11:19:57.797 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 133.969ms
+2026-10-25 11:19:57.801 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 142.5951ms
+2026-10-25 11:19:57.812 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 153.414ms
+2026-10-25 11:19:57.828 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 89.5105ms
+2026-10-25 11:19:57.842 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-25 11:19:58.050 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 208.0627ms
+2026-10-25 11:19:58.113 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-25 11:19:58.335 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 222.1684ms
+2026-10-25 11:20:03.723 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/user/login - application/json 76
+2026-10-25 11:20:04.052 +03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '10/25/2026 7:26:59 AM', Current time (UTC): '10/25/2026 8:20:04 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-10-25 11:20:04.062 +03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '10/25/2026 7:26:59 AM', Current time (UTC): '10/25/2026 8:20:04 AM'.
+2026-10-25 11:20:04.079 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-25 11:20:04.176 +03:00 [INF] Route matched with {action = "UserLogin", controller = "user"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserLoginAsync(iWallet.Application.DTOs.LoginDto) on controller iWallet.API.Controllers.userController (iWallet.API).
+2026-10-25 11:20:04.295 +03:00 [INF] Executing action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) - Validation state: "Valid"
+2026-10-25 11:20:05.223 +03:00 [INF] Executed DbCommand (153ms) [Parameters=[@loginDto_email='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[Email], [u].[Role], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @loginDto_email
+2026-10-25 11:20:05.863 +03:00 [INF] user abdallah registerd Successfly
+2026-10-25 11:20:05.884 +03:00 [INF] Executed action method iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1574.6359ms.
+2026-10-25 11:20:05.909 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-25 11:20:05.946 +03:00 [INF] Executed action iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API) in 1752.9496ms
+2026-10-25 11:20:05.957 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.userController.UserLoginAsync (iWallet.API)'
+2026-10-25 11:20:05.998 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/user/login - 200 null application/json; charset=utf-8 2275.1463ms
+2026-10-25 11:20:22.418 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 65
+2026-10-25 11:20:22.486 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 11:20:22.533 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-25 11:20:22.669 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) - Validation state: "Valid"
+2026-10-25 11:20:22.686 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 90
+2026-10-25 11:20:22.973 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[UserId] = @userId
+2026-10-25 11:20:23.211 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@toAccountNumber='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[WalletNumber] = @toAccountNumber
+2026-10-25 11:20:23.260 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DailyLimit], [u].[PerTransactionLimit], [u].[UserId]
+FROM [UserLimits] AS [u]
+WHERE [u].[UserId] = @userId
+2026-10-25 11:20:23.394 +03:00 [INF] Executed DbCommand (59ms) [Parameters=[@userId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @tomorrow='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([t].[Amount]), 0.0)
+FROM [Transactions] AS [t]
+LEFT JOIN [Wallets] AS [w] ON [t].[FromWalletId] = [w].[Id]
+WHERE [w].[UserId] = @userId AND [t].[CreatedAt] >= @today AND [t].[CreatedAt] < @tomorrow AND [t].[Status] = N'Success'
+2026-10-25 11:20:23.484 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-10-25 11:20:23.701 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:20:23.796 +03:00 [INF] Executed DbCommand (79ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p12='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13
+OUTPUT 1
+WHERE [Id] = @p14;
+2026-10-25 11:20:23.874 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:20:23.891 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 11:20:23.904 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:20:23.912 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 11:20:23.935 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:20:23.969 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p12='?' (DbType = Int32), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 8000) (DbType = Binary), @p6='?' (Size = 8000) (DbType = Binary), @p7='?' (Size = 40), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?' (Size = 40), @p23='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Boolean), @p16='?' (Size = 8000) (DbType = Binary), @p17='?' (Size = 8000) (DbType = Binary), @p18='?' (Size = 40), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int32), @p21='?' (Size = 12), @p22='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [LedgerEntries] SET [UpdatedAt] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Wallets] SET [Balance] = @p2, [CreatedAt] = @p3, [IsDeleted] = @p4, [PinHash] = @p5, [PinSalt] = @p6, [Status] = @p7, [UpdatedAt] = @p8, [UserId] = @p9, [WalletNumber] = @p10, [WalletType] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13, [CreatedAt] = @p14, [IsDeleted] = @p15, [PinHash] = @p16, [PinSalt] = @p17, [Status] = @p18, [UpdatedAt] = @p19, [UserId] = @p20, [WalletNumber] = @p21, [WalletType] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+2026-10-25 11:20:25.008 +03:00 [INF] Transfer completed successfully. Reference: TRN-261025-0D60C8, Amount: 90, Sender: W720980850, Receiver: W437089894
+2026-10-25 11:20:25.028 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2352.1127ms.
+2026-10-25 11:20:25.034 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-25 11:20:25.042 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 2490.7444ms
+2026-10-25 11:20:25.049 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 11:20:25.054 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 200 null application/json; charset=utf-8 2636.566ms
+2026-10-25 11:22:27.240 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 11:22:27.272 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 11:22:27.653 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 11:22:27.667 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-25 11:22:27.708 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-25 11:22:27.773 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-25 11:22:27.791 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 11:22:27.794 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-25 11:22:27.805 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-25 11:22:27.815 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-25 11:22:27.824 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-25 11:22:27.923 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-25 11:22:28.223 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-25 11:22:28.230 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-25 11:22:28.435 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-25 11:22:28.441 +03:00 [INF] Hosting environment: Development
+2026-10-25 11:22:28.446 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-25 11:22:28.689 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-25 11:22:28.842 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 168.4358ms
+2026-10-25 11:22:28.870 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-25 11:22:28.870 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-25 11:22:28.870 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-25 11:22:28.901 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 31.6398ms
+2026-10-25 11:22:28.908 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 38.595ms
+2026-10-25 11:22:28.924 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 54.3279ms
+2026-10-25 11:22:28.964 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-25 11:22:28.965 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-25 11:22:28.969 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-25 11:22:29.025 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 62.0421ms
+2026-10-25 11:22:29.033 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-25 11:22:29.041 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 76.2555ms
+2026-10-25 11:22:29.067 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 99.0593ms
+2026-10-25 11:22:29.124 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 91.2221ms
+2026-10-25 11:22:29.173 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-25 11:22:29.247 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 74.366ms
+2026-10-25 11:22:34.450 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 65
+2026-10-25 11:22:34.765 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 11:22:34.832 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-25 11:22:35.032 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) - Validation state: "Valid"
+2026-10-25 11:22:35.055 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 90
+2026-10-25 11:22:35.985 +03:00 [INF] Executed DbCommand (90ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[UserId] = @userId
+2026-10-25 11:22:36.206 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@toAccountNumber='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[WalletNumber] = @toAccountNumber
+2026-10-25 11:22:36.231 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DailyLimit], [u].[PerTransactionLimit], [u].[UserId]
+FROM [UserLimits] AS [u]
+WHERE [u].[UserId] = @userId
+2026-10-25 11:22:36.324 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[@userId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @tomorrow='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([t].[Amount]), 0.0)
+FROM [Transactions] AS [t]
+LEFT JOIN [Wallets] AS [w] ON [t].[FromWalletId] = [w].[Id]
+WHERE [w].[UserId] = @userId AND [t].[CreatedAt] >= @today AND [t].[CreatedAt] < @tomorrow AND [t].[Status] = N'Success'
+2026-10-25 11:22:36.412 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-10-25 11:22:36.615 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:22:36.657 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p12='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13
+OUTPUT 1
+WHERE [Id] = @p14;
+2026-10-25 11:22:36.736 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:22:36.751 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 11:22:36.762 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:22:36.769 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 11:22:36.801 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:22:36.827 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p12='?' (DbType = Int32), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 8000) (DbType = Binary), @p6='?' (Size = 8000) (DbType = Binary), @p7='?' (Size = 40), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?' (Size = 40), @p23='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Boolean), @p16='?' (Size = 8000) (DbType = Binary), @p17='?' (Size = 8000) (DbType = Binary), @p18='?' (Size = 40), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int32), @p21='?' (Size = 12), @p22='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [LedgerEntries] SET [UpdatedAt] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Wallets] SET [Balance] = @p2, [CreatedAt] = @p3, [IsDeleted] = @p4, [PinHash] = @p5, [PinSalt] = @p6, [Status] = @p7, [UpdatedAt] = @p8, [UserId] = @p9, [WalletNumber] = @p10, [WalletType] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13, [CreatedAt] = @p14, [IsDeleted] = @p15, [PinHash] = @p16, [PinSalt] = @p17, [Status] = @p18, [UpdatedAt] = @p19, [UserId] = @p20, [WalletNumber] = @p21, [WalletType] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+2026-10-25 11:22:37.808 +03:00 [INF] Transfer completed successfully. Reference: TRN-261025-3954A9, Amount: 90, Sender: W720980850, Receiver: W437089894
+2026-10-25 11:22:37.828 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2784.353ms.
+2026-10-25 11:22:37.844 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-25 11:22:37.873 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 3027.4763ms
+2026-10-25 11:22:37.879 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 11:22:37.898 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 200 null application/json; charset=utf-8 3448.7995ms
+2026-10-25 11:26:07.275 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 11:26:07.317 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-25 11:26:07.733 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 11:26:07.757 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-10-25 11:26:07.811 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-10-25 11:26:07.886 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-10-25 11:26:07.907 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-10-25 11:26:07.911 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-10-25 11:26:07.942 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-10-25 11:26:07.963 +03:00 [INF] No migrations were applied. The database is already up to date.
+2026-10-25 11:26:08.003 +03:00 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-10-25 11:26:08.137 +03:00 [INF] User profile is available. Using 'C:\Users\Mohamed Hasouna\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-10-25 11:26:08.521 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-25 11:26:08.522 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-25 11:26:08.730 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-25 11:26:08.732 +03:00 [INF] Hosting environment: Development
+2026-10-25 11:26:08.733 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
+2026-10-25 11:26:09.056 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.html - null null
+2026-10-25 11:26:09.392 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.html - 304 null null 361.6714ms
+2026-10-25 11:26:09.427 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - null null
+2026-10-25 11:26:09.427 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - null null
+2026-10-25 11:26:09.428 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.js - null null
+2026-10-25 11:26:09.427 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - null null
+2026-10-25 11:26:09.456 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.js - 304 null null 27.6514ms
+2026-10-25 11:26:09.427 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - null null
+2026-10-25 11:26:09.427 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/index.css - null null
+2026-10-25 11:26:09.470 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui.css - 304 null null 43.8124ms
+2026-10-25 11:26:09.470 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-standalone-preset.js - 304 null null 43.6287ms
+2026-10-25 11:26:09.489 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 62.8222ms
+2026-10-25 11:26:09.530 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/index.css - 304 null null 103.5423ms
+2026-10-25 11:26:09.531 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/_vs/browserLink - null null
+2026-10-25 11:26:09.531 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/swagger-ui-bundle.js - 304 null null 104.1166ms
+2026-10-25 11:26:09.654 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/_vs/browserLink - 200 null text/javascript; charset=UTF-8 123.3117ms
+2026-10-25 11:26:09.693 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - null null
+2026-10-25 11:26:09.882 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7111/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 188.6184ms
+2026-10-25 11:26:12.850 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7111/api/transaction/transfer - application/json 65
+2026-10-25 11:26:13.194 +03:00 [INF] Executing endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 11:26:13.278 +03:00 [INF] Route matched with {action = "Transfer", controller = "transaction"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] TransferAsync(iWallet.Application.DTOs.TransferTransactionDto) on controller iWallet.API.Controllers.transactionController (iWallet.API).
+2026-10-25 11:26:13.471 +03:00 [INF] Executing action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) - Validation state: "Valid"
+2026-10-25 11:26:35.121 +03:00 [INF] Starring Transfer Process. UserId: 8, ToAccount: W437089894, Amount: 90
+2026-10-25 11:26:38.063 +03:00 [INF] Executed DbCommand (190ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[UserId] = @userId
+2026-10-25 11:26:40.698 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@toAccountNumber='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[Balance], [w].[CreatedAt], [w].[IsDeleted], [w].[PinHash], [w].[PinSalt], [w].[Status], [w].[UpdatedAt], [w].[UserId], [w].[WalletNumber], [w].[WalletType], [u].[Id], [u].[BirthDate], [u].[City], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[IsDeleted], [u].[LastName], [u].[Password], [u].[PhoneNumber], [u].[ProfileImageUrl], [u].[Role], [u].[UpdatedAt]
+FROM [Wallets] AS [w]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [w].[WalletNumber] = @toAccountNumber
+2026-10-25 11:27:04.798 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DailyLimit], [u].[PerTransactionLimit], [u].[UserId]
+FROM [UserLimits] AS [u]
+WHERE [u].[UserId] = @userId
+2026-10-25 11:27:05.788 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@userId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @tomorrow='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([t].[Amount]), 0.0)
+FROM [Transactions] AS [t]
+LEFT JOIN [Wallets] AS [w] ON [t].[FromWalletId] = [w].[Id]
+WHERE [w].[UserId] = @userId AND [t].[CreatedAt] >= @today AND [t].[CreatedAt] < @tomorrow AND [t].[Status] = N'Success'
+2026-10-25 11:27:07.514 +03:00 [INF] Database transaction start for transfer. FromWallet: W720980850, ToWallet: W437089894
+2026-10-25 11:27:11.060 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:27:11.116 +03:00 [INF] Executed DbCommand (41ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime2), @p2='?' (Size = 60), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p5='?' (Size = 25), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p12='?' (DbType = Int32), @p11='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Transactions] ([Amount], [CreatedAt], [Description], [FromWalletId], [IsDeleted], [Reference], [Status], [ToWalletId], [TransactionType], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+UPDATE [Wallets] SET [Balance] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13
+OUTPUT 1
+WHERE [Id] = @p14;
+2026-10-25 11:27:12.866 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:27:12.907 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 11:27:14.171 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:27:14.210 +03:00 [INF] Executed DbCommand (35ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Boolean), @p4='?' (Size = 300), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [LedgerEntries] ([CreatedAt], [Credit], [Debit], [IsDeleted], [Particulars], [TransactionId], [UpdatedAt], [WalletId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-10-25 11:27:16.516 +03:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-25 11:27:16.575 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p12='?' (DbType = Int32), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 8000) (DbType = Binary), @p6='?' (Size = 8000) (DbType = Binary), @p7='?' (Size = 40), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?' (Size = 40), @p23='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Boolean), @p16='?' (Size = 8000) (DbType = Binary), @p17='?' (Size = 8000) (DbType = Binary), @p18='?' (Size = 40), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int32), @p21='?' (Size = 12), @p22='?' (Size = 40)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [LedgerEntries] SET [UpdatedAt] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Wallets] SET [Balance] = @p2, [CreatedAt] = @p3, [IsDeleted] = @p4, [PinHash] = @p5, [PinSalt] = @p6, [Status] = @p7, [UpdatedAt] = @p8, [UserId] = @p9, [WalletNumber] = @p10, [WalletType] = @p11
+OUTPUT 1
+WHERE [Id] = @p12;
+UPDATE [Wallets] SET [Balance] = @p13, [CreatedAt] = @p14, [IsDeleted] = @p15, [PinHash] = @p16, [PinSalt] = @p17, [Status] = @p18, [UpdatedAt] = @p19, [UserId] = @p20, [WalletNumber] = @p21, [WalletType] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+2026-10-25 11:27:24.379 +03:00 [INF] Transfer completed successfully. Reference: TRN-261025-F89DA0, Amount: 90, Sender: W720980850, Receiver: W437089894
+2026-10-25 11:27:46.405 +03:00 [INF] Executed action method iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 92917.2961ms.
+2026-10-25 11:27:46.427 +03:00 [INF] Executing OkObjectResult, writing value of type 'iWallet.Application.Common.Result`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-10-25 11:27:46.462 +03:00 [INF] Executed action iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API) in 93168.716ms
+2026-10-25 11:27:46.467 +03:00 [INF] Executed endpoint 'iWallet.API.Controllers.transactionController.TransferAsync (iWallet.API)'
+2026-10-25 11:27:46.508 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7111/api/transaction/transfer - 200 null application/json; charset=utf-8 93658.0639ms
