@@ -22,8 +22,8 @@ namespace iWallet.Application.DTOs
         public decimal amount { get; set; }
     }
 
-    public record WithdrawalDto(int walletId,decimal amount);
+    public record WithdrawalDto(int walletId, decimal amount);
 
-    public record DepositDto (int walletId,decimal amount);
+    public record DepositDto (int walletId, decimal amount);
     
 }

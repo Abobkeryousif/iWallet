@@ -1,4 +1,8 @@
 ﻿
+using iWallet.Application.Helper;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+
 namespace iWallet.Infrastructure.Implemention
 {
     public class UserRepository : IUserRepository, IIsExistMethod<User>
@@ -7,13 +11,16 @@ namespace iWallet.Infrastructure.Implemention
         private readonly ISendEmailService _sendEmail;
         private IOtpRepository _otpRepository;
         private readonly ITokenService _tokenService;
+        private readonly ILogger<UserRepository> _logger;
+        const string module = "user";
 
-        public UserRepository(ApplicationDbContext context , ISendEmailService sendEmail , IOtpRepository otpRepository, ITokenService tokenService)
+        public UserRepository(ILogger<UserRepository> logger ,ApplicationDbContext context , ISendEmailService sendEmail , IOtpRepository otpRepository, ITokenService tokenService)
         {
             _context = context;
             _sendEmail = sendEmail;
             _otpRepository = otpRepository;
             _tokenService = tokenService;
+            _logger = logger;
         }
 
         //public string CompleteRegister(string Otp)
@@ -84,9 +91,11 @@ namespace iWallet.Infrastructure.Implemention
 
         //}
 
-        public async Task<string> UserLoginAsync(LoginDto loginDto)
+        public async Task<Result<string>> UserLoginAsync(LoginDto loginDto)
         {
-            
+            Stopwatch sw = Stopwatch.StartNew();
+            const string operation = "login";
+
             var loginUser = await _context.Users
                 .AsNoTracking()
                 .Where(u => u.Email == loginDto.email)
@@ -101,23 +110,41 @@ namespace iWallet.Infrastructure.Implemention
                 .FirstOrDefaultAsync();
 
             if (loginUser == null)
-                throw new Exception("invalid email or password");
+            {
+                _logger.LogWarning("invalid email or password");
+                BusinessMetricsHelper.RecordBusinessOperation(module, operation, "failure");
+
+                return Result<string>.Failure(UserErrors.InValidEmailOrPassword());
+            }
 
             var checkUserPassword = BCrypt.Net.BCrypt.Verify(loginDto.password, loginUser.Password);
             if (!checkUserPassword)
-                throw new Exception("invalid email or password");
+            {
+                _logger.LogWarning("invalid email or password");
+                BusinessMetricsHelper.RecordBusinessOperation(module, operation, "failure");
+
+                return Result<string>.Failure(UserErrors.InValidEmailOrPassword());
+            }
 
             var token = _tokenService.GenerateJwtToken(loginUser.Id, loginUser.Email, loginUser.Role);
             _tokenService.WriteTokenToCookie("ACCESS_TOKEN", token, DateTime.UtcNow.AddMinutes(15));
 
-            return $"Welcome back: {loginUser.FirstName}";
+            _logger.LogInformation("user {FirstName} registerd Successfly", loginUser.FirstName);
+            BusinessMetricsHelper.RecordBusinessOperation(module, operation, "success");
+            BusinessMetricsHelper.RecordBusinessOperationDuration(module, operation, sw.ElapsedMilliseconds);
+
+            return Result<string>.Success($"welcome back!");
         }
 
         public async Task<string> UserRegister(UserDto userDto)
         {
+
             var checkUserIsExist = IsExist(u => u.Email == userDto.Email);
             if (checkUserIsExist)
-                throw new ArgumentException("this user already added");
+            {
+                _logger.LogWarning("this user email already used");
+                throw new Exception("user already added");
+            }
 
             var encriptedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
 

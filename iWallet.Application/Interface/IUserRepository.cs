@@ -6,7 +6,7 @@ namespace iWallet.Application.Interface
         Task<string> UserRegister(UserDto userDto);
         //string CompleteRegister(string Otp);
 
-        Task<string> UserLoginAsync (LoginDto loginDto);
+        Task<Result<string>> UserLoginAsync (LoginDto loginDto);
         //string ResetEmail (int id ,UpdateUserEmailDto updateUserEmail);
         Task<List<GetUsersDto>> GetAllUsers();
     }
