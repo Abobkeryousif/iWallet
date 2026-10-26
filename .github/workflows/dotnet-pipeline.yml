@@ -69,12 +69,10 @@ jobs:
                 
 
     containerization:
+      if: github.event_name != 'pull_request'
       needs: build-app
       runs-on: ubuntu-latest
       timeout-minutes: 8
-      # permissions:
-      #  contents: read
-      #  packages: write
       
       outputs:
         image: ${{ steps.set-image.outputs.image }}
@@ -97,11 +95,10 @@ jobs:
 
 
         - name: build and push image to ghcr
-          continue-on-error: true
           uses: docker/build-push-action@v7.1.0
           with:
             context: .
-            file: ./iWallet.API/Dockerfile
+            file: ./Observability/dockerfile
             push: true
             tags: |
                ghcr.io/${{ env.REPO }}:latest
@@ -117,10 +114,10 @@ jobs:
 
           
     deploy-gitops:
+      if: github.event_name != 'pull_request'
       needs: containerization
       runs-on: ubuntu-latest
       timeout-minutes: 5
-      continue-on-error: true
       steps:
         - name: checkout repo code 
           run: |
