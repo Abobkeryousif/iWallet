@@ -101,7 +101,7 @@ jobs:
           uses: docker/build-push-action@v7.1.0
           with:
             context: .
-            file: ./iWallet.API/Dockerfile
+            file: ./Observability/dockerfile
             push: true
             tags: |
                ghcr.io/${{ env.REPO }}:latest
