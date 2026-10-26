@@ -69,12 +69,10 @@ jobs:
                 
 
     containerization:
+      if: github.event_name != 'pull_request'
       needs: build-app
       runs-on: ubuntu-latest
       timeout-minutes: 8
-      # permissions:
-      #  contents: read
-      #  packages: write
       
       outputs:
         image: ${{ steps.set-image.outputs.image }}
@@ -116,6 +114,7 @@ jobs:
 
           
     deploy-gitops:
+      if: github.event_name != 'pull_request'
       needs: containerization
       runs-on: ubuntu-latest
       timeout-minutes: 5
