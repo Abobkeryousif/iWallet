@@ -3,6 +3,7 @@
     <File Path=".env" />
     <File Path="docker-compose.yaml" />
     <File Path="dockerfile" />
+    <File Path="otel-collector-config.yaml" />
   </Folder>
   <Project Path="iWallet.API/iWallet.API.csproj" />
   <Project Path="iWallet.Application/iWallet.Application.csproj" />

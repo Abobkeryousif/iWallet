@@ -89,6 +89,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(connection=>
 
 
 //opentelemetry configuration
+const string otlp_endpoint_url = "http://otel-collector:4317";
+
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resourceBuilder=> resourceBuilder.AddService("iWallet", "2.0"))
     .WithTracing(tracerProvider=>
@@ -98,7 +100,11 @@ builder.Services.AddOpenTelemetry()
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
         .AddSqlClientInstrumentation()
-        .AddConsoleExporter();
+        .AddOtlpExporter(options=>
+        {
+            options.Endpoint = new Uri(otlp_endpoint_url);
+        });
+
     })
     .WithMetrics(meterProvider=>
     {
@@ -108,7 +114,6 @@ builder.Services.AddOpenTelemetry()
             .AddHttpClientInstrumentation()
             .AddRuntimeInstrumentation()
             .AddSqlClientInstrumentation();
-            //.AddConsoleExporter();
     });
 
 

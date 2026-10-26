@@ -71,7 +71,7 @@ namespace iWallet.Infrastructure.Implemention
 
         public bool IsExist(Expression<Func<User, bool>> filter = null)
         {
-            return _context.Users.Any(filter);
+            return _context.Users.AsNoTracking().Any(filter);
         }
 
         //public string ResetEmail(int id , UpdateUserEmailDto updateUserEmail)
@@ -139,11 +139,11 @@ namespace iWallet.Infrastructure.Implemention
         public async Task<string> UserRegister(UserDto userDto)
         {
 
-            var checkUserIsExist = IsExist(u => u.Email == userDto.Email);
+            var checkUserIsExist = IsExist(u => u.Email == userDto.Email || u.PhoneNumber == userDto.PhoneNumber);
             if (checkUserIsExist)
             {
-                _logger.LogWarning("this user email already used");
-                throw new Exception("user already added");
+                _logger.LogWarning("user email or phone number already used");
+                throw new Exception("user email or phone number already used");
             }
 
             var encriptedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);

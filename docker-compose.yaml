@@ -21,12 +21,12 @@ services:
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: iwallet-Database
+    container_name: iwallet-database
 
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD}
-      
+
 
     ports:
       - 1433:1433
@@ -42,7 +42,24 @@ services:
       - redis-data:/data
     restart: unless-stopped
 
-    
+
+  otel-collector:
+     image: otel/opentelemetry-collector-contrib
+     container_name: otel-collector-container
+
+     volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
+     
+     ports:
+       - "4317:4317"
+       - "4318:4318"
+       - "13133:13133"
+
+     command:
+       - "--config=/etc/otelcol-contrib/config.yaml"
+
+
+
   # prometheus:
   #   image: prom/prometheus
   #   restart: always
