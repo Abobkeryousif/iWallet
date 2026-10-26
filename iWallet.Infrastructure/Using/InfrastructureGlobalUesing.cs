@@ -25,7 +25,6 @@ global using QuestPDF.Fluent;
 global using QuestPDF.Helpers;
 global using QuestPDF.Infrastructure;
 global using Serilog;
-global using iWallet.Application.iWalletCustomMetrics;
 global using iWallet.Infrastructure.Implementation;
 global using iWallet.Application.Common;
 global using iWallet.Application.Errors;
@@ -33,3 +32,6 @@ global using iWallet.Application.Helper;
 global using Microsoft.Extensions.Logging;
 global using System.Diagnostics;
 global using iWallet.Application.Observability.CustomTraces;
+
+
+// test test
