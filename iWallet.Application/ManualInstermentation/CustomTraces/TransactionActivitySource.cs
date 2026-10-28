@@ -1,5 +1,5 @@
 ﻿
-namespace iWallet.Application.Observability.CustomTraces
+namespace iWallet.Application.ManualInstermentation.CustomTraces
 {
     public class TransactionActivitySource
     {

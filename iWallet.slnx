@@ -1,10 +1,12 @@
+
 <Solution>
   <Folder Name="/Observability/">
-    <File Path=".env" />
-    <File Path="docker-compose.yaml" />
-    <File Path="dockerfile" />
+    <File Path="Observability/.env" />
+    <File Path="Observability/docker-compose.yaml" />
+    <File Path="Observability/dockerfile" />
     <File Path="otel-collector-config.yaml" />
   </Folder>
+
   <Project Path="iWallet.API/iWallet.API.csproj" />
   <Project Path="iWallet.Application/iWallet.Application.csproj" />
   <Project Path="iWallet.Domain/iWallet.Domain.csproj" />

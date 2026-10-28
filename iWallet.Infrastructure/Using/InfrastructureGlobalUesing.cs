@@ -31,7 +31,8 @@ global using iWallet.Application.Errors;
 global using iWallet.Application.Helper;
 global using Microsoft.Extensions.Logging;
 global using System.Diagnostics;
-global using iWallet.Application.Observability.CustomTraces;
+global using iWallet.Application.ManualInstermentation.CustomTraces;
+global using iWallet.Application.ManualInstermentation.iWalletBusinessMetrics;
 
 
 // test test

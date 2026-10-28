@@ -6,5 +6,5 @@ global using Prometheus;
 global using FluentValidation;
 global using iWallet.Application.Common;
 global using System.Diagnostics.Metrics;
-global using iWallet.Application.Observability.iWalletBusinessMetrics;
+global using iWallet.Application.ManualInstermentation.iWalletBusinessMetrics;
 global using System.Diagnostics;

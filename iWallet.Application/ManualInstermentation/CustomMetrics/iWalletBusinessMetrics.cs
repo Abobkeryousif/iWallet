@@ -1,5 +1,5 @@
 ﻿
-namespace iWallet.Application.Observability.iWalletBusinessMetrics
+namespace iWallet.Application.ManualInstermentation.iWalletBusinessMetrics
 {
     public static class iWalletBusinessMetrics
     {

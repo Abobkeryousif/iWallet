@@ -24,5 +24,5 @@ global using System.Text.Json.Serialization;
 global using OpenTelemetry.Resources;
 global using OpenTelemetry.Trace;
 global using OpenTelemetry.Metrics;
-global using iWallet.Application.Observability.iWalletBusinessMetrics;
-global using iWallet.Application.Observability.CustomTraces;
+global using iWallet.Application.ManualInstermentation.iWalletBusinessMetrics;
+global using iWallet.Application.ManualInstermentation.CustomTraces;
