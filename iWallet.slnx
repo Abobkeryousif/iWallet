@@ -7,8 +7,10 @@
     <File Path="Observability/docker-compose.yaml" />
     <File Path="Observability/dockerfile" />
     <File Path="Observability/otel-collector-config.yaml" />
+    <File Path="Observability/prometheus.yml" />
+    <File Path="Observability/loki-configs.yaml" />
+    <File Path="Observability/datasources.yaml" />
   </Folder>
-  
   <Project Path="iWallet.API/iWallet.API.csproj" />
   <Project Path="iWallet.Application/iWallet.Application.csproj" />
   <Project Path="iWallet.Domain/iWallet.Domain.csproj" />

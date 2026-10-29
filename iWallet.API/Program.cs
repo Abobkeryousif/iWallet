@@ -113,7 +113,13 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddRuntimeInstrumentation()
-            .AddSqlClientInstrumentation();
+            .AddSqlClientInstrumentation()
+            .AddOtlpExporter((otlpOption, readOption) =>
+            {
+                otlpOption.Endpoint = new Uri(otlp_endpoint_url);
+
+                readOption.PeriodicExportingMetricReaderOptions.ExportIntervalMilliseconds = 20_000; //scrape metrics and send it to otel col every 20s
+            });
     });
 
 
