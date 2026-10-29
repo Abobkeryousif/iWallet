@@ -1,38 +1,38 @@
+
 services:
-      
   iwallet-app:
     build:
-      context: .
-      dockerfile: dockerfile
+      context: ..
+      dockerfile: Observability/dockerfile
     container_name: iwallet-application
     ports:
-      - 8082:8080
-    
+      - "8082:8080"
     environment:
-       ConnectionStrings__default: "Server=sqlserver,1433;Database=iWalletDb;User Id=sa;Password=admin123$;TrustServerCertificate=True;"
-       JWT__Key: ${JWT_KEY}
-       JWT__Issuer: ${JWT_ISSUER}
-       JWT__Audience: ${JWT_AUDIENCE}
-       redis: "redis-db:6379"
-
+      ConnectionStrings__default: "Server=sqlserver,1433;Database=iWalletDb;User Id=sa;Password=${SQL_SA_PASSWORD};TrustServerCertificate=True;"
+      JWT__Key: ${JWT_KEY}
+      JWT__Issuer: ${JWT_ISSUER}
+      JWT__Audience: ${JWT_AUDIENCE}
+      redis: "redis-db:6379"
     depends_on:
       - sqlserver
       - redis-db
+      - otel-collector
+
+
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: iwallet-database
-
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD}
-
-
     ports:
-      - 1433:1433
+      - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
-  
+    restart: unless-stopped
+
+
   redis-db:
     image: redis:7-alpine
     container_name: iwallet-redis
@@ -43,50 +43,49 @@ services:
     restart: unless-stopped
 
 
+
+  
+  jaeger:
+    image: jaegertracing/all-in-one:1.76.0
+    container_name: iwallet-jaeger-traces
+    user: "0:0"
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+      SPAN_STORAGE_TYPE: badger
+      BADGER_EPHEMERAL: "false"
+      BADGER_DIRECTORY_KEY: /badger/data/keys
+      BADGER_DIRECTORY_VALUE: /badger/data/values
+    volumes:
+      - ./jaeger-data/data:/badger/data
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
+    restart: unless-stopped
+
+
+
+
   otel-collector:
-     image: otel/opentelemetry-collector-contrib
-     container_name: otel-collector-container
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector-container
+    command:
+      - "--config=/etc/otelcol-contrib/config.yaml"
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml:ro
+    ports:
+      - "4319:4317"
+      - "4320:4318"
+      - "13133:13133"
+    depends_on:
+      - jaeger
+    restart: unless-stopped
 
-     volumes:
-      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
-     
-     ports:
-       - "4317:4317"
-       - "4318:4318"
-       - "13133:13133"
-
-     command:
-       - "--config=/etc/otelcol-contrib/config.yaml"
-
-
-
-  # prometheus:
-  #   image: prom/prometheus
-  #   restart: always
-  #   ports:
-  #     - 9090:9090
-    
-  #   volumes:
-  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
-  #   networks:
-  #     - iwallet-application-network
-  #   depends_on:
-  #     - web
-
-
-  # grafana:
-  #   image: grafana/grafana
-  #   restart: always
-  #   environment:
-  #   - GF_SECURITY_ADMIN_PASSWORD=admin
-  #   ports:
-  #     - 3001:3000
-  #   networks:
-  #     - iwallet-application-network
-  #   depends_on:
-  #     - prometheus
 
 
 volumes:
-   sqlserver-data:
-   redis-data:
+  sqlserver-data:
+  redis-data:
+  jaeger-data:
+
+

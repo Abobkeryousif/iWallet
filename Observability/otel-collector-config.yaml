@@ -9,6 +9,11 @@ receivers:
 
 
 exporters:
+
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
   debug:
     verbosity: detailed
 
@@ -22,7 +27,7 @@ service:
     
     traces:
       receivers: [otlp]
-      exporters: [debug]
+      exporters: [otlp/jaeger]
 
     # metrics:
     #   receivers: [otlp]

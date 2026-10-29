@@ -1,12 +1,14 @@
-
 <Solution>
   <Folder Name="/Observability/">
+    <Folder Name="/Observability/jaeger-data/">
+      <Folder Name="/Observability/jaeger-data/data/" />
+    </Folder>
     <File Path="Observability/.env" />
     <File Path="Observability/docker-compose.yaml" />
     <File Path="Observability/dockerfile" />
-    <File Path="otel-collector-config.yaml" />
+    <File Path="Observability/otel-collector-config.yaml" />
   </Folder>
-
+  
   <Project Path="iWallet.API/iWallet.API.csproj" />
   <Project Path="iWallet.Application/iWallet.Application.csproj" />
   <Project Path="iWallet.Domain/iWallet.Domain.csproj" />
