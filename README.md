@@ -1,3 +1,5 @@
+<img width="1600" height="684" alt="bakry-stack" src="https://github.com/user-attachments/assets/2dc13159-945b-42fc-b931-585d561f259a" />
+
 # 💳 iWallet
 
 A **production-ready digital wallet system** built with **.NET**, designed using **Clean Architecture** and powered by a modern **DevOps ecosystem** including CI/CD, Docker, and Kubernetes with GitOps deployment.
@@ -206,6 +208,31 @@ Ensuring:
 
 ---
 
+## 📊 Application Monitoring & Observability
+
+iWallet implements an observability stack to monitor application health, analyze performance, and troubleshoot issues across financial transaction workflows.
+
+- **OpenTelemetry:** Instruments the .NET application to collect traces, metrics, and logs.
+- **OpenTelemetry Collector:** Receives, processes, and exports telemetry through configurable pipelines.
+- **Jaeger:** Tracks request execution paths and identifies slow operations and performance bottlenecks.
+- **Prometheus:** Collects application performance and custom business metrics.
+- **Grafana Loki:** Centralizes application logs and supports log analysis using LogQL.
+- **Grafana:** Provides dashboards for monitoring application health and analyzing telemetry.
+
+### 🎯 Key Benefits
+
+- Monitor application performance and health.
+- Trace requests to identify latency and performance bottlenecks.
+- Investigate errors by analyzing logs, metrics, and distributed traces.
+- Gain visibility into financial transaction workflows.
+
+**Technologies:** OpenTelemetry, OpenTelemetry Collector, Jaeger, Prometheus, Grafana Loki, Grafana.
+
+<img width="800" height="533" alt="otel" src="https://github.com/user-attachments/assets/33bcbf57-de30-4f30-bbe7-437da9a8ecc2" />
+
+
+---
+
 ## 🧠 Key Engineering Concepts
 
 * Clean Architecture
@@ -214,6 +241,7 @@ Ensuring:
 * Async/Await scalability
 * Performance optimization using caching (InMemory , Distributed)
 * container and container orchestration
+* Observability & Monitoring
 * DevOps automation (CI/CD)
 * GitOps workflow
 
@@ -229,6 +257,11 @@ Ensuring:
 * Kubernetes
 * ArgoCD
 * GitHub Actions
+* OpenTelemetry
+* Jaeger
+* Prometheus
+* Loki
+* Grafana
 
 ---
 
