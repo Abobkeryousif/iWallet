@@ -64,8 +64,6 @@ services:
     restart: unless-stopped
 
 
-
-
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
     container_name: otel-collector-container
@@ -77,9 +75,52 @@ services:
       - "4319:4317"
       - "4320:4318"
       - "13133:13133"
+      - "9464:9464"
+
     depends_on:
       - jaeger
     restart: unless-stopped
+
+
+  prometheus:
+    image: prom/prometheus
+    container_name: iwallet-prometheus-metrics
+    ports:
+      - 9094:9090
+    
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml 
+
+    depends_on:
+      - otel-collector
+   
+  loki:
+    image: grafana/loki
+    container_name: iwallet-loki-logs
+    command:  -config.file=/etc/loki/config.yaml
+    ports:
+      - 127.0.0.1:3100:3100
+
+    volumes:
+      - ./loki-configs.yaml:/etc/loki/config.yaml:ro
+      - loki-data:/loki
+
+    restart: unless-stopped      
+
+  grafana:
+    image: grafana/grafana
+    container_name: iwallet-grafana-dashboard
+
+    ports: 
+      - "127.0.0.1:3000:3000"
+    volumes:  
+       - grafana-data:/var/lib/grafana
+       - ./datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml:ro
+
+    depends_on:
+      - loki
+    restart: unless-stopped
+
 
 
 
@@ -87,5 +128,6 @@ volumes:
   sqlserver-data:
   redis-data:
   jaeger-data:
-
+  loki-data:
+  grafana-data:
 

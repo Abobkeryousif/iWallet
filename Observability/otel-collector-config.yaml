@@ -14,9 +14,16 @@ exporters:
     endpoint: jaeger:4317
     tls:
       insecure: true
+
+  prometheus:
+    endpoint: 0.0.0.0:9464
+
+  otlphttp/loki:
+    endpoint: http://loki:3100/otlp
+
   debug:
     verbosity: detailed
-
+  
 extensions:
   health_check:
     endpoint: 0.0.0.0:13133
@@ -29,12 +36,12 @@ service:
       receivers: [otlp]
       exporters: [otlp/jaeger]
 
-    # metrics:
-    #   receivers: [otlp]
-    #   exporters: [debug]
+    metrics:
+      receivers: [otlp]
+      exporters: [prometheus]
 
     logs:
       receivers: [otlp]
-      exporters: [debug]
+      exporters: [otlphttp/loki]
 
     

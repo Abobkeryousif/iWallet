@@ -1,0 +1,7 @@
+2026-10-29 10:43:13.242 +03:00 [WRN] No store type was specified for the decimal property 'DailyLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-29 10:43:13.279 +03:00 [WRN] No store type was specified for the decimal property 'PerTransactionLimit' on entity type 'UserLimit'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-10-29 10:43:16.845 +03:00 [INF] Now listening on: https://localhost:7111
+2026-10-29 10:43:16.848 +03:00 [INF] Now listening on: http://localhost:5010
+2026-10-29 10:43:17.273 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-29 10:43:17.275 +03:00 [INF] Hosting environment: Development
+2026-10-29 10:43:17.278 +03:00 [INF] Content root path: C:\D files\Projects\iWallet\iWallet.API
