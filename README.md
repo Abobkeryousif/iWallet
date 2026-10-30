@@ -4,7 +4,7 @@
 
 A **production-ready digital wallet system** built with **.NET** and **Clean Architecture**, powered by a modern **DevOps ecosystem** featuring **CI/CD, Docker, Kubernetes, and GitOps**.
 
-Integrated with a comprehensive **Observability Stack** (OpenTelemetry, Prometheus, Grafana, Loki, and Jaeger) for application monitoring, centralized logging, distributed tracing, and performance analysis.
+Integrated with a comprehensive **Observability Stack** featuring **OpenTelemetry, Prometheus, Grafana, Loki, and Jaeger** for application monitoring, centralized logging, distributed tracing, and performance analysis.
 ---
 
 ## 🚀 Overview
