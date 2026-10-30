@@ -2,8 +2,9 @@
 
 # 💳 iWallet
 
-A **production-ready digital wallet system** built with **.NET**, designed using **Clean Architecture** and powered by a modern **DevOps ecosystem** including CI/CD, Docker, and Kubernetes with GitOps deployment.
+A **production-ready digital wallet system** built with **.NET** and **Clean Architecture**, powered by a modern **DevOps ecosystem** featuring **CI/CD, Docker, Kubernetes, and GitOps**.
 
+Integrated with a comprehensive **Observability Stack** (OpenTelemetry, Prometheus, Grafana, Loki, and Jaeger) for application monitoring, centralized logging, distributed tracing, and performance analysis.
 ---
 
 ## 🚀 Overview
