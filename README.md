@@ -1,10 +1,11 @@
 <img width="1600" height="684" alt="bakry-stack" src="https://github.com/user-attachments/assets/2dc13159-945b-42fc-b931-585d561f259a" />
 
-# 💳 iWallet
+ # 💳 iWallet
 
-A **production-ready digital wallet system** built with **.NET** and **Clean Architecture**, powered by a modern **DevOps ecosystem** featuring **CI/CD, Docker, Kubernetes, and GitOps**.
+A **production-ready digital wallet system** built with **.NET** and **Clean Architecture**, powered by a modern DevOps ecosystem featuring **CI/CD, Docker, Kubernetes, and GitOps**.
 
 Integrated with a comprehensive **Observability Stack** featuring **OpenTelemetry, Prometheus, Grafana, Loki, and Jaeger** for application monitoring, centralized logging, distributed tracing, and performance analysis.
+
 ---
 
 ## 🚀 Overview
