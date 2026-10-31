@@ -8,6 +8,44 @@ receivers:
         endpoint: 0.0.0.0:4318
 
 
+processors:
+  batch:
+    timeout: 10s
+    send_batch_size: 512
+
+  memory_limiter:
+    check_interval: 3s
+    limit_mib: 256
+    spike_limit_mib: 64
+
+
+  filter/metrics:
+    metrics:
+      exclude:
+        match_type: regexp
+        metric_names:
+          - "^kestrel"
+  
+  filter/logs:
+    error_mode: ignore
+    log_conditions:
+      - 'IsMatch(log.body, "./*/swagger/.*")'
+
+  filter/traces:
+    error_mode: ignore
+    trace_conditions:
+      - 'IsMatch(span.attributes["uri.path"], "^/swagger(/|$)")'
+
+  transform/traces:
+    error_mode: ignore
+    trace_statements:
+      - context: span
+        statements: 
+          - 'set(attributes["environment.name"], "development")'
+          - 'delete_key(span.attributes, "db.system.name")'
+
+
+
 exporters:
 
   otlp/jaeger:
@@ -15,15 +53,28 @@ exporters:
     tls:
       insecure: true
 
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s  # wait 5s before retry again
+      max_interval: 25s  
+      max_elapsed_time: 120s
+
   prometheus:
     endpoint: 0.0.0.0:9464
 
   otlphttp/loki:
     endpoint: http://loki:3100/otlp
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s  # wait 5s before retry again
+      max_interval: 25s  
+      max_elapsed_time: 120s
 
   debug:
     verbosity: detailed
   
+  
+
 extensions:
   health_check:
     endpoint: 0.0.0.0:13133
@@ -34,14 +85,17 @@ service:
     
     traces:
       receivers: [otlp]
+      processors: [memory_limiter ,batch, filter/traces, transform/traces]
       exporters: [otlp/jaeger]
 
     metrics:
       receivers: [otlp]
+      processors: [memory_limiter ,batch, filter/metrics]
       exporters: [prometheus]
 
     logs:
       receivers: [otlp]
+      processors: [memory_limiter ,batch, filter/logs]
       exporters: [otlphttp/loki]
 
     
