@@ -1,6 +1,10 @@
-# 💳 iWallet
+<img width="1600" height="684" alt="bakry-stack" src="https://github.com/user-attachments/assets/2dc13159-945b-42fc-b931-585d561f259a" />
 
-A **production-ready digital wallet system** built with **.NET**, designed using **Clean Architecture** and powered by a modern **DevOps ecosystem** including CI/CD, Docker, and Kubernetes with GitOps deployment.
+ # 💳 iWallet
+
+A **production-ready digital wallet system** built with **.NET** and **Clean Architecture**, powered by a modern DevOps ecosystem featuring **CI/CD, Docker, Kubernetes, and GitOps**.
+
+Integrated with a comprehensive **Observability Stack** featuring **OpenTelemetry, Prometheus, Grafana, Loki, and Jaeger** for application monitoring, centralized logging, distributed tracing, and performance analysis.
 
 ---
 
@@ -206,6 +210,31 @@ Ensuring:
 
 ---
 
+## 📊 Application Monitoring & Observability
+
+iWallet implements an observability stack to monitor application health, analyze performance, and troubleshoot issues across financial transaction workflows.
+
+- **OpenTelemetry:** Instruments the .NET application to collect traces, metrics, and logs.
+- **OpenTelemetry Collector:** Receives, processes, and exports telemetry through configurable pipelines.
+- **Jaeger:** Tracks request execution paths and identifies slow operations and performance bottlenecks.
+- **Prometheus:** Collects application performance and custom business metrics.
+- **Grafana Loki:** Centralizes application logs and supports log analysis using LogQL.
+- **Grafana:** Provides dashboards for monitoring application health and analyzing telemetry.
+
+### 🎯 Key Benefits
+
+- Monitor application performance and health.
+- Trace requests to identify latency and performance bottlenecks.
+- Investigate errors by analyzing logs, metrics, and distributed traces.
+- Gain visibility into financial transaction workflows.
+
+**Technologies:** OpenTelemetry, OpenTelemetry Collector, Jaeger, Prometheus, Grafana Loki, Grafana.
+
+<img width="800" height="533" alt="otel" src="https://github.com/user-attachments/assets/33bcbf57-de30-4f30-bbe7-437da9a8ecc2" />
+
+
+---
+
 ## 🧠 Key Engineering Concepts
 
 * Clean Architecture
@@ -214,6 +243,7 @@ Ensuring:
 * Async/Await scalability
 * Performance optimization using caching (InMemory , Distributed)
 * container and container orchestration
+* Observability & Monitoring
 * DevOps automation (CI/CD)
 * GitOps workflow
 
@@ -229,108 +259,213 @@ Ensuring:
 * Kubernetes
 * ArgoCD
 * GitHub Actions
+* OpenTelemetry
+* Jaeger
+* Prometheus
+* Loki
+* Grafana
 
 ---
 
 ## 📌 Example: Transfer between wallets
 
 ```csharp
- public async Task<string> TransferAsync(string toAccountNumber, decimal amount, int userId)
-        {
-            if (amount <= 0)
-                throw new Exception("Invalid Amount");
+  public async Task<Result<string>> TransferAsync(string toAccountNumber, decimal amount, int userId)
+  {
+      const string transferOperation = "transfer";
+      using var activity = TransactionActivitySource.Source.StartActivity("transaction.transfer");
 
-            var senderWallet = await _context.Wallets.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
-                throw new Exception("invalid sender wallet");
+      activity?.AddEvent(new ActivityEvent("start.transfer.process"));
+      
 
-            var receiverWallet = await _context.Wallets.FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
-            if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
-                throw new Exception("Invalid receiver wallet");
+      Stopwatch st = Stopwatch.StartNew();
 
-            if (senderWallet.Id == receiverWallet.Id)
-                throw new Exception("you can't transfer to yourself");
+      _logger.LogInformation("Starring Transfer Process. UserId: {UserId}, ToAccount: {toAccount}, Amount: {Amount}",
+          userId,
+          toAccountNumber,
+          amount);
 
-            if (senderWallet.Balance < amount)
-                throw new Exception("insufficient balance");
+      //activity.AddEvent();
 
-            // frud pervention and get value from cache
+      var senderWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(u => u.UserId == userId);
+      if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
+      {
+          Log.Warning("Sender wallet not found or not active. UserId: {UserId}", userId);
+          activity?.SetTag("transaction.outcome", "failure");
+          BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "failure");
 
-            var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
-            if (amount > limit.PerTransactionLimit)
-                throw new Exception("Exceeded per transaction limit 5000");
+          return Result<string>.Failure(TransactionSharedErrors.InValidUserWallet());
+      }
 
-            var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
-            if (todyTotal + amount > limit.DailyLimit)
-                throw new Exception("You already Exceeded daily limit 200000");
+      var receiverWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
+      if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
+      {
+          Log.Warning("Receiver wallet not found or not active. UserId: {UserId}", userId);
+          activity?.SetTag("transaction.outcome", "failure");
 
-            await _context.SaveChangesAsync();
+          BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "failure");
 
-            var reference = GenerateReference(TransactionType.Transfer);
+          return Result<string>.Failure(TransferErrors.InValidReceiverWallet());
+      }
 
-            using var dbTransaction = await _context.Database.BeginTransactionAsync();
+      if (senderWallet.Id == receiverWallet.Id)
+      {
+          return Result<string>.Failure(TransferErrors.Conflict());
+      }
 
-            try
-            {
-                senderWallet.Balance -= amount;
-                receiverWallet.Balance += amount;
+      if (senderWallet.Balance < amount)
+      {
+          _logger.LogWarning("InSufficient Balance to transfer");
+          activity?.SetTag("transaction.outcome", "failure");
 
-                var transaction = new Transaction
-                {
-                    FromWalletId = senderWallet.Id,
-                    ToWalletId = receiverWallet.Id,
-                    Amount = amount,
-                    TransactionType = TransactionType.Transfer,
-                    Reference = reference,
-                    Status = TransactionStatus.Success
-                };
+          BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "failure");
 
-                await _context.Transactions.AddAsync(transaction);
-                _context.SaveChanges();
+          return Result<string>.Failure(TransactionSharedErrors.InsufficientBalance());
+      }
 
-                var senderLedger = new LedgerEntry
-                {
-                    WalletId = senderWallet.Id,
-                    TransactionId = transaction.Id,
-                    Debit = amount,
-                    Credit = 0,
-                    Particulars = $"Transfer to {senderWallet.WalletNumber}"
-                };
+      activity?.SetTag("sender_wallet.id", senderWallet.Id);
+      activity?.SetTag("receiver_wallet.id", receiverWallet.Id);
 
-                await _context.LedgerEntries.AddAsync(senderLedger);
-                _context.SaveChanges();
+      // frud pervention and get value from cache
 
-                var receiverLedger = new LedgerEntry
-                {
-                    WalletId = receiverWallet.Id,
-                    TransactionId = transaction.Id,
-                    Debit = 0,
-                    Credit = amount,
-                    Particulars = $"Successfly receive transaction from {receiverWallet.WalletNumber}"
-                };
+      var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
 
-                await _context.LedgerEntries.AddAsync(receiverLedger);
-                _context.SaveChanges();
+      var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
+      if (todyTotal + amount > limit.DailyLimit)
+      {
+          _logger.LogWarning("user {UserId} is Exceeded Daily limit", userId);
+          activity?.SetTag("transaction.outcome", "failure");
 
-                senderLedger.UpdatedAt = DateTime.UtcNow;
-                receiverWallet.UpdatedAt = DateTime.UtcNow;
+          BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "failure");
 
-                _context.Wallets.Update(senderWallet);
-                _context.Wallets.Update(receiverWallet);
+          return Result<string>.Failure(TransferErrors.ExceededDailylimit());
+      }
 
-                await _context.SaveChangesAsync();
+      await _context.SaveChangesAsync();
 
-                await dbTransaction.CommitAsync();
+      var reference = GenerateReference(TransactionType.Transfer);
 
-                return $"Transfer Completed Successfly with Transaction Reference {reference}";
-                }
 
-            catch
-            {
-                await dbTransaction.RollbackAsync();
-                throw;
-            }
-        }
+      _logger.LogInformation(
+      "Database transaction start for transfer. FromWallet: {FromWallet}, ToWallet: {ToWallet}",
+      senderWallet.WalletNumber,
+      receiverWallet.WalletNumber);
+
+      
+      using var dbTransaction = await _context.Database.BeginTransactionAsync();
+
+      activity?.AddEvent(new ActivityEvent("transfer.db_transaction.started"));
+
+      try
+      {
+          senderWallet.Balance -= amount;
+          receiverWallet.Balance += amount;
+
+          activity?.AddEvent(
+          new ActivityEvent("transfer.balances.updated"));
+
+          var transaction = new Transaction
+          {
+              FromWalletId = senderWallet.Id,
+              ToWalletId = receiverWallet.Id,
+              Amount = amount,
+              TransactionType = TransactionType.Transfer,
+              Reference = reference,
+              Status = TransactionStatus.Success
+          };
+
+          await _context.Transactions.AddAsync(transaction);
+          _context.SaveChanges();
+
+
+          var senderLedger = new LedgerEntry
+          {
+              WalletId = senderWallet.Id,
+              TransactionId = transaction.Id,
+              Debit = amount,
+              Credit = 0,
+              Particulars = $"Transfer to {senderWallet.WalletNumber}"
+          };
+
+          await _context.LedgerEntries.AddAsync(senderLedger);
+          _context.SaveChanges();
+
+          var receiverLedger = new LedgerEntry
+          {
+              WalletId = receiverWallet.Id,
+              TransactionId = transaction.Id,
+              Debit = 0,
+              Credit = amount,
+              Particulars = $"Successfly receive transaction from {receiverWallet.WalletNumber}"
+          };
+
+          await _context.LedgerEntries.AddAsync(receiverLedger);
+          _context.SaveChanges();
+
+          senderLedger.UpdatedAt = DateTime.UtcNow;
+          receiverWallet.UpdatedAt = DateTime.UtcNow;
+
+          _context.Wallets.Update(senderWallet);
+          _context.Wallets.Update(receiverWallet);
+
+          await _context.SaveChangesAsync();
+
+          await dbTransaction.CommitAsync();
+
+          activity?.AddEvent(new ActivityEvent("end.db.transaction.successfly"));
+
+          var recepit = new TransferReceiptDto
+          {
+              TransactionReference = reference,
+              SenderName = senderWallet.User.UserName,
+              SenderWalletNumber = senderWallet.WalletNumber,
+              ReceiverName = receiverWallet.User.UserName,
+              ReceiveWalletNumber = receiverWallet.WalletNumber,
+              Amount = amount,
+              Fees = 0,
+              Currency = "SAR",
+              Date = DateTime.UtcNow,
+              Status = transaction.Status.ToString(),
+          };
+
+          var path = Path.Combine("receipts/");
+
+          if (!Directory.Exists(path))
+              Directory.CreateDirectory(path);
+
+          var logoPath = Path.Combine("wwwroot/assets", "iWallet-logo.png");
+
+          var document = new TransferReceiptDocument(recepit, logoPath);
+
+          document.GeneratePdf($"receipts/receipt-{recepit.TransactionReference}.pdf");
+
+          _logger.LogInformation("Transfer completed successfully. Reference: {Reference}, Amount: {Amount}, Sender: {Sender}, Receiver: {Receiver}"
+                  ,reference,amount,senderWallet.WalletNumber,receiverWallet.WalletNumber);
+
+          activity?.SetTag("transaction.outcome", "success");
+          activity?.AddEvent(new ActivityEvent("end.transfer.process.successfly"));
+
+          BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "success");
+          BusinessMetricsHelper.RecordBusinessOperationDuration(module, transferOperation, st.ElapsedMilliseconds);
+
+
+          return Result<string>.Success($"Transfer Completed Successfly with Transaction Reference {reference}");
+
+      }
+
+      catch (Exception ex)
+      {
+          await dbTransaction.RollbackAsync();
+
+          _logger.LogError(ex.Message, "Transfer failed. UserId: {UserId}, Amount: {Amount}, Reference: {Reference}",userId ,amount ,reference);
+
+          activity?.SetTag("transaction.outcome", "failure");
+          activity?.SetStatus(ActivityStatusCode.Error,"Transfer failed");
+          activity?.AddEvent(new ActivityEvent("transfer.failed"));
+
+          throw;
+      }
+  }
 ```
 
 ---
