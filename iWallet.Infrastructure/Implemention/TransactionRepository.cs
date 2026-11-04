@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace iWallet.Infrastructure.Implemention
 {
     public class TransactionRepository : ITransactionRepository
@@ -83,24 +81,25 @@ namespace iWallet.Infrastructure.Implemention
 
         }
 
-        public async Task<Result<string>> TransferAsync(string toAccountNumber, decimal amount, int userId)
+
+        public async Task<Result<string>> TransferAsync( string toAccountNumber ,decimal amount, int userId)
         {
             const string transferOperation = "transfer";
-            using var activity = TransactionActivitySource.Source.StartActivity("transaction.transfer");
+
+            using var activity = TransactionActivitySource.Source
+                .StartActivity("transaction.transfer");
 
             activity?.AddEvent(new ActivityEvent("start.transfer.process"));
-            
 
             Stopwatch st = Stopwatch.StartNew();
 
-            _logger.LogInformation("Starring Transfer Process. UserId: {UserId}, ToAccount: {toAccount}, Amount: {Amount}",
-                userId,
-                toAccountNumber,
-                amount);
+            _logger.LogInformation("Starting Transfer Process. UserId: {UserId}, ToAccount: {ToAccount}, Amount: {Amount}" ,userId, toAccountNumber, amount);
 
-            //activity.AddEvent();
+            if (amount <= 0)
+                return Result<string>.Failure(TransferErrors.Conflict());
 
-            var senderWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(u => u.UserId == userId);
+            var senderWallet = await _context.Wallets.FirstOrDefaultAsync(w => w.UserId == userId);
+
             if (senderWallet == null || senderWallet.Status != WalletStatus.Active)
             {
                 Log.Warning("Sender wallet not found or not active. UserId: {UserId}", userId);
@@ -110,7 +109,8 @@ namespace iWallet.Infrastructure.Implemention
                 return Result<string>.Failure(TransactionSharedErrors.InValidUserWallet());
             }
 
-            var receiverWallet = await _context.Wallets.Include(w => w.User).FirstOrDefaultAsync(an => an.WalletNumber == toAccountNumber);
+            var receiverWallet = await _context.Wallets.FirstOrDefaultAsync(w => w.WalletNumber == toAccountNumber);
+
             if (receiverWallet == null || receiverWallet.Status != WalletStatus.Active)
             {
                 Log.Warning("Receiver wallet not found or not active. UserId: {UserId}", userId);
@@ -122,9 +122,7 @@ namespace iWallet.Infrastructure.Implemention
             }
 
             if (senderWallet.Id == receiverWallet.Id)
-            {
                 return Result<string>.Failure(TransferErrors.Conflict());
-            }
 
             if (senderWallet.Balance < amount)
             {
@@ -139,12 +137,11 @@ namespace iWallet.Infrastructure.Implemention
             activity?.SetTag("sender_wallet.id", senderWallet.Id);
             activity?.SetTag("receiver_wallet.id", receiverWallet.Id);
 
-            // frud pervention and get value from cache
-
             var limit = await _limitService.GetUserLimitAsync(senderWallet.UserId);
 
-            var todyTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
-            if (todyTotal + amount > limit.DailyLimit)
+            var todayTotal = await GetTransactionsTodayTotalAsync(senderWallet.UserId);
+
+            if (todayTotal + amount > limit.DailyLimit)
             {
                 _logger.LogWarning("user {UserId} is Exceeded Daily limit", userId);
                 activity?.SetTag("transaction.outcome", "failure");
@@ -154,29 +151,24 @@ namespace iWallet.Infrastructure.Implemention
                 return Result<string>.Failure(TransferErrors.ExceededDailylimit());
             }
 
-            await _context.SaveChangesAsync();
-
             var reference = GenerateReference(TransactionType.Transfer);
 
-
-            _logger.LogInformation(
-            "Database transaction start for transfer. FromWallet: {FromWallet}, ToWallet: {ToWallet}",
-            senderWallet.WalletNumber,
-            receiverWallet.WalletNumber);
-
-            
-            using var dbTransaction = await _context.Database.BeginTransactionAsync();
+            await using var dbTransaction = await _context.Database.BeginTransactionAsync();
 
             activity?.AddEvent(new ActivityEvent("transfer.db_transaction.started"));
 
             try
             {
+                
                 senderWallet.Balance -= amount;
                 receiverWallet.Balance += amount;
 
-                activity?.AddEvent(
-                new ActivityEvent("transfer.balances.updated"));
+                senderWallet.UpdatedAt = DateTime.UtcNow;
+                receiverWallet.UpdatedAt = DateTime.UtcNow;
 
+                activity?.AddEvent(new ActivityEvent("transfer.balances.updated"));
+
+                
                 var transaction = new Transaction
                 {
                     FromWalletId = senderWallet.Id,
@@ -187,94 +179,70 @@ namespace iWallet.Infrastructure.Implemention
                     Status = TransactionStatus.Success
                 };
 
-                await _context.Transactions.AddAsync(transaction);
-                _context.SaveChanges();
-
-
+                
                 var senderLedger = new LedgerEntry
                 {
                     WalletId = senderWallet.Id,
-                    TransactionId = transaction.Id,
+                    Transaction = transaction,
                     Debit = amount,
                     Credit = 0,
-                    Particulars = $"Transfer to {senderWallet.WalletNumber}"
+                    Particulars = $"Transfer to {receiverWallet.WalletNumber}" //edit message
                 };
-
-                await _context.LedgerEntries.AddAsync(senderLedger);
-                _context.SaveChanges();
 
                 var receiverLedger = new LedgerEntry
                 {
                     WalletId = receiverWallet.Id,
-                    TransactionId = transaction.Id,
+                    Transaction = transaction,
                     Debit = 0,
                     Credit = amount,
-                    Particulars = $"Successfly receive transaction from {receiverWallet.WalletNumber}"
+                    Particulars = $"Successfully received transfer from {senderWallet.WalletNumber}"
                 };
 
-                await _context.LedgerEntries.AddAsync(receiverLedger);
-                _context.SaveChanges();
+               
+                _context.Transactions.Add(transaction);
 
-                senderLedger.UpdatedAt = DateTime.UtcNow;
-                receiverWallet.UpdatedAt = DateTime.UtcNow;
+                // one add for both ledgers
+                _context.LedgerEntries.AddRange(senderLedger, receiverLedger);
 
-                _context.Wallets.Update(senderWallet);
-                _context.Wallets.Update(receiverWallet);
-
+               // Save all change in one call 
                 await _context.SaveChangesAsync();
 
                 await dbTransaction.CommitAsync();
 
-                activity?.AddEvent(new ActivityEvent("end.db.transaction.successfly"));
+                activity?.AddEvent(new ActivityEvent("transfer.db_transaction.completed"));
 
-                var recepit = new TransferReceiptDto
+                try
                 {
-                    TransactionReference = reference,
-                    SenderName = senderWallet.User.UserName,
-                    SenderWalletNumber = senderWallet.WalletNumber,
-                    ReceiverName = receiverWallet.User.UserName,
-                    ReceiveWalletNumber = receiverWallet.WalletNumber,
-                    Amount = amount,
-                    Fees = 0,
-                    Currency = "SAR",
-                    Date = DateTime.UtcNow,
-                    Status = transaction.Status.ToString(),
-                };
+                    BackgroundJob.Enqueue<ITransferReceiptJob>(
+                        job => job.GenerateReceiptAsync(reference));
+                }
+                catch (Exception jobException)
+                {
+                    _logger.LogError(jobException, "Failed to enqueue transfer receipt. Reference: {Reference}" ,reference);
+                }
 
-                var path = Path.Combine("receipts/");
-
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
-                var logoPath = Path.Combine("wwwroot/assets", "iWallet-logo.png");
-
-                var document = new TransferReceiptDocument(recepit, logoPath);
-
-                document.GeneratePdf($"receipts/receipt-{recepit.TransactionReference}.pdf");
-
-                _logger.LogInformation("Transfer completed successfully. Reference: {Reference}, Amount: {Amount}, Sender: {Sender}, Receiver: {Receiver}"
-                        ,reference,amount,senderWallet.WalletNumber,receiverWallet.WalletNumber);
+                _logger.LogInformation("Transfer completed successfully. Reference: {Reference}, Amount: {Amount}" ,reference ,amount);
 
                 activity?.SetTag("transaction.outcome", "success");
-                activity?.AddEvent(new ActivityEvent("end.transfer.process.successfly"));
+
+                activity?.AddEvent(new ActivityEvent("end.transfer.process.successfully"));
 
                 BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "success");
+
                 BusinessMetricsHelper.RecordBusinessOperationDuration(module, transferOperation, st.ElapsedMilliseconds);
 
-
-                return Result<string>.Success($"Transfer Completed Successfly with Transaction Reference {reference}");
-
+                return Result<string>.Success($"Transfer Completed Successfully with Transaction Reference {reference}");
             }
-
             catch (Exception ex)
             {
                 await dbTransaction.RollbackAsync();
 
-                _logger.LogError(ex.Message, "Transfer failed. UserId: {UserId}, Amount: {Amount}, Reference: {Reference}",userId ,amount ,reference);
+                _logger.LogError(ex, "Transfer failed. UserId: {UserId}, Amount: {Amount}, Reference: {Reference}" ,userId, amount, reference);
 
                 activity?.SetTag("transaction.outcome", "failure");
-                activity?.SetStatus(ActivityStatusCode.Error,"Transfer failed");
-                activity?.AddEvent(new ActivityEvent("transfer.failed"));
+                activity?.SetStatus(ActivityStatusCode.Error, "Transfer failed");
+
+                BusinessMetricsHelper.RecordBusinessOperation(module, transferOperation, "failure");
 
                 throw;
             }

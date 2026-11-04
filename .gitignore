@@ -8,3 +8,10 @@
 # Visual Studio
 .vs/
 **/.vs/
+*.csproj.user
+
+# receipt 
+receipts
+
+#application logs
+app-log
