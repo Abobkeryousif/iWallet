@@ -32,7 +32,6 @@ global using iWallet.Application.Helper;
 global using Microsoft.Extensions.Logging;
 global using System.Diagnostics;
 global using iWallet.Application.ManualInstermentation.CustomTraces;
-global using iWallet.Application.ManualInstermentation.iWalletBusinessMetrics;
+global using iWallet.Application.Jobs;
+global using Hangfire;
 
-
-// test test

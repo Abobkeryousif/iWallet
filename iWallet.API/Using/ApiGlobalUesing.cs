@@ -26,3 +26,5 @@ global using OpenTelemetry.Trace;
 global using OpenTelemetry.Metrics;
 global using iWallet.Application.ManualInstermentation.iWalletBusinessMetrics;
 global using iWallet.Application.ManualInstermentation.CustomTraces;
+global using System.Data.Common;
+global using Hangfire;

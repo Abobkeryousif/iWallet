@@ -35,8 +35,15 @@ builder.Services.AddRateLimiter(options =>
                 Window = TimeSpan.FromSeconds(10)
             }));
 });
+
+
 builder.Services.AddDbContext<ApplicationDbContext>
     (option=> option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+
+builder.Services.AddHangfire(config=> config.UseSqlServerStorage(builder.Configuration.GetConnectionString("default")));
+
+
+builder.Services.AddHangfireServer();
 
 builder.Services.Configure<MailSetting>(builder.Configuration.GetSection("MailSetting"));
 
@@ -97,9 +104,25 @@ builder.Services.AddOpenTelemetry()
     {
         tracerProvider
         .AddSource(TransactionActivitySource.SourceName)
+        .AddSource(BackgroundJobActivitySource.SourceName)
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
-        .AddSqlClientInstrumentation()
+      .AddSqlClientInstrumentation(options =>
+      {
+          //after i add hangfire job, sql auto insterment generate a lot traces and jobs spans that we dont need it, only need iwallet.background_job
+          options.Filter = command =>
+          {
+              if (command is not DbCommand dbCommand)
+                  return true;
+
+              var sql = dbCommand.CommandText;
+
+              return !sql.Contains("[HangFire]", StringComparison.OrdinalIgnoreCase)
+                  && !sql.Contains("sp_getapplock", StringComparison.OrdinalIgnoreCase)
+                  && !sql.Contains("sp_releaseapplock", StringComparison.OrdinalIgnoreCase)
+                  && !sql.Contains("SYSUTCDATETIME", StringComparison.OrdinalIgnoreCase);
+          };
+      })
         .AddOtlpExporter(options=>
         {
             options.Endpoint = new Uri(otlp_endpoint_url);
