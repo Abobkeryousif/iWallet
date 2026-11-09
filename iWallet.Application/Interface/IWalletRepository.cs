@@ -6,8 +6,8 @@
 
         Task<List<GetWalletDto>> GetUserWalletsAsync(int userId);
         Task<List<GetWalletDto>> GetWalletsAsync();
-        Task<GetWalletDto> GetWalletById(int walletId);
-        Task<GetWalletDto> GetByWalletNumber(string walletNumber);
-        Task<string> PatchWalletBalance(int walletId, decimal balance);
+        Task<GetWalletDto> GetWalletById(int walletId, int user);
+        Task<GetWalletDto> GetByWalletNumber(string walletNumber, int userId);
+        Task<string> PatchWalletBalance(int walletId, int userId, decimal balance);
     }
 }

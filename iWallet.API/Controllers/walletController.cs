@@ -32,14 +32,19 @@
         [Authorize(Roles = "USER")]
         public async Task<IActionResult> GetWalletByIdA(int id)
         {
-            var getWallet = await _unitofwork.WalletRepository.GetWalletById(id);
+            var userid = _getUserIdFromToken.UserIdFromToken();
+            var getWallet = await _unitofwork.WalletRepository.GetWalletById(id, userid);
             return Ok(getWallet);
         }
 
         [HttpGet("get-by-wallet-number")]
         [Authorize(Roles = "USER")]
-        public async Task<IActionResult> GetByWalletNumber(string walletNumber) =>
-            Ok( await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber) );
+        public async Task<IActionResult> GetByWalletNumber(string walletNumber)
+        {
+            var userid = _getUserIdFromToken.UserIdFromToken();
+
+            return Ok(await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber, userid));
+        }
 
 
         [HttpGet("get-user-wallets")]
@@ -54,7 +59,8 @@
         [Authorize(Roles = "USER")]
         public async Task<IActionResult> PatchWalletBalance(int id, decimal balance)
         {
-            var updatedWalletBalance = await _unitofwork.WalletRepository.PatchWalletBalance(id, balance);
+            var userid = _getUserIdFromToken.UserIdFromToken();
+            var updatedWalletBalance = await _unitofwork.WalletRepository.PatchWalletBalance(id, userid, balance);
             return Ok(updatedWalletBalance);
         }
     }
