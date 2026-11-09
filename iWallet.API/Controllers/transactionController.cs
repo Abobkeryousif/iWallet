@@ -19,7 +19,8 @@
 
         public async Task<IActionResult> MakeDepositAsync(DepositDto depositDto)
         {
-            return Ok(await _unitofwork.TransactionRepository.MakeDepositAsync(depositDto));
+            int userId = _getUserIdFromToken.UserIdFromToken();
+            return Ok(await _unitofwork.TransactionRepository.MakeDepositAsync(depositDto, userId));
         }
 
         [HttpPost("transfer")]
@@ -38,7 +39,8 @@
 
         public async Task<IActionResult> WithdrawalAsync(WithdrawalDto withdrawalDto)
         {
-            return Ok(await _unitofwork.TransactionRepository.MakeWithdrawal(withdrawalDto.walletId , withdrawalDto.amount));
+            int userId = _getUserIdFromToken.UserIdFromToken();
+            return Ok(await _unitofwork.TransactionRepository.MakeWithdrawal(withdrawalDto.walletId, userId , withdrawalDto.amount));
         }
 
 
@@ -51,9 +53,11 @@
         }
 
         [HttpGet("transaction-history")]
-        public async Task<IActionResult> GetTransactionHistoryAsync(int walletId) =>
-           Ok(await _unitofwork.TransactionRepository.TransactionHistory(walletId));
-
+        public async Task<IActionResult> GetTransactionHistoryAsync(int walletId) 
+        {
+            int userId = _getUserIdFromToken.UserIdFromToken();
+            return Ok(await _unitofwork.TransactionRepository.TransactionHistory(walletId, userId));
+        }
 
     }
 }

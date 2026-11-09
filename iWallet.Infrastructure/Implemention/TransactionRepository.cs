@@ -16,7 +16,7 @@ namespace iWallet.Infrastructure.Implemention
         }
 
 
-        public async Task<Result<string>> MakeDepositAsync(DepositDto depositDto)
+        public async Task<Result<string>> MakeDepositAsync(DepositDto depositDto, int userId)
         {
             const string depositOperation = "deposit";
             using var activity = TransactionActivitySource.Source.StartActivity("transaction.deposit");
@@ -27,12 +27,14 @@ namespace iWallet.Infrastructure.Implemention
             Stopwatch stopwatch = Stopwatch.StartNew();
              
 
-            var wallet = await _context.Wallets.FirstOrDefaultAsync(x => x.Id == depositDto.walletId);
+            var wallet = await _context.Wallets
+                .Where(d=> d.Id == depositDto.walletId && d.UserId == userId && d.Status == WalletStatus.Active)
+                .FirstOrDefaultAsync();
 
 
-            if (wallet == null || wallet.Status != WalletStatus.Active)
+            if (wallet == null)
             {
-                _logger.LogWarning("Withdrawal rejected because wallet was not found or is inactive. WalletId: {WalletId}", depositDto.walletId);
+                _logger.LogWarning("deposit rejected because wallet was not found or is inactive. WalletId: {WalletId}", depositDto.walletId);
                 activity?.SetTag("transaction.outcome", "failure");
                 BusinessMetricsHelper.RecordBusinessOperation(module, depositOperation, "failure");
 
@@ -41,44 +43,67 @@ namespace iWallet.Infrastructure.Implemention
 
             var reference = GenerateReference(TransactionType.Deposit);
 
-            var transaction = new Transaction
-            {
-                FromWalletId = depositDto.walletId,
-                Reference = reference,
-                Amount = depositDto.amount,
-                TransactionType = TransactionType.Deposit,
-                Status = TransactionStatus.Success,
-            };
+            using var depositTransaction = await _context.Database.BeginTransactionAsync();
+            activity?.AddEvent(new ActivityEvent("deposit.db_transaction.started"));
 
-            wallet.Balance += depositDto.amount;
-            _context.Wallets.Update(wallet);
-            await _context.Transactions.AddAsync(transaction);
-            _context.SaveChanges();
-
-            
-
-            var ledger = new LedgerEntry
+            try
             {
 
-                WalletId = depositDto.walletId,
-                TransactionId = transaction.Id,
-                Debit = 0,
-                Credit = depositDto.amount,
-                Particulars = $"Deposit ammount = {depositDto.amount} to wallet {wallet.WalletNumber}"
+                var transaction = new Transaction
+                {
+                    FromWalletId = depositDto.walletId,
+                    Reference = reference,
+                    Amount = depositDto.amount,
+                    TransactionType = TransactionType.Deposit,
+                    Status = TransactionStatus.Success,
+                };
 
-            };
-            
-            _context.LedgerEntries.Add(ledger);
-            await _context.SaveChangesAsync();
+                wallet.Balance += depositDto.amount;
 
-            _logger.LogInformation("deposit amount: {DepositAmount} to wallet: {WalletNumber}", depositDto.amount, depositDto.walletId);
-            activity?.SetTag("transaction.outcome", "success");
+                await _context.Transactions.AddAsync(transaction);
+                await _context.SaveChangesAsync();
 
-            BusinessMetricsHelper.RecordBusinessOperation(module, depositOperation, "success");
-            BusinessMetricsHelper.RecordBusinessOperationDuration(module, depositOperation, stopwatch.ElapsedMilliseconds);
+                var ledger = new LedgerEntry
+                {
 
-            return Result<string>.Success($"Successfly Deposit with Ammount {transaction.Amount} and total wallet balance = {wallet.Balance}");
+                    WalletId = depositDto.walletId,
+                    TransactionId = transaction.Id,
+                    Debit = 0,
+                    Credit = depositDto.amount,
+                    Particulars = $"Deposit ammount = {depositDto.amount} to wallet {wallet.WalletNumber}"
 
+                };
+
+                _context.LedgerEntries.Add(ledger);
+                await _context.SaveChangesAsync();
+
+                await depositTransaction.CommitAsync();
+
+                
+                _logger.LogInformation("deposit amount: {DepositAmount} to wallet: {WalletNumber}", depositDto.amount, depositDto.walletId);
+                activity?.SetTag("transaction.outcome", "success");
+
+                BusinessMetricsHelper.RecordBusinessOperation(module, depositOperation, "success");
+                BusinessMetricsHelper.RecordBusinessOperationDuration(module, depositOperation, stopwatch.ElapsedMilliseconds);
+
+                return Result<string>.Success($"Successfly Deposit with Ammount {transaction.Amount} and total wallet balance = {wallet.Balance}");
+            }
+
+
+            catch (Exception ex) {
+                await depositTransaction.RollbackAsync();
+
+                _logger.LogError(ex ,"deposit failed walletId: {WalletId}, amount: {Amount}, reference: {Reference}", 
+                        depositDto.walletId, depositDto.amount, reference);
+
+                activity?.SetTag("transaction.outcome", "failure");
+                activity?.SetStatus(ActivityStatusCode.Error, "deposit failed");
+
+                BusinessMetricsHelper.RecordBusinessOperation(module, depositOperation, "failure");
+                BusinessMetricsHelper.RecordBusinessOperationDuration(module, depositOperation, stopwatch.ElapsedMilliseconds);
+
+                throw;
+            }
         }
 
 
@@ -248,7 +273,7 @@ namespace iWallet.Infrastructure.Implemention
             }
         }
 
-        public async Task<Result<string>> MakeWithdrawal(int walletId, decimal amount)
+        public async Task<Result<string>> MakeWithdrawal(int walletId, int userId, decimal amount)
         {
             const string withdrawalOperation = "withdrawal";
             using var activity = TransactionActivitySource.Source.StartActivity("transaction.withdrawal");
@@ -257,7 +282,14 @@ namespace iWallet.Infrastructure.Implemention
             Stopwatch sw = Stopwatch.StartNew();
             
 
-            var wallet = await _context.Wallets.FindAsync(walletId);
+            var wallet = await _context
+                .Wallets
+                .Where(w=> w.Id == walletId &&
+                    w.UserId == userId &&
+                    w.Status == WalletStatus.Active)
+                .FirstOrDefaultAsync();
+
+
             if (wallet == null || wallet.Status != WalletStatus.Active)
             {
                 _logger.LogWarning("Withdrawal rejected because wallet was not found or is inactive. WalletId: {WalletId}", walletId);
@@ -277,52 +309,69 @@ namespace iWallet.Infrastructure.Implemention
                 return Result<string>.Failure(TransactionSharedErrors.InsufficientBalance());
             }
 
-            wallet.Balance -= amount;
-            wallet.UpdatedAt = DateTime.UtcNow;
-            _context.Wallets.Update(wallet);
-            _context.SaveChanges();
-
             var reference = GenerateReference(TransactionType.Withdrawal);
 
-            var transaction = new Transaction
+            var withdrawalTransaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                FromWalletId = walletId,
-                Reference = reference,
-                Amount = amount,
-                Status = TransactionStatus.Success,
-                TransactionType = TransactionType.Withdrawal,
+                wallet.Balance -= amount;
+                wallet.UpdatedAt = DateTime.UtcNow;
 
-            };
+                var transaction = new Transaction
+                {
+                    FromWalletId = walletId,
+                    Reference = reference,
+                    Amount = amount,
+                    Status = TransactionStatus.Success,
+                    TransactionType = TransactionType.Withdrawal,
 
-            await _context.Transactions.AddAsync(transaction);
-            _context.SaveChanges();
+                };
+
+                await _context.Transactions.AddAsync(transaction);
+                _context.SaveChanges();
 
 
-            var ledger = new LedgerEntry
-            {
-                TransactionId = transaction.Id,
-                WalletId = wallet.Id,
-                Debit = amount,
-                Credit = 0,
-                Particulars = $"successfly withdrawal from {wallet.WalletNumber} with balance {amount}"
-            };
+                var ledger = new LedgerEntry
+                {
+                    TransactionId = transaction.Id,
+                    WalletId = wallet.Id,
+                    Debit = amount,
+                    Credit = 0,
+                    Particulars = $"successfly withdrawal from {wallet.WalletNumber} with balance {amount}"
+                };
 
-            _context.LedgerEntries.Add(ledger);
-            _context.SaveChanges();
+                _context.LedgerEntries.Add(ledger);
+                _context.SaveChanges();
 
-            _logger.LogInformation("Withdrawal completed successfully. TransactionReference: {TransactionReference}, Amount: {Amount}",reference ,amount);
-            activity?.SetTag("transaction.outcome", "success");
+                await withdrawalTransaction.CommitAsync();
 
-            BusinessMetricsHelper.RecordBusinessOperation(module, withdrawalOperation, "success");
-            BusinessMetricsHelper.RecordBusinessOperationDuration(module, withdrawalOperation, sw.ElapsedMilliseconds);
+                _logger.LogInformation("Withdrawal completed successfully. TransactionReference: {TransactionReference}, Amount: {Amount}", reference, amount);
+                activity?.SetTag("transaction.outcome", "success");
 
-            return Result<string>.Success($"withdrawal completed successfly with Transaction Reference {reference}");
-        }
+                BusinessMetricsHelper.RecordBusinessOperation(module, withdrawalOperation, "success");
+                BusinessMetricsHelper.RecordBusinessOperationDuration(module, withdrawalOperation, sw.ElapsedMilliseconds);
+                return Result<string>.Success($"withdrawal completed successfly with Transaction Reference {reference}");
+            }
 
-        public async Task<List<TransactionDto>> TransactionHistory(int walletId)
+            
+            catch (Exception ex) {
+                await withdrawalTransaction.RollbackAsync();
+
+                _logger.LogError(ex, "Withdrawal operation failed. WalletId: {WalletId}, Amount: {Amount}, Reference: {Reference}",
+                    walletId, amount, reference);
+
+                activity?.SetTag("transaction.outcome", "failure");
+
+                BusinessMetricsHelper.RecordBusinessOperation(module, withdrawalOperation, "failure");
+                BusinessMetricsHelper.RecordBusinessOperationDuration(module, withdrawalOperation, sw.ElapsedMilliseconds);
+
+                throw;
+            }}
+
+        public async Task<List<TransactionDto>> TransactionHistory(int walletId, int userId)
         {
             var walletExists = await _context.Wallets
-                 .AnyAsync(w => w.Id == walletId);
+                 .AnyAsync(w => w.Id == walletId && w.UserId == userId);
 
             if (!walletExists)
                 throw new Exception("Invalid wallet");

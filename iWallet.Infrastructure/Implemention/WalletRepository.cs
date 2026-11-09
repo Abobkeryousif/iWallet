@@ -68,11 +68,11 @@ namespace iWallet.Infrastructure.Implemention
             pinHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(pin));
         }
 
-        public async Task<GetWalletDto> GetWalletById(int walletId)
+        public async Task<GetWalletDto> GetWalletById(int walletId, int userId)
         {
             var wallet = await _context.Wallets
                 .AsNoTracking()
-                .Where(wi=> wi.Id == walletId)
+                .Where(wi=> wi.Id == walletId && wi.UserId == userId)
                 .Select(w=> new GetWalletDto
                 {
                     WalletNumber = w.WalletNumber,
@@ -89,9 +89,12 @@ namespace iWallet.Infrastructure.Implemention
             return wallet;
         }
 
-        public async Task<string> PatchWalletBalance(int walletId, decimal balance)
+        public async Task<string> PatchWalletBalance(int walletId, int userId, decimal balance)
         {
-            var wallet = await _context.Wallets.FindAsync(walletId);
+            var wallet = await _context.Wallets
+                .Where(w => w.Id == walletId && w.UserId == userId)
+                .FirstOrDefaultAsync();
+
             if (wallet == null)
                  throw new Exception($"not found wallet with id: {walletId}");
 
@@ -100,7 +103,6 @@ namespace iWallet.Infrastructure.Implemention
 
             wallet.Balance += balance;
             wallet.UpdatedAt = DateTime.UtcNow;
-            _context.Wallets.Update(wallet);
             await _context.SaveChangesAsync();  
 
             return $"your updated balance is {wallet.Balance}";
@@ -124,11 +126,11 @@ namespace iWallet.Infrastructure.Implemention
             return wallets;
         }
 
-        public async Task<GetWalletDto> GetByWalletNumber(string walletNumber)
+        public async Task<GetWalletDto> GetByWalletNumber(string walletNumber, int userId)
         {
             var wallet = await _context.Wallets
                 .AsNoTracking()
-                .Where(wn => wn.WalletNumber == walletNumber && wn.Status == WalletStatus.Active)
+                .Where(wn => wn.WalletNumber == walletNumber && wn.Status == WalletStatus.Active && wn.UserId == userId)
                 .Select(w => new GetWalletDto
                 {
                     WalletNumber = w.WalletNumber,
