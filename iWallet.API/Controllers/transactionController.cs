@@ -53,10 +53,10 @@
         }
 
         [HttpGet("transaction-history")]
-        public async Task<IActionResult> GetTransactionHistoryAsync(int walletId) 
+        public async Task<IActionResult> GetTransactionHistoryAsync(int walletId, int pageNumber, int pageSize, CancellationToken cancellationToken) 
         {
             int userId = _getUserIdFromToken.UserIdFromToken();
-            return Ok(await _unitofwork.TransactionRepository.TransactionHistory(walletId, userId));
+            return Ok(await _unitofwork.TransactionRepository.TransactionHistory(walletId, userId, pageNumber, pageSize, cancellationToken));
         }
 
     }

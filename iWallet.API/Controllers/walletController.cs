@@ -25,34 +25,34 @@
         [HttpGet]
         [Authorize(Roles = "ADMIN")]
 
-        public async Task<IActionResult> GetWallets() =>
-            Ok(await _unitofwork.WalletRepository.GetWalletsAsync());
+        public async Task<IActionResult> GetWallets(CancellationToken cancellationToken) =>
+            Ok(await _unitofwork.WalletRepository.GetWalletsAsync(cancellationToken));
 
         [HttpGet("{id:int}")]
         [Authorize(Roles = "USER")]
-        public async Task<IActionResult> GetWalletByIdA(int id)
+        public async Task<IActionResult> GetWalletByIdA(int id, CancellationToken cancellationToken)
         {
             var userid = _getUserIdFromToken.UserIdFromToken();
-            var getWallet = await _unitofwork.WalletRepository.GetWalletById(id, userid);
+            var getWallet = await _unitofwork.WalletRepository.GetWalletById(id, userid, cancellationToken);
             return Ok(getWallet);
         }
 
         [HttpGet("get-by-wallet-number")]
         [Authorize(Roles = "USER")]
-        public async Task<IActionResult> GetByWalletNumber(string walletNumber)
+        public async Task<IActionResult> GetByWalletNumber(string walletNumber, CancellationToken cancellationToken)
         {
             var userid = _getUserIdFromToken.UserIdFromToken();
 
-            return Ok(await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber, userid));
+            return Ok(await _unitofwork.WalletRepository.GetByWalletNumber(walletNumber, userid, cancellationToken));
         }
 
 
         [HttpGet("get-user-wallets")]
         [Authorize(Roles = "USER")]
-        public async Task<IActionResult> GetUserWallets()
+        public async Task<IActionResult> GetUserWallets(CancellationToken cancellationToken)
         {
             var userId = _getUserIdFromToken.UserIdFromToken();
-            return Ok(await _unitofwork.WalletRepository.GetUserWalletsAsync(userId));
+            return Ok(await _unitofwork.WalletRepository.GetUserWalletsAsync(userId, cancellationToken));
         }
 
         [HttpPatch("{id:int}")]
