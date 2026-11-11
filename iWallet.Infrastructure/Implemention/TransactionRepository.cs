@@ -368,8 +368,11 @@ namespace iWallet.Infrastructure.Implemention
                 throw;
             }}
 
-        public async Task<List<TransactionDto>> TransactionHistory(int walletId, int userId)
+        public async Task<List<TransactionDto>> TransactionHistory(int walletId, int userId, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
+            if (pageNumber <= 0 || pageSize <= 0)
+                throw new Exception("please add vaild page number and size");
+            
             var walletExists = await _context.Wallets
                  .AnyAsync(w => w.Id == walletId && w.UserId == userId);
 
@@ -396,7 +399,9 @@ namespace iWallet.Infrastructure.Implemention
                     TransactionType = t.TransactionType.ToString(),
                     TransactionStatus = t.Status.ToString()
                 })
-                .ToListAsync();
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(cancellationToken);
 
 
             if (history.Count == 0)

@@ -15,3 +15,6 @@ receipts
 
 #application logs
 app-log
+
+# ignore .env and sensetive info
+.env

@@ -68,7 +68,7 @@ namespace iWallet.Infrastructure.Implemention
             pinHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(pin));
         }
 
-        public async Task<GetWalletDto> GetWalletById(int walletId, int userId)
+        public async Task<GetWalletDto> GetWalletById(int walletId, int userId, CancellationToken cancellationToken)
         {
             var wallet = await _context.Wallets
                 .AsNoTracking()
@@ -80,7 +80,7 @@ namespace iWallet.Infrastructure.Implemention
                     Status = w.Status,
                     WalletType = w.WalletType
                 })
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
                 
    
             if (wallet == null)
@@ -108,7 +108,7 @@ namespace iWallet.Infrastructure.Implemention
             return $"your updated balance is {wallet.Balance}";
         }
 
-        public async Task<List<GetWalletDto>> GetWalletsAsync()
+        public async Task<List<GetWalletDto>> GetWalletsAsync(CancellationToken cancellationToken)
         {
             //fix performance to filter in database level and just get filterd data to local
 
@@ -121,12 +121,12 @@ namespace iWallet.Infrastructure.Implemention
                     WalletType = w.WalletType,
                     Status = w.Status
                 })
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             return wallets;
         }
 
-        public async Task<GetWalletDto> GetByWalletNumber(string walletNumber, int userId)
+        public async Task<GetWalletDto> GetByWalletNumber(string walletNumber, int userId, CancellationToken cancellationToken)
         {
             var wallet = await _context.Wallets
                 .AsNoTracking()
@@ -137,7 +137,7 @@ namespace iWallet.Infrastructure.Implemention
                     Balance = w.Balance,
                     Status = w.Status,
                     WalletType = w.WalletType
-                }).FirstOrDefaultAsync();
+                }).FirstOrDefaultAsync(cancellationToken);
 
             if (wallet == null)
                 throw new Exception("invalid wallet number or InActive Wallet");
@@ -145,7 +145,7 @@ namespace iWallet.Infrastructure.Implemention
             return wallet;
         }
 
-        public async Task<List<GetWalletDto>> GetUserWalletsAsync(int userId)
+        public async Task<List<GetWalletDto>> GetUserWalletsAsync(int userId, CancellationToken cancellationToken)
         {
             var result = await _context.Wallets
                 .AsNoTracking()
@@ -156,7 +156,7 @@ namespace iWallet.Infrastructure.Implemention
                     Balance = w.Balance,
                     WalletType = w.WalletType,
                     Status = w.Status
-                }).ToListAsync();
+                }).ToListAsync(cancellationToken);
 
             if (result.Count == 0)
                 throw new ArgumentNullException("user does't have any wallet!");
@@ -165,4 +165,3 @@ namespace iWallet.Infrastructure.Implemention
         }
     }
     }
-
